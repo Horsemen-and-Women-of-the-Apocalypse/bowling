@@ -1,0 +1,12 @@
+{
+    "en": {
+      "home": {
+        "hello": "Hello World"
+      }
+    },
+    "fr": {
+      "home": {
+        "hello": "Bonjour le monde"
+      }
+    }
+  }
