@@ -2,6 +2,9 @@
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <md-button class="md-icon-button">
+      <md-icon>home</md-icon>
+    </md-button>
   </div>
 </template>
 
