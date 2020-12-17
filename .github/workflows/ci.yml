@@ -19,8 +19,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12.13.1
-        run: npm install
       - name: Install dependencies
+        run: npm install
       - name: Run lint checker
         run: npm run lint
 
