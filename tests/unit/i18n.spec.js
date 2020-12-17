@@ -11,12 +11,9 @@ const removeValues = (obj) => {
   }
 
   for (const key in obj) {
-    // @ts-ignore
     if (obj[key] instanceof Object) {
-      // @ts-ignore
       removeValues(obj[key])
     } else {
-      // @ts-ignore
       obj[key] = undefined
     }
   }
@@ -34,8 +31,6 @@ describe('i18n', () => {
         if (lang === otherLang) {
           continue
         }
-
-        // @ts-ignore
         expect(translations[lang]).toStrictEqual(translations[otherLang])
       }
     }

@@ -1,4 +1,4 @@
 import home from './home'
-import { merge } from '../../utils/merge'
+import merge from "deepmerge";
 
-export default merge(home)
+export default merge.all([home])
