@@ -1,0 +1,77 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - develop
+      - master
+      - "feature/*"
+  pull_request:
+    branches:
+      - "feature/*"
+
+env:
+  node-version: 12.13.1
+jobs:
+  # Lint checker UI job
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup NodeJS
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{env.node-version}}
+      - name: Install dependencies
+        run: npm install
+      - name: Run lint checker
+        run: npm run lint
+
+  # Build UI job
+  build:
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup NodeJS
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{env.node-version}}
+      - name: Install dependencies
+        run: npm install
+      - name: Build
+        run: npm run build
+
+  # Test integration job
+  test-e2e:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: nanasess/setup-chromedriver@master
+      - run: |
+          export DISPLAY=:99
+          sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
+      - name: Setup NodeJS
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{env.node-version}}
+      - name: Install dependencies
+        run: npm install
+      - name: Test
+        run: npm run test:e2e
+
+  # Test unit job
+  test-unit:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup NodeJS
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{env.node-version}}
+      - name: Install dependencies
+        run: npm install
+      - name: Test
+        run: npm run test:unit
