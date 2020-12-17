@@ -10,6 +10,8 @@ on:
     branches:
       - "feature/*"
 
+env:
+  node-version: 12.13.1
 jobs:
   # Lint checker UI job
   lint:
@@ -19,7 +21,7 @@ jobs:
       - name: Setup NodeJS
         uses: actions/setup-node@v1
         with:
-          node-version: 12.13.1
+          node-version: ${{env.node-version}}
       - name: Install dependencies
         run: npm install
       - name: Run lint checker
@@ -34,7 +36,7 @@ jobs:
       - name: Setup NodeJS
         uses: actions/setup-node@v1
         with:
-          node-version: 12.13.1
+          node-version: ${{env.node-version}}
       - name: Install dependencies
         run: npm install
       - name: Build
@@ -53,7 +55,7 @@ jobs:
       - name: Setup NodeJS
         uses: actions/setup-node@v1
         with:
-          node-version: 12.13.1
+          node-version: ${{env.node-version}}
       - name: Install dependencies
         run: npm install
       - name: Test
@@ -68,7 +70,7 @@ jobs:
       - name: Setup NodeJS
         uses: actions/setup-node@v1
         with:
-          node-version: 12.13.1
+          node-version: ${{env.node-version}}
       - name: Install dependencies
         run: npm install
       - name: Test
