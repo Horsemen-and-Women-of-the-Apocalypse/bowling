@@ -1,0 +1,58 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - develop
+      - master
+  pull_request:
+    branches:
+      - "feature/*"
+
+jobs:
+  # Lint checker UI job
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup NodeJS
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.13.1
+        run: npm install
+      - name: Install dependencies
+      - name: Run lint checker
+        run: npm run lint
+
+  # Build UI job
+  build:
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup NodeJS
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.13.1
+      - name: Install dependencies
+        run: npm install
+      - name: Build
+        run: npm run build
+
+  # Test integration job
+  # TOTO WIP
+
+  # Test unitary job
+  test-unit:
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup NodeJS
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.13.1
+      - name: Install dependencies
+        run: npm install
+      - name: Test
+        run: npm run test:unit
