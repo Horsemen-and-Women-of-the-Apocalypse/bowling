@@ -59,7 +59,7 @@ jobs:
       - name: Test
         run: npm run test:e2e
 
-  # Test unitary job
+  # Test unit job
   test-unit:
     needs: build
     runs-on: ubuntu-latest
