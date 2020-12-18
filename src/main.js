@@ -19,7 +19,7 @@ Vue.use(VueI18n)
 const i18n = new VueI18n({
   messages: lang, // set locale messages
   locale: (navigator.language.includes('-') ? navigator.language.split('-')[0] : navigator.language), // set locale
-  fallbackLocale: 'en',
+  fallbackLocale: 'fr',
   availableLocales: ['en', 'fr'],
   silentFallbackWarn: true
 })
