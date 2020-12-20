@@ -29,9 +29,9 @@ export default class GameParam {
 
       if (Number.isInteger(cturn)) {
         if (cturn > 0) {
-            this.turn = cturn
+          this.turn = cturn
         } else {
-            throw new Error('wrong number of turn')
+          throw new Error('wrong number of turn')
         }
       } else {
         throw new Error('bad turn type argument')
@@ -39,9 +39,9 @@ export default class GameParam {
 
       if (Number.isInteger(cpins)) {
         if (cpins > 0) {
-            this.pins = cpins
+          this.pins = cpins
         } else {
-            throw new Error('wrong number of pins')
+          throw new Error('wrong number of pins')
         }
       } else {
         throw new Error('bad pins type argument')
