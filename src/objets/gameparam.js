@@ -16,6 +16,10 @@ export default class GameParam {
     constructor (cplayers, cturn, cpins) {
       var ok = true
 
+      if (!Array.isArray(cplayers)) {
+        throw new Error('players is not a list')
+      }
+
       cplayers.forEach(function (item, index, array) {
         if (!(item instanceof Player)) {
           ok = false

@@ -195,6 +195,12 @@ describe('gameparam', () => {
       }
 
       expect(t).toThrow('bad players type argument')
+
+      const h = () => {
+        return new GameParam(5, 10, 5)
+      }
+
+      expect(h).toThrow('players is not a list')
     })
   })
 
