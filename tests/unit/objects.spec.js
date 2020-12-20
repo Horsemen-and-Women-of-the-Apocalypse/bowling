@@ -35,7 +35,7 @@ describe('gameparam', () => {
 
       expect(g.getPlayerAt(0).getName()).toStrictEqual('Nom')
       expect(g.getPlayerAt(1).getName()).toStrictEqual('Nom2')
-      expect(g.getCount()).toEqual(10)
+      expect(g.getTurn()).toEqual(10)
       expect(g.getPins()).toEqual(5)
     })
   })
@@ -56,7 +56,7 @@ describe('gameparam', () => {
       expect(g.getPlayerAt(0).getName()).toStrictEqual('Nom')
       expect(g.getPlayerAt(1).getName()).toStrictEqual('Nom2')
       expect(g.getPlayerAt(2).getName()).toStrictEqual('Nom3')
-      expect(g.getCount()).toEqual(10)
+      expect(g.getTurn()).toEqual(10)
       expect(g.getPins()).toEqual(5)
     })
   })
@@ -76,8 +76,12 @@ describe('gameparam', () => {
 
       g.removePlayerFromIndex(0)
 
-      expect(g.getPlayerAt(0)).toBeUndefined()
-      expect(g.getCount()).toEqual(10)
+      const t = () => {
+        g.getPlayerAt(0)
+      }
+
+      expect(t).toThrow('index out of bound')
+      expect(g.getTurn()).toEqual(10)
       expect(g.getPins()).toEqual(5)
     })
   })
@@ -94,7 +98,7 @@ describe('gameparam', () => {
       var players2 = g.getPlayers()
 
       expect(players2).toEqual(players)
-      expect(g.getCount()).toEqual(10)
+      expect(g.getTurn()).toEqual(10)
       expect(g.getPins()).toEqual(5)
     })
   })
@@ -113,6 +117,12 @@ describe('gameparam', () => {
       }
 
       expect(t).toThrow('bad type argument')
+
+      const h = () => {
+        g.removePlayerFromIndex(3)
+      }
+
+      expect(h).toThrow('index out of bound')
     })
   })
 
@@ -154,6 +164,7 @@ describe('gameparam', () => {
     test('Assert contents', () => {
       var p = new Player('Nom')
       var p2 = new Player('Nom2')
+      var p3 = new Player('Nom3')
 
       var players = [p, p2]
 
@@ -164,6 +175,12 @@ describe('gameparam', () => {
       }
 
       expect(t).toThrow('bad type argument')
+
+      const h = () => {
+        g.removePlayer(p3)
+      }
+
+      expect(h).toThrow('player not in list')
     })
   })
 
@@ -181,7 +198,7 @@ describe('gameparam', () => {
     })
   })
 
-  describe('errorConstructCount', () => {
+  describe('errorConstructTurn', () => {
     test('Assert contents', () => {
       const t = () => {
         var p = new Player('Nom')
@@ -192,7 +209,18 @@ describe('gameparam', () => {
         return new GameParam(players, 'test', 5)
       }
 
-      expect(t).toThrow('bad count type argument')
+      expect(t).toThrow('bad turn type argument')
+
+      const h = () => {
+        var p = new Player('Nom')
+        var p2 = new Player('Nom2')
+
+        var players = [p, p2]
+
+        return new GameParam(players, -1, 5)
+      }
+
+      expect(h).toThrow('wrong number of turn')
     })
   })
 
@@ -208,6 +236,17 @@ describe('gameparam', () => {
       }
 
       expect(t).toThrow('bad pins type argument')
+
+      const h = () => {
+        var p = new Player('Nom')
+        var p2 = new Player('Nom2')
+
+        var players = [p, p2]
+
+        return new GameParam(players, 10, -1)
+      }
+
+      expect(h).toThrow('wrong number of pins')
     })
   })
 })

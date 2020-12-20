@@ -5,15 +5,15 @@ import Player from './player'
  */
 export default class GameParam {
     players = []
-    count = -1
+    turn = -1
     pins = -1
 
     /**
     * @param {Player[]} cplayers - List of player
-    * @param {int} ccount - number of count
+    * @param {int} cturn - number of turn
     * @param {int} cpins - number of pins
     */
-    constructor (cplayers, ccount, cpins) {
+    constructor (cplayers, cturn, cpins) {
       var ok = true
 
       cplayers.forEach(function (item, index, array) {
@@ -27,14 +27,22 @@ export default class GameParam {
         throw new Error('bad players type argument')
       }
 
-      if (Number.isInteger(ccount)) {
-        this.count = ccount
+      if (Number.isInteger(cturn)) {
+        if (cturn > 0) {
+            this.turn = cturn
+        } else {
+            throw new Error('wrong number of turn')
+        }
       } else {
-        throw new Error('bad count type argument')
+        throw new Error('bad turn type argument')
       }
 
       if (Number.isInteger(cpins)) {
-        this.pins = cpins
+        if (cpins > 0) {
+            this.pins = cpins
+        } else {
+            throw new Error('wrong number of pins')
+        }
       } else {
         throw new Error('bad pins type argument')
       }
@@ -46,7 +54,10 @@ export default class GameParam {
     */
     getPlayerAt (pos) {
       if (Number.isInteger(pos)) {
-        return this.players[pos]
+        if (pos >= 0 && pos < this.players.length) {
+          return this.players[pos]
+        }
+        throw new Error('index out of bound')
       }
       throw new Error('bad type argument')
     }
@@ -76,8 +87,11 @@ export default class GameParam {
     */
     removePlayer (player) {
       if (player instanceof Player) {
-        this.players.splice(this.players.indexOf(player), 1)
-        return
+        if (this.players.includes(player)) {
+          this.players.splice(this.players.indexOf(player), 1)
+          return
+        }
+        throw new Error('player not in list')
       }
       throw new Error('bad type argument')
     }
@@ -88,17 +102,20 @@ export default class GameParam {
     */
     removePlayerFromIndex (pos) {
       if (Number.isInteger(pos)) {
-        this.players.splice(pos, 1)
-        return
+        if (pos >= 0 && pos < this.players.length) {
+          this.players.splice(pos, 1)
+          return
+        }
+        throw new Error('index out of bound')
       }
       throw new Error('bad type argument')
     }
 
     /**
-     * return count
+     * return turn
      */
-    getCount () {
-      return this.count
+    getTurn () {
+      return this.turn
     }
 
     /**
