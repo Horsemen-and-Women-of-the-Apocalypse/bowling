@@ -28,7 +28,7 @@ jobs:
           repo_token: ${{secrets.GITHUB_TOKEN}}
           file: ${{env.docker-img-name}}.tar
           asset_name: ${{env.docker-img-name}}.tar
-          tag: ${{github.ref}}
+          tag: release
           overwrite: true
 
   deploy:
