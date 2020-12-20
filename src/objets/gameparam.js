@@ -4,9 +4,9 @@ import Player from './player'
  * Class to describe parameter of the game
  */
 export default class GameParam {
-    players = []
-    turn = -1
-    pins = -1
+    #players = []
+    #turn = -1
+    #pins = -1
 
     /**
     * @param {Player[]} cplayers - List of player
@@ -26,14 +26,14 @@ export default class GameParam {
         }
       })
       if (ok) {
-        this.players = cplayers
+        this.#players = cplayers
       } else {
         throw new Error('bad players type argument')
       }
 
       if (Number.isInteger(cturn)) {
         if (cturn > 0) {
-          this.turn = cturn
+          this.#turn = cturn
         } else {
           throw new Error('wrong number of turn')
         }
@@ -43,7 +43,7 @@ export default class GameParam {
 
       if (Number.isInteger(cpins)) {
         if (cpins > 0) {
-          this.pins = cpins
+          this.#pins = cpins
         } else {
           throw new Error('wrong number of pins')
         }
@@ -58,8 +58,8 @@ export default class GameParam {
     */
     getPlayerAt (pos) {
       if (Number.isInteger(pos)) {
-        if (pos >= 0 && pos < this.players.length) {
-          return this.players[pos]
+        if (pos >= 0 && pos < this.#players.length) {
+          return this.#players[pos]
         }
         throw new Error('index out of bound')
       }
@@ -67,10 +67,10 @@ export default class GameParam {
     }
 
     /**
-     * Return list of players
+     * Return list of #players
      */
     getPlayers () {
-      return this.players
+      return this.#players
     }
 
     /**
@@ -79,7 +79,7 @@ export default class GameParam {
     */
     addPlayer (player) {
       if (player instanceof Player) {
-        this.players.push(player)
+        this.#players.push(player)
         return
       }
       throw new Error('bad type argument')
@@ -91,8 +91,8 @@ export default class GameParam {
     */
     removePlayer (player) {
       if (player instanceof Player) {
-        if (this.players.includes(player)) {
-          this.players.splice(this.players.indexOf(player), 1)
+        if (this.#players.includes(player)) {
+          this.#players.splice(this.#players.indexOf(player), 1)
           return
         }
         throw new Error('player not in list')
@@ -106,8 +106,8 @@ export default class GameParam {
     */
     removePlayerFromIndex (pos) {
       if (Number.isInteger(pos)) {
-        if (pos >= 0 && pos < this.players.length) {
-          this.players.splice(pos, 1)
+        if (pos >= 0 && pos < this.#players.length) {
+          this.#players.splice(pos, 1)
           return
         }
         throw new Error('index out of bound')
@@ -119,13 +119,13 @@ export default class GameParam {
      * return turn
      */
     getTurn () {
-      return this.turn
+      return this.#turn
     }
 
     /**
      * return pins
      */
     getPins () {
-      return this.pins
+      return this.#pins
     }
 }
