@@ -1,0 +1,46 @@
+name: Continuous Deployment
+
+on:
+  push:
+    branches:
+      - master
+
+env:
+  docker-img-name: bowling_app_img
+  node-version: 12.13.1
+jobs:
+  buildAndAttach:
+    name: Build and attach docker image
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Build the Docker image
+        run: docker build . -t ${{env.docker-img-name}}
+
+      - name: Save the Docker image
+        run: docker save --output ${{env.docker-img-name}}.tar ${{env.docker-img-name}}
+
+      - name: Upload Docker image to release
+        uses: svenstaro/upload-release-action@v1-release
+        with:
+          repo_token: ${{secrets.GITHUB_TOKEN}}
+          file: ${{env.docker-img-name}}.tar
+          asset_name: ${{env.docker-img-name}}.tar
+          tag: ${{github.ref}}
+          overwrite: true
+
+  deploy:
+    needs: buildAndAttach
+    name: Deploy to hosted server
+    runs-on: ubuntu-latest
+    steps:
+    - name: Remote ssh
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{secrets.REMOTE_HOST}}
+        username: ${{secrets.REMOTE_USER}}
+        password: ${{secrets.REMOTE_PASSWORD}}
+        port: ${{secrets.REMOTE_PORT}}
+        script: ./updateapp.sh
