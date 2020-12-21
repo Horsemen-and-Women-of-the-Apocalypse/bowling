@@ -16,6 +16,10 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
+      - name: Get application version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@master
+
       - name: Build the Docker image
         run: docker build . -t ${{env.docker-img-name}}
 
@@ -28,7 +32,7 @@ jobs:
           repo_token: ${{secrets.GITHUB_TOKEN}}
           file: ${{env.docker-img-name}}.tar
           asset_name: ${{env.docker-img-name}}.tar
-          tag: release
+          tag: ${{steps.package-version.outputs.current-version}}
           overwrite: true
 
   deploy:
