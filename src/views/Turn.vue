@@ -1,7 +1,9 @@
 <template>
   <div class="turn">
-    <h1>{{ $t('turn.title') }} {{$t('turn.turn')}} :</h1>
-    <div class="md-layout">
+    <div class='spacing md-alignment-center-center'>
+      <h1 class='eames'>{{ $t('turn.title') }} <span class="hansWegner">{{$t('turn.turn')}}</span> :</h1>
+    </div>
+    <div class="md-layout md-alignment-center-center">
       <div class="md-layout-item">
         <md-button v-on:click="minus" class="md-icon-button">
           <md-icon>-</md-icon>
@@ -20,6 +22,44 @@
     </div>
   </div>
 </template>
+
+<style>
+.eames {
+  color: #8C2318;
+}
+.spacing {
+  padding-top: 5%;
+}
+.hansWegner {
+  color: #88A65E;
+}
+.md-button {
+  background-color: #88A65E !important;
+}
+.md-icon {
+  color: white !important;
+}
+.md-layout {
+  padding-top: 20%;
+}
+.turn {
+  background-color: #BFB35A;
+  height: 100%;
+  font-size: 2em;
+}
+@media only screen and (max-device-width: 480px) {
+  .turn {
+      font-size: 1em;
+  }
+}
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { /* Chrome, Safari, Edge, Opera support */
+  -webkit-appearance: none;
+}
+
+input[type=number] { /* Firefox support */
+  -moz-appearance: textfield;
+}
+</style>
 
 <script>
 import Vue from 'vue'
