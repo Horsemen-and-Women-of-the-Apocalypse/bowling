@@ -6,7 +6,7 @@
     <div class="md-layout md-alignment-center-center">
       <div class="md-layout-item">
         <md-button v-on:click="minus" class="md-icon-button">
-          <md-icon>-</md-icon>
+          <md-icon>remove</md-icon>
         </md-button>
       </div>
       <div class="md-layout-item">
@@ -16,14 +16,14 @@
       </div>
       <div class="md-layout-item">
         <md-button v-on:click="add" class="md-icon-button">
-        <md-icon>+</md-icon>
+        <md-icon>add</md-icon>
       </md-button>
       </div>
     </div>
   </div>
 </template>
 
-<style>
+<style scoped>
 .eames {
   color: #8C2318;
 }
@@ -62,29 +62,27 @@ input[type=number] { /* Firefox support */
 </style>
 
 <script>
-import Vue from 'vue'
-
-const turn = Vue.observable({ count: 1 }) // Global access to number of turn
 
 export default {
   name: 'Turn',
+  data: () => ({
+    count: 1
+  }),
   computed: {
     turnCount () { // Method to get turnCount
-      return this.$turn.count
+      return this.count
     }
   },
   methods: {
     add: function (e) { // Add 1 to number of count
-      turn.count++
+      this.count++
     },
     minus: function (e) { // Remove 1 to number of count
-      if (turn.count > 1) {
-        turn.count--
+      if (this.count > 1) {
+        this.count--
       }
     }
   }
 }
-
-Vue.prototype.$turn = turn
 
 </script>
