@@ -5,7 +5,7 @@
     </div>
     <div class="md-layout md-alignment-center-center">
       <div class="md-layout-item">
-        <md-button v-on:click="minus" class="md-icon-button">
+        <md-button id='minus' v-on:click="minus" class="md-icon-button">
           <md-icon>remove</md-icon>
         </md-button>
       </div>
@@ -15,7 +15,7 @@
         </md-field>
       </div>
       <div class="md-layout-item">
-        <md-button v-on:click="add" class="md-icon-button">
+        <md-button id='add' v-on:click="add" class="md-icon-button">
         <md-icon>add</md-icon>
       </md-button>
       </div>
