@@ -11,7 +11,7 @@
       </div>
       <div class="md-layout-item">
         <md-field md-inline>
-          <md-input :value="turnCount" type="number" name="turnCount">{{turnCount}}</md-input>
+          <md-input v-model="count" type="number" name="turnCount" @blur="updateTurn($event)">{{count}}</md-input>
         </md-field>
       </div>
       <div class="md-layout-item">
@@ -74,6 +74,14 @@ export default {
     }
   },
   methods: {
+    updateTurn: function (e) { // Update turn count if negative
+      const value = parseInt(e.target.value)
+      if (value < 1) {
+        this.count = 1
+      } else {
+        this.count = value
+      }
+    },
     add: function (e) { // Add 1 to number of count
       this.count++
     },
