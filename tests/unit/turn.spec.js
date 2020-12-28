@@ -61,7 +61,7 @@ describe('TurnComponent', () => {
     await wrapper.find(InputSelector).setValue(-5)
 
     expect(wrapper.vm.turnCount).toBe('-5')
-    wrapper.find('.md-input').element.dispatchEvent(new Event('blur'))
+    wrapper.find(InputSelector).trigger('blur')
     expect(wrapper.vm.turnCount).toBe(1)
   })
 
