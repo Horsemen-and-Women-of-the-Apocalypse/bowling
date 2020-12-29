@@ -17,7 +17,9 @@
         :key="i"
         :id="'player_' + (i + 1)"
       >
-        <div class="name">
+        <div
+          :class="'name ' + (newPlayerName === player.getName() ? 'red' : '')"
+        >
           {{ player.getName() }}
         </div>
         <div class="removeBtn">
@@ -126,6 +128,10 @@ export default {
   border-bottom: solid 3px #88a65e;
   margin-left: 4%;
   font-size: 1.5em;
+}
+.player .name.red {
+  color: red;
+  font-weight: bold;
 }
 
 .player.add {
