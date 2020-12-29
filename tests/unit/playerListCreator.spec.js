@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
 import Vue from 'vue'
-import PlayerListCreator from '../../src/views/PlayerListCreator.vue'
+import PlayerListCreator from '../../src/components/PlayerListCreator.vue'
 import VueMaterial from 'vue-material'
 
 /**

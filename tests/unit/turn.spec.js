@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
 import Vue from 'vue'
-import Turn from '../../src/views/Turn.vue'
+import Turn from '../../src/components/Turn.vue'
 import VueMaterial from 'vue-material'
 
 /**
