@@ -81,7 +81,9 @@ export default {
     },
     removePlayer (index) {
       // Remove a player from his index pos
-      if (index >= 0 && index < this.players.length) { this.players.splice(index, 1) }
+      if (index >= 0 && index < this.players.length) {
+        this.players.splice(index, 1)
+      }
     },
     getPlayers () {
       // Method to get the player list
@@ -131,6 +133,9 @@ export default {
   border-bottom: solid 3px #88a65e;
   margin-left: 4%;
   font-size: 1.5em;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .player .name.red {
   color: red;
