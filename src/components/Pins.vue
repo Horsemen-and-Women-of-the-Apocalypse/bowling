@@ -11,7 +11,7 @@
       </div>
       <div class="md-layout-item">
         <md-field md-inline>
-          <md-input v-model="pinsCount" type="number" name="pinsCount" @blur="updatePinsCount($event)">{{pinsCount}}</md-input>
+          <md-input v-model="count" type="number" name="pinsCount" @blur="updatePinsCount($event)">{{count}}</md-input>
         </md-field>
       </div>
       <div class="md-layout-item">
@@ -66,28 +66,28 @@ input[type=number] { /* Firefox support */
 export default {
   name: 'Pins',
   data: () => ({
-    pinsCount: 1
+    count: 1
   }),
   computed: {
     pinsCount () { // Method to get the number of pins
-      return this.pinsCount
+      return this.count
     }
   },
   methods: {
     updatePinsCount: function (e) { // Update pins count if value >= 1
       const value = parseInt(e.target.value)
       if (value <= 1) {
-        this.pinsCount = 1
+        this.count = 1
       } else {
-        this.pinsCount = value
+        this.count = value
       }
     },
     add: function (e) { // Add 1 to number of pins
-      this.pinsCount++
+      this.count++
     },
     sub: function (e) { // Remove 1 to number of pins
-      if (this.pinsCount > 1) {
-        this.pinsCount--
+      if (this.count > 1) {
+        this.count--
       }
     }
   }
