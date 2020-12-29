@@ -11,27 +11,28 @@
     </div>
     <div id="playerList">
       <!-- Created player list -->
-      <div
-        class="player"
-        v-for="(player, i) in players"
-        :key="i"
-        :id="'player_' + (i + 1)"
-      >
+      <draggable v-model="players">
         <div
-          :class="'name ' + (newPlayerName === player.getName() ? 'red' : '')"
+          class="player"
+          v-for="(player, i) in players"
+          :key="i"
+          :id="'player_' + (i + 1)"
         >
-          {{ player.getName() }}
-        </div>
-        <div class="removeBtn">
-          <md-button
-            v-on:click="removePlayer(i)"
-            class="removePlayerBtn md-icon-button"
+          <div
+            :class="'name ' + (newPlayerName === player.getName() ? 'red' : '')"
           >
-            <md-icon>remove</md-icon>
-          </md-button>
+            {{ player.getName() }}
+          </div>
+          <div class="removeBtn">
+            <md-button
+              v-on:click="removePlayer(i)"
+              class="removePlayerBtn md-icon-button"
+            >
+              <md-icon>remove</md-icon>
+            </md-button>
+          </div>
         </div>
-      </div>
-
+      </draggable>
       <!-- Add player line -->
       <form class="player add" @submit.prevent="">
         <div class="name">
@@ -53,10 +54,14 @@
 </template>
 
 <script>
+import draggable from 'vuedraggable'
 import Player from '../objets/player'
 
 export default {
   name: 'Turn',
+  components: {
+    draggable
+  },
   data: () => ({
     newPlayerName: '',
     players: []
