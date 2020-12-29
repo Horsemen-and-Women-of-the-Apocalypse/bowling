@@ -1,10 +1,10 @@
 import { mount } from '@vue/test-utils'
 import Vue from 'vue'
-import Pins from '../../src/views/Pins.vue'
+import Pins from '../../src/components/Pins.vue'
 import VueMaterial from 'vue-material'
 
 /**
- * Mount a mocked version of Pins component
+ * Mount a mocked version of Pins  component
  *
  * @return {Wrapper<Pins>} Pins component
  */
