@@ -4,7 +4,7 @@ import Pins from '../../src/views/Pins.vue'
 import VueMaterial from 'vue-material'
 
 /**
- * Mount a mocked version of Turn component
+ * Mount a mocked version of Pins component
  *
  * @return {Wrapper<Pins>} Pins component
  */
