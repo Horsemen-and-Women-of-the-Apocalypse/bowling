@@ -35,5 +35,21 @@ npm run test:e2e
 npm run test:unit
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Run docker image
+
+A docker image is attached to each release, so you can run a self-hosted version of the application. First you have to download
+the docker image, and install docker.
+
+#### Load docker image
+
+```
+docker load < bowling_docker_img.tar
+```
+
+#### Run docker image
+
+```
+docker run -p ${HOST_PORT}:80 -it bowling_docker_img
+```
+
+N.B: Don't forget to change `${HOST_PORT}` by the port you want to expose for this application on your computer
