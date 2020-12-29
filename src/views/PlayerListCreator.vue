@@ -58,7 +58,7 @@ import draggable from 'vuedraggable'
 import Player from '../objets/player'
 
 export default {
-  name: 'Turn',
+  name: 'PlayerListCreator',
   components: {
     draggable
   },
@@ -67,23 +67,21 @@ export default {
     players: []
   }),
   methods: {
-    addPlayer (e) {
+    addPlayer () {
       // Add a new player object to the player list
-      if (this.newPlayerName.length > 0) {
-        // check for duplicates
-        if (
-          this.players.find((p) => p.getName() === this.newPlayerName) ===
+      if (
+        this.newPlayerName.length > 0 &&
+        this.players.find((p) => p.getName() === this.newPlayerName) ===
           undefined
-        ) {
-          this.players.push(new Player(this.newPlayerName))
-          this.newPlayerName = ''
-        }
+      ) {
+        // check for duplicates
+        this.players.push(new Player(this.newPlayerName))
+        this.newPlayerName = ''
       }
-      e.preventDefault()
     },
     removePlayer (index) {
       // Remove a player from his index pos
-      this.players.splice(index, 1)
+      if (index >= 0 && index < this.players.length) { this.players.splice(index, 1) }
     },
     getPlayers () {
       // Method to get the player list
