@@ -21,7 +21,7 @@
           <div
             :class="'name ' + (newPlayerName === player.getName() ? 'red' : '')"
           >
-            {{ player.getName() }}
+            {{ i + 1 + " : " + player.getName() }}
           </div>
           <div class="removeBtn">
             <md-button
@@ -35,9 +35,9 @@
       </draggable>
       <!-- Add player line -->
       <form class="player add" @submit.prevent="">
-        <div class="name">
-          <input type="text" name="newPlayerName" v-model="newPlayerName" />
-        </div>
+        <md-field class="name">
+          <md-input type="text" name="newPlayerName" v-model="newPlayerName"></md-input>
+        </md-field>
         <div class="addBtn">
           <md-button
             type="submit"
@@ -144,12 +144,6 @@ export default {
 
 .player.add {
   background-color: #f8d562;
-}
-.player.add input {
-  border: 0;
-  outline: 0;
-  padding: 7px 0;
-  background: transparent;
 }
 
 /* Buttons */
