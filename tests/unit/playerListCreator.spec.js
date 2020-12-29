@@ -130,6 +130,5 @@ describe('PlayerListCreator component', () => {
     await wrapper.find('#player_1 .removePlayerBtn').trigger('click')
     expect(wrapper.vm.getPlayers().length).toBe(1)
     expect(wrapper.vm.getPlayers()[0].getName()).toBe(newPlayerName2)
-
   })
 })
