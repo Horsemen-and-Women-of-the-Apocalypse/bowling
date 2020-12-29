@@ -1,0 +1,14 @@
+{
+    "en": {
+      "turn": {
+        "title": "Put a number of ",
+        "turn": "turn"
+      }
+    },
+    "fr": {
+      "turn": {
+        "title": "Saisissez un nombre de ",
+        "turn": "tours"
+      }
+    }
+  }
