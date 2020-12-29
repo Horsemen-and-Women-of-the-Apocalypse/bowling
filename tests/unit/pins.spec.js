@@ -6,7 +6,7 @@ import VueMaterial from 'vue-material'
 /**
  * Mount a mocked version of Turn component
  *
- * @return {Wrapper<Turn>} Turn component
+ * @return {Wrapper<Pins>} Pins component
  */
 const mountComponent = () => {
   return mount(Pins, {
