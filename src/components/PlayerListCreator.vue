@@ -106,14 +106,14 @@ export default {
   text-align: left;
 }
 #title h1 {
-  color: #8c2318;
+  color: #8C2318;
   margin-bottom: 0px;
 }
 #title h1 span {
-  color: #88a65e;
+  color: #88A65E;
 }
 #title h2 {
-  color: #8c2318;
+  color: #8C2318;
   font-size: 1em;
   margin-top: 0px;
   font-weight: 100;
@@ -127,10 +127,10 @@ export default {
   align-items: center;
 }
 .player:nth-child(2n) {
-  background-color: #bdbf5a;
+  background-color: #9fa65e;
 }
 .player .name {
-  border-bottom: solid 3px #88a65e;
+  border-bottom: solid 4px #5E8C6A;
   margin-left: 4%;
   font-size: 1.5em;
   overflow: hidden;
@@ -143,7 +143,7 @@ export default {
 }
 
 .player.add {
-  background-color: #f8d562;
+  background-color: #F2C45A;
 }
 
 /* Buttons */
