@@ -2,11 +2,11 @@
   <div id="PlayerListCreator">
     <div id="title">
       <h1>
-        {{ $t("PlayerListCreator.title1_1") }}
-        <span>{{ $t("PlayerListCreator.title1_2") }}</span> ?
+        {{ $t("playerListCreator.title1_1") }}
+        <span>{{ $t("playerListCreator.title1_2") }}</span> ?
       </h1>
       <h2>
-        {{ $t("PlayerListCreator.title2") }}
+        {{ $t("playerListCreator.title2") }}
       </h2>
     </div>
     <div id="playerList">

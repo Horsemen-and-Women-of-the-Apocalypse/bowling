@@ -1,13 +1,13 @@
 {
     "fr": {
-      "PlayerListCreator": {
+      "playerListCreator": {
         "title1_1": "Qui sont les ",
         "title1_2": "joueurs",
         "title2": "Déplacez un joueur pour choisir l'ordre"
       }
     },
     "en": {
-      "PlayerListCreator": {
+      "playerListCreator": {
         "title1_1": "Who are the ",
         "title1_2": "players",
         "title2": "Move a player to set the order"
