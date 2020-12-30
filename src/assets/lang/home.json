@@ -1,12 +1,20 @@
 {
     "en": {
       "home": {
-        "hello": "Hello World"
+        "pins": "Pins",
+        "turn": "Turn",
+        "players": "Players",
+        "continue": "Continue",
+        "play": "Play"
       }
     },
     "fr": {
       "home": {
-        "hello": "Bonjour le monde"
+        "pins": "Quilles",
+        "turn": "Tours",
+        "players": "Joueurs",
+        "continue": "Continuer",
+        "play": "Jouer"
       }
     }
   }
