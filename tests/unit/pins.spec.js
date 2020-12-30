@@ -29,27 +29,37 @@ describe('PinsComponent', () => {
   test('add', async () => {
     const wrapper = mountComponent()
 
-    await wrapper.find(AddButtonSelector).trigger('click') // 2
+    await wrapper.find(AddButtonSelector).trigger('click') // 11
 
-    expect(wrapper.vm.pinsCount).toBe(2)
-    expect(wrapper.find(InputSelector).element.value).toBe('2')
+    expect(wrapper.vm.pinsCount).toBe(11)
+    expect(wrapper.find(InputSelector).element.value).toBe('11')
   })
 
   test('sub', async () => {
     const wrapper = mountComponent()
 
-    await wrapper.find(AddButtonSelector).trigger('click') // 2
-    await wrapper.find(SubButtonSelector).trigger('click') // 1
-    await wrapper.find(AddButtonSelector).trigger('click') // 2
+    await wrapper.find(AddButtonSelector).trigger('click') // 11
+    await wrapper.find(SubButtonSelector).trigger('click') // 10
+    await wrapper.find(AddButtonSelector).trigger('click') // 11
 
-    expect(wrapper.vm.pinsCount).toBe(2)
-    expect(wrapper.find(InputSelector).element.value).toBe('2')
+    expect(wrapper.vm.pinsCount).toBe(11)
+    expect(wrapper.find(InputSelector).element.value).toBe('11')
   })
 
   test('subTo0', async () => {
     const wrapper = mountComponent()
 
+    await wrapper.find(SubButtonSelector).trigger('click') // 10
+    await wrapper.find(SubButtonSelector).trigger('click') // 9
+    await wrapper.find(SubButtonSelector).trigger('click') // 8
+    await wrapper.find(SubButtonSelector).trigger('click') // 7
+    await wrapper.find(SubButtonSelector).trigger('click') // 6
+    await wrapper.find(SubButtonSelector).trigger('click') // 5
+    await wrapper.find(SubButtonSelector).trigger('click') // 4
+    await wrapper.find(SubButtonSelector).trigger('click') // 3
+    await wrapper.find(SubButtonSelector).trigger('click') // 2
     await wrapper.find(SubButtonSelector).trigger('click') // 1
+    await wrapper.find(SubButtonSelector).trigger('click') // 0
 
     expect(wrapper.vm.pinsCount).toBe(1)
     expect(wrapper.find(InputSelector).element.value).toBe('1')
@@ -62,16 +72,16 @@ describe('PinsComponent', () => {
 
     expect(wrapper.vm.pinsCount).toBe('-1')
     wrapper.find(InputSelector).trigger('blur')
-    expect(wrapper.vm.pinsCount).toBe(1)
+    expect(wrapper.vm.pinsCount).toBe(10)
   })
 
   test('setValuePositive', async () => {
     const wrapper = mountComponent()
 
-    await wrapper.find(InputSelector).setValue(2) // 2
+    await wrapper.find(InputSelector).setValue(11) // 11
 
-    expect(wrapper.vm.pinsCount).toBe('2')
+    expect(wrapper.vm.pinsCount).toBe('11')
     wrapper.find(InputSelector).trigger('blur')
-    expect(wrapper.vm.pinsCount).toBe(2)
+    expect(wrapper.vm.pinsCount).toBe(11)
   })
 })

@@ -73,7 +73,7 @@ export default {
     updateTurn: function (e) { // Update turn count if negative
       const value = parseInt(e.target.value)
       if (value < 1) {
-        this.count = 1
+        this.count = 10
       } else {
         this.count = value
       }

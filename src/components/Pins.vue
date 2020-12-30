@@ -73,7 +73,7 @@ export default {
     updatePinsCount: function (e) { // Update pins count if value >= 1
       const value = parseInt(e.target.value)
       if (value <= 1) {
-        this.count = 1
+        this.count = 10
       } else {
         this.count = value
       }
