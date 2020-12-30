@@ -89,6 +89,11 @@ export default {
       // Method to get the player list
       return this.players
     }
+  },
+  watch: {
+    players () {
+      this.$emit('playerListChange', this.players)
+    }
   }
 }
 </script>

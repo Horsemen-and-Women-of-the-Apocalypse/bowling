@@ -4,7 +4,7 @@
         "pins": "Pins",
         "turn": "Turn",
         "players": "Players",
-        "continue": "Continue",
+        "continue": "Next",
         "play": "Play"
       }
     },
@@ -13,7 +13,7 @@
         "pins": "Quilles",
         "turn": "Tours",
         "players": "Joueurs",
-        "continue": "Continuer",
+        "continue": "Suivant",
         "play": "Jouer"
       }
     }
