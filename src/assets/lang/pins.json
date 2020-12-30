@@ -1,0 +1,14 @@
+{
+  "en": {
+    "pins": {
+      "title": "Put a number of ",
+      "pins": "pins"
+    }
+  },
+  "fr": {
+    "pins": {
+      "title": "Saisissez un nombre de ",
+      "pins": "quilles"
+    }
+  }
+}
