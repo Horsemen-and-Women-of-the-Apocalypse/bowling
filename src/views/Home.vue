@@ -3,17 +3,17 @@
     <md-steppers :md-active-step.sync="active" md-linear>
       <md-step id="first" :md-label="$t('home.turn')"  :md-done.sync="first">
         <Turn ref="turn"/>
-        <md-button class="md-raised md-primary" @click="setDone('first', 'second')">{{ $t("home.continue")}}</md-button>
+        <md-button name="firstBtnValidate" class="md-raised md-primary" @click="setDone('first', 'second')">{{ $t("home.continue")}}</md-button>
       </md-step>
 
       <md-step id="second" :md-label="$t('home.pins')" :md-done.sync="second">
         <Pins ref="pins"/>
-        <md-button class="md-raised md-primary" @click="setDone('second', 'third')">{{ $t("home.continue")}}</md-button>
+        <md-button name="secondBtnValidate" class="md-raised md-primary" @click="setDone('second', 'third')">{{ $t("home.continue")}}</md-button>
       </md-step>
 
       <md-step id="third" :md-label="$t('home.players')" :md-done.sync="third">
         <Players ref="players" @playerListChange="playerListChange"/>
-        <md-button :disabled="players.length == 0" class="md-raised md-primary" @click="createGameParam()">{{ $t("home.play")}}</md-button>
+        <md-button name="thirdBtnValidate" :disabled="players.length == 0" class="md-raised md-primary" @click="createGameParam()">{{ $t("home.play")}}</md-button>
       </md-step>
     </md-steppers>
   </div>
