@@ -1,8 +1,5 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <Header/>
-    </div>
     <router-view/>
   </div>
 </template>
@@ -16,27 +13,14 @@
   color: #2c3e50;
 }
 
-#nav {
-  height: 10vh;
-}
-
 #app {
   height: 90vh;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
 }
 </style>
 
 <script>
 
-import Header from './views/Header.vue'
-
 export default {
-  name: 'App',
-  components: {
-    Header
-  }
+  name: 'App'
 }
 </script>

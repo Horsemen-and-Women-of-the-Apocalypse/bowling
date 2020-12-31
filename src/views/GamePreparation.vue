@@ -1,26 +1,29 @@
 <template>
-  <div class="home">
+  <div class="gamepreparation">
+    <div id="nav">
+      <Header/>
+    </div>
     <md-steppers :md-active-step.sync="active" md-linear>
-      <md-step id="first" :md-label="$t('home.turn')"  :md-done.sync="first">
+      <md-step id="first" :md-label="$t('gamepreparation.turn')"  :md-done.sync="first">
         <Turn ref="turn"/>
-        <md-button name="firstBtnValidate" class="md-raised md-primary" @click="setDone('first', 'second')">{{ $t("home.continue")}}</md-button>
+        <md-button name="firstBtnValidate" class="md-raised md-primary" @click="setDone('first', 'second')">{{ $t("gamepreparation.continue")}}</md-button>
       </md-step>
 
-      <md-step id="second" :md-label="$t('home.pins')" :md-done.sync="second">
+      <md-step id="second" :md-label="$t('gamepreparation.pins')" :md-done.sync="second">
         <Pins ref="pins"/>
-        <md-button name="secondBtnValidate" class="md-raised md-primary" @click="setDone('second', 'third')">{{ $t("home.continue")}}</md-button>
+        <md-button name="secondBtnValidate" class="md-raised md-primary" @click="setDone('second', 'third')">{{ $t("gamepreparation.continue")}}</md-button>
       </md-step>
 
-      <md-step id="third" :md-label="$t('home.players')" :md-done.sync="third">
+      <md-step id="third" :md-label="$t('gamepreparation.players')" :md-done.sync="third">
         <Players ref="players" @playerListChange="playerListChange"/>
-        <md-button name="thirdBtnValidate" :disabled="players.length == 0" class="md-raised md-primary" @click="createGameParam()">{{ $t("home.play")}}</md-button>
+        <md-button name="thirdBtnValidate" :disabled="players.length == 0" class="md-raised md-primary" @click="createGameParam()">{{ $t("gamepreparation.play")}}</md-button>
       </md-step>
     </md-steppers>
   </div>
 </template>
 
 <style scoped>
-  .home {
+  .gamepreparation {
     margin:0px;
     height:100%;
   }
@@ -37,6 +40,9 @@
     color: #88A65E !important;
     font-weight: bold;
   }
+  #nav {
+    height: 10vh;
+  }
 </style>
 
 <script>
@@ -45,13 +51,15 @@ import Turn from '../components/Turn'
 import Pins from '../components/Pins'
 import Players from '../components/PlayerListCreator'
 import GameParam from '../objets/gameparam'
+import Header from '../components/GamePrepHeader.vue'
 
 export default {
-  name: 'Home',
+  name: 'GamePreparation',
   components: {
     Turn,
     Pins,
-    Players
+    Players,
+    Header
   },
   data: () => ({
     active: 'first',
