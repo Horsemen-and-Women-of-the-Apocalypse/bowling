@@ -54,7 +54,7 @@
 </template>
 
 <style scoped>
-.home {
+.gamepreparation {
   margin: 0px;
   height: 100%;
 }
