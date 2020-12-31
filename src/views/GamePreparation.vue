@@ -3,7 +3,7 @@
     <div id="nav">
       <Header/>
     </div>
-    <md-steppers :md-active-step.sync="active" md-linear>
+    <md-steppers :md-active-step.sync="active" md-linear  md-alternative>
       <md-step id="first" :md-label="$t('gamepreparation.turn')" :md-done.sync="first">
         <Turn ref="turn" />
         <md-button
@@ -45,9 +45,9 @@
       :md-active.sync="errorMsg"
       md-persistent
     >
-      <span>{{ $t("home.errorMsg") }}</span>
+      <span>{{ $t("gamepreparation.errorMsg") }}</span>
       <md-button class="md-primary" @click="errorMsg = false"
-        >{{ $t("home.errorMsgCloseBtn") }}</md-button
+        >{{ $t("gamepreparation.errorMsgCloseBtn") }}</md-button
       >
     </md-snackbar>
   </div>
