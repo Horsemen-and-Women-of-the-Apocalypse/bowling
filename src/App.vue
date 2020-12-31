@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
-      <About/>
+      <Header/>
     </div>
     <router-view/>
   </div>
@@ -31,12 +31,12 @@
 
 <script>
 
-import About from './views/About.vue'
+import Header from './views/Header.vue'
 
 export default {
   name: 'App',
   components: {
-    About
+    Header
   }
 }
 </script>
