@@ -1,5 +1,8 @@
 <template>
-  <div class="home">
+  <div class="gamepreparation">
+    <div id="nav">
+      <Header/>
+    </div>
     <md-steppers :md-active-step.sync="active" md-linear>
       <md-step id="first" :md-label="$t('home.turn')" :md-done.sync="first">
         <Turn ref="turn" />
@@ -68,7 +71,10 @@
   color: #88a65e !important;
   font-weight: bold;
 }
-#errorMsg{
+#nav {
+  height: 10vh;
+}
+#errorMsg {
   background-color: crimson;
 }
 </style>
@@ -78,13 +84,15 @@ import Turn from '../components/Turn'
 import Pins from '../components/Pins'
 import Players from '../components/PlayerListCreator'
 import GameParam from '../objets/gameparam'
+import Header from '../components/GamePrepHeader.vue'
 
 export default {
-  name: 'Home',
+  name: 'GamePreparation',
   components: {
     Turn,
     Pins,
-    Players
+    Players,
+    Header
   },
   data: () => ({
     active: 'first',

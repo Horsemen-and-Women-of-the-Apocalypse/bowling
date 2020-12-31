@@ -1,12 +1,12 @@
 {
     "en": {
-      "about": {
+      "header": {
         "title": "Bowling",
         "prep": "Game preparation"
       }
     },
     "fr": {
-      "about": {
+      "header": {
         "title": "Bowling",
         "prep": "Préparation de la partie"
       }

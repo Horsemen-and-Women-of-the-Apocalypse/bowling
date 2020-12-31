@@ -64,5 +64,39 @@ module.exports = {
     })
 
     app.click('button[name=thirdBtnValidate]')
+  },
+  'Create game with wrong pins number': browser => {
+    const homepage = browser.page.homepage()
+    homepage.waitForElementVisible('@appContainer')
+    const app = homepage.section.app
+
+    const nbPins = 'NAN'
+    const players = ['toto', 'tata', 'tutu']
+
+    // Add turns
+    app.assert.visible('button[name=firstBtnValidate]')
+    app.click('button[name=firstBtnValidate]')
+
+    // Add pins
+    app.assert.visible('input[name=pinsCount]')
+    app.assert.visible('button[name=secondBtnValidate]')
+    app.clearValue('input[name=pinsCount]')
+    app.setValue('input[name=pinsCount]', nbPins)
+    app.click('button[name=secondBtnValidate]')
+
+    // Add players
+    app.assert.visible('input[name=newPlayerName]')
+    app.assert.visible('button[name=thirdBtnValidate]')
+    app.assert.attributeEquals('button[name=thirdBtnValidate]', 'disabled', 'true')
+
+    players.forEach((playerName, i) => {
+      app.setValue('input[name=newPlayerName]', playerName)
+      app.click('#PlayerListCreator #addPlayerBtn')
+      app.assert.elementPresent('#PlayerListCreator #player_' + (i + 1))
+    })
+
+    app.assert.elementCount('#errorMsg', 0)
+    app.click('button[name=thirdBtnValidate]')
+    app.assert.elementCount('#errorMsg', 1)
   }
 }

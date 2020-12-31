@@ -1,6 +1,6 @@
 {
   "en": {
-    "home": {
+    "gamepreparation": {
       "pins": "Pins",
       "turn": "Turn",
       "players": "Players",
@@ -11,7 +11,7 @@
     }
   },
   "fr": {
-    "home": {
+    "gamepreparation": {
       "pins": "Quilles",
       "turn": "Tours",
       "players": "Joueurs",
