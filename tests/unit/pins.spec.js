@@ -29,27 +29,29 @@ describe('PinsComponent', () => {
   test('add', async () => {
     const wrapper = mountComponent()
 
-    await wrapper.find(AddButtonSelector).trigger('click') // 2
+    await wrapper.find(AddButtonSelector).trigger('click') // 11
 
-    expect(wrapper.vm.pinsCount).toBe(2)
-    expect(wrapper.find(InputSelector).element.value).toBe('2')
+    expect(wrapper.vm.pinsCount).toBe(11)
+    expect(wrapper.find(InputSelector).element.value).toBe('11')
   })
 
   test('sub', async () => {
     const wrapper = mountComponent()
 
-    await wrapper.find(AddButtonSelector).trigger('click') // 2
-    await wrapper.find(SubButtonSelector).trigger('click') // 1
-    await wrapper.find(AddButtonSelector).trigger('click') // 2
+    await wrapper.find(AddButtonSelector).trigger('click') // 11
+    await wrapper.find(SubButtonSelector).trigger('click') // 10
+    await wrapper.find(AddButtonSelector).trigger('click') // 11
 
-    expect(wrapper.vm.pinsCount).toBe(2)
-    expect(wrapper.find(InputSelector).element.value).toBe('2')
+    expect(wrapper.vm.pinsCount).toBe(11)
+    expect(wrapper.find(InputSelector).element.value).toBe('11')
   })
 
   test('subTo0', async () => {
     const wrapper = mountComponent()
 
-    await wrapper.find(SubButtonSelector).trigger('click') // 1
+    for (let i = 0; i <= 10; i++) {
+      await wrapper.find(SubButtonSelector).trigger('click') // 10-9-8...
+    }
 
     expect(wrapper.vm.pinsCount).toBe(1)
     expect(wrapper.find(InputSelector).element.value).toBe('1')
@@ -62,16 +64,16 @@ describe('PinsComponent', () => {
 
     expect(wrapper.vm.pinsCount).toBe('-1')
     wrapper.find(InputSelector).trigger('blur')
-    expect(wrapper.vm.pinsCount).toBe(1)
+    expect(wrapper.vm.pinsCount).toBe(10)
   })
 
   test('setValuePositive', async () => {
     const wrapper = mountComponent()
 
-    await wrapper.find(InputSelector).setValue(2) // 2
+    await wrapper.find(InputSelector).setValue(11) // 11
 
-    expect(wrapper.vm.pinsCount).toBe('2')
+    expect(wrapper.vm.pinsCount).toBe('11')
     wrapper.find(InputSelector).trigger('blur')
-    expect(wrapper.vm.pinsCount).toBe(2)
+    expect(wrapper.vm.pinsCount).toBe(11)
   })
 })

@@ -39,13 +39,9 @@
 .md-icon {
   color: white !important;
 }
-.md-layout {
-  padding-top: 20%;
-}
 .turn {
   background-color: #BFB35A;
   height: 100%;
-  font-size: 2em;
 }
 @media only screen and (max-device-width: 480px) {
   .turn {
@@ -66,7 +62,7 @@ input[type=number] { /* Firefox support */
 export default {
   name: 'Turn',
   data: () => ({
-    count: 1
+    count: 10
   }),
   computed: {
     turnCount () { // Method to get turnCount
@@ -77,7 +73,7 @@ export default {
     updateTurn: function (e) { // Update turn count if negative
       const value = parseInt(e.target.value)
       if (value < 1) {
-        this.count = 1
+        this.count = 10
       } else {
         this.count = value
       }

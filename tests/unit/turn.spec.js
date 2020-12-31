@@ -31,8 +31,8 @@ describe('TurnComponent', () => {
 
     await wrapper.find(AddButtonSelector).trigger('click')
 
-    expect(wrapper.vm.turnCount).toBe(2)
-    expect(wrapper.find(InputSelector).element.value).toBe('2')
+    expect(wrapper.vm.turnCount).toBe(11)
+    expect(wrapper.find(InputSelector).element.value).toBe('11')
   })
 
   test('minus', async () => {
@@ -42,14 +42,16 @@ describe('TurnComponent', () => {
     await wrapper.find(AddButtonSelector).trigger('click')
     await wrapper.find(MinusButtonSelector).trigger('click')
 
-    expect(wrapper.vm.turnCount).toBe(2)
-    expect(wrapper.find(InputSelector).element.value).toBe('2')
+    expect(wrapper.vm.turnCount).toBe(11)
+    expect(wrapper.find(InputSelector).element.value).toBe('11')
   })
 
   test('minusTo0', async () => {
     const wrapper = mountComponent()
 
-    await wrapper.find(MinusButtonSelector).trigger('click')
+    for (let i = 0; i <= 10; i++) {
+      await wrapper.find(MinusButtonSelector).trigger('click') // 10-9-8-...
+    }
 
     expect(wrapper.vm.turnCount).toBe(1)
     expect(wrapper.find(InputSelector).element.value).toBe('1')
@@ -62,7 +64,7 @@ describe('TurnComponent', () => {
 
     expect(wrapper.vm.turnCount).toBe('-5')
     wrapper.find(InputSelector).trigger('blur')
-    expect(wrapper.vm.turnCount).toBe(1)
+    expect(wrapper.vm.turnCount).toBe(10)
   })
 
   test('setValuePositive', async () => {

@@ -39,13 +39,9 @@
 .md-icon {
   color: white !important;
 }
-.md-layout {
-  padding-top: 20%;
-}
 .pins {
   background-color: #BFB35A;
   height: 100%;
-  font-size: 2em;
 }
 @media only screen and (max-device-width: 480px) {
   .pins {
@@ -66,7 +62,7 @@ input[type=number] { /* Firefox support */
 export default {
   name: 'Pins',
   data: () => ({
-    count: 1
+    count: 10
   }),
   computed: {
     pinsCount () { // Method to get the number of pins
@@ -77,7 +73,7 @@ export default {
     updatePinsCount: function (e) { // Update pins count if value >= 1
       const value = parseInt(e.target.value)
       if (value <= 1) {
-        this.count = 1
+        this.count = 10
       } else {
         this.count = value
       }
