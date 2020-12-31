@@ -1,12 +1,12 @@
 <template>
-  <div class="header">
-    <div id="title">{{ $t('header.title')}}</div>
-    <div id="gamePrep">{{ $t('header.prep')}}</div>
+  <div class="gameprepheader">
+    <div id="title">{{ $t('gameprepheader.title')}}</div>
+    <div id="gamePrep">{{ $t('gameprepheader.prep')}}</div>
   </div>
 </template>
 
 <style scoped>
-.header {
+.gameprepheader {
   height: 100%;
 }
 #title{
