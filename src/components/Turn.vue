@@ -59,10 +59,12 @@ input[type=number] { /* Firefox support */
 
 <script>
 
+const defaultNbTurn = 10
+
 export default {
   name: 'Turn',
   data: () => ({
-    count: 10
+    count: defaultNbTurn
   }),
   computed: {
     turnCount () { // Method to get turnCount
@@ -72,7 +74,7 @@ export default {
   watch: {
     count () {
       if (isNaN(this.count)) {
-        this.count = 10
+        this.count = defaultNbTurn
       }
     }
   },
@@ -80,7 +82,7 @@ export default {
     updateTurn: function (e) { // Update turn count if negative
       const value = parseInt(e.target.value)
       if (value < 1) {
-        this.count = 10
+        this.count = defaultNbTurn
       } else {
         this.count = value
       }
