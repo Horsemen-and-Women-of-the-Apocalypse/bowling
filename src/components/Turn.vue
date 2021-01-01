@@ -69,6 +69,13 @@ export default {
       return this.count
     }
   },
+  watch: {
+    count () {
+      if (isNaN(this.count)) {
+        this.count = 10
+      }
+    }
+  },
   methods: {
     updateTurn: function (e) { // Update turn count if negative
       const value = parseInt(e.target.value)
