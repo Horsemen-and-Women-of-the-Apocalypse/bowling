@@ -18,6 +18,7 @@
           :key="i"
           :id="'player_' + (i + 1)"
         >
+          <md-icon class="dragIcon">drag_indicator </md-icon>
           <div
             :class="'name ' + (newPlayerName === player.getName() ? 'red' : '')"
           >
@@ -25,7 +26,7 @@
           </div>
           <div class="removeBtn">
             <md-button
-              v-on:click="removePlayer(i)"
+              v-on:click.native="removePlayer(i)"
               class="removePlayerBtn md-icon-button"
             >
               <md-icon>remove</md-icon>
@@ -134,7 +135,12 @@ export default {
 .player:nth-child(2n) {
   background-color: #9fa65e;
 }
+.player .dragIcon {
+  color: #687555 !important;
+}
 .player .name {
+  flex:1;
+  text-align: left;
   border-bottom: solid 4px #5E8C6A;
   margin-left: 4%;
   font-size: 1.5em;
