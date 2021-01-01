@@ -26,7 +26,7 @@
           </div>
           <div class="removeBtn">
             <md-button
-              v-on:click.native="removePlayer(i)"
+              v-on:click="removePlayer(i)"
               class="removePlayerBtn md-icon-button"
             >
               <md-icon>remove</md-icon>
@@ -161,6 +161,10 @@ export default {
 .md-button {
   background-color: #687555 !important;
 }
+.removeBtn {
+  z-index: 1000;
+}
+
 .md-icon {
   color: white !important;
 }
