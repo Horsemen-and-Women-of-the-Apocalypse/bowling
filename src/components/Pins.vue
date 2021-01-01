@@ -69,6 +69,13 @@ export default {
       return this.count
     }
   },
+  watch: {
+    count () {
+      if (isNaN(this.count)) {
+        this.count = 10
+      }
+    }
+  },
   methods: {
     updatePinsCount: function (e) { // Update pins count if value >= 1
       const value = parseInt(e.target.value)
