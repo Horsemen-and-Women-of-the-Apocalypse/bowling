@@ -59,10 +59,12 @@ input[type=number] { /* Firefox support */
 
 <script>
 
+const defaultNbPins = 10
+
 export default {
   name: 'Pins',
   data: () => ({
-    count: 10
+    count: defaultNbPins
   }),
   computed: {
     pinsCount () { // Method to get the number of pins
@@ -72,7 +74,7 @@ export default {
   watch: {
     count () {
       if (isNaN(this.count)) {
-        this.count = 10
+        this.count = defaultNbPins
       }
     }
   },
@@ -80,7 +82,7 @@ export default {
     updatePinsCount: function (e) { // Update pins count if value >= 1
       const value = parseInt(e.target.value)
       if (value <= 1) {
-        this.count = 10
+        this.count = defaultNbPins
       } else {
         this.count = value
       }
