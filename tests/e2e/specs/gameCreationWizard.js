@@ -98,5 +98,46 @@ module.exports = {
     app.assert.elementCount('#errorMsg', 0)
     app.click('button[name=thirdBtnValidate]')
     app.assert.elementCount('#errorMsg', 1)
+  },
+  'Create game and remove players': browser => {
+    const homepage = browser.page.homepage()
+    homepage.waitForElementVisible('@appContainer')
+    const app = homepage.section.app
+
+    const players = ['toto', 'tata', 'tutu']
+
+    // Add turns
+    app.assert.visible('button[name=firstBtnValidate]')
+    app.click('button[name=firstBtnValidate]')
+
+    // Add pins
+    app.assert.visible('button[name=secondBtnValidate]')
+    app.click('button[name=secondBtnValidate]')
+
+    // Add players
+    app.assert.visible('input[name=newPlayerName]')
+
+    players.forEach((playerName, i) => {
+      app.setValue('input[name=newPlayerName]', playerName)
+      app.click('#PlayerListCreator #addPlayerBtn')
+    })
+
+    // remove players by removing first players
+    app.assert.elementCount('#PlayerListCreator .removeBtn', players.length)
+    players.forEach(() => {
+      app.click('#PlayerListCreator #player_1 .removeBtn')
+    })
+    app.assert.elementCount('#PlayerListCreator .removeBtn', 0)
+
+    // Add players
+    players.forEach((playerName, i) => {
+      app.setValue('input[name=newPlayerName]', playerName)
+      app.click('#PlayerListCreator #addPlayerBtn')
+    })
+
+    // remove second player
+    app.assert.elementCount('#PlayerListCreator .removeBtn', players.length)
+    app.click('#PlayerListCreator #player_2 .removeBtn')
+    app.assert.elementCount('#PlayerListCreator .removeBtn', players.length - 1)
   }
 }
