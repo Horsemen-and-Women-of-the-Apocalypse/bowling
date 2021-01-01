@@ -88,7 +88,7 @@ describe('TurnComponent', () => {
     // NaN trigger watch on count next tick
     wrapper.vm.$nextTick(() => {
       expect(wrapper.vm.turnCount).toBe(10)
-    });
+    })
   })
 
   test('setValueSpace', async () => {
@@ -102,7 +102,7 @@ describe('TurnComponent', () => {
     // NaN trigger watch on count next tick
     wrapper.vm.$nextTick(() => {
       expect(wrapper.vm.turnCount).toBe(10)
-    });
+    })
   })
 
   test('setValueString', async () => {
@@ -116,6 +116,6 @@ describe('TurnComponent', () => {
     // NaN trigger watch on count next tick
     wrapper.vm.$nextTick(() => {
       expect(wrapper.vm.turnCount).toBe(10)
-    });
+    })
   })
 })
