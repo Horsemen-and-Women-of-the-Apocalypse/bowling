@@ -18,8 +18,8 @@ module.exports = {
     homepage.waitForElementVisible('@appContainer')
     const app = homepage.section.app
 
-    const nbTurn = 10
-    const nbPins = 8
+    const nbTurn = 20
+    const nbPins = 10
     const players = ['toto', 'tata', 'tutu']
 
     // Add turns
@@ -27,9 +27,8 @@ module.exports = {
     app.assert.visible('button[name=firstBtnValidate]')
 
     app.clearValue('input[name=turnCount]')
-    app.setValue('input[name=turnCount]', 1)
-    app.assert.value('input[name=turnCount]', '1')
-    for (let i = 2; i <= nbTurn; i++) {
+    app.assert.value('input[name=turnCount]', '10')
+    for (let i = 11; i <= nbTurn; i++) {
       app.click('.turn #add')
       app.assert.value('input[name=turnCount]', '' + i)
     }
@@ -39,9 +38,8 @@ module.exports = {
     app.assert.visible('input[name=pinsCount]')
     app.assert.visible('button[name=secondBtnValidate]')
     app.clearValue('input[name=pinsCount]')
-    app.setValue('input[name=pinsCount]', 5)
-    app.assert.value('input[name=pinsCount]', '5')
-    for (let i = 6; i <= nbPins; i++) {
+    app.assert.value('input[name=pinsCount]', '10')
+    for (let i = 11; i <= nbPins; i++) {
       app.click('.pins #add')
       app.assert.value('input[name=pinsCount]', '' + i)
     }
@@ -97,6 +95,6 @@ module.exports = {
 
     app.assert.elementCount('#errorMsg', 0)
     app.click('button[name=thirdBtnValidate]')
-    app.assert.elementCount('#errorMsg', 1)
+    app.assert.elementCount('#errorMsg', 0)
   }
 }
