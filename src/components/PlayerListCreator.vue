@@ -11,7 +11,12 @@
     </div>
     <div id="playerList">
       <!-- Created player list -->
-      <draggable v-model="players" handle=".draggable">
+      <draggable
+        v-model="players"
+        handle=".draggable"
+        ghostClass="ghost"
+        animation=200
+      >
         <div
           class="player"
           v-for="(player, i) in players"
@@ -129,7 +134,11 @@ export default {
   font-weight: 100;
 }
 
-/* Players */
+.ghost {
+  opacity: 0;
+}
+
+/* Player */
 .player {
   padding: 2%;
   display: flex;
@@ -141,6 +150,7 @@ export default {
 }
 
 .player .draggable {
+  cursor: move;
   display: flex;
   overflow: hidden;
   flex:1;
