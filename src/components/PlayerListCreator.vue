@@ -11,7 +11,12 @@
     </div>
     <div id="playerList">
       <!-- Created player list -->
-      <draggable v-model="players">
+      <draggable
+        v-model="players"
+        handle=".draggable"
+        ghostClass="ghost"
+        animation=200
+      >
         <div
           class="player"
           v-for="(player, i) in players"
@@ -19,9 +24,14 @@
           :id="'player_' + (i + 1)"
         >
           <div
-            :class="'name ' + (newPlayerName === player.getName() ? 'red' : '')"
+          class="draggable"
           >
-            {{ i + 1 + " : " + player.getName() }}
+            <md-icon class="dragIcon">drag_indicator </md-icon>
+            <div
+              :class="'name ' + (newPlayerName === player.getName() ? 'red' : '')"
+            >
+              {{ i + 1 + " : " + player.getName() }}
+            </div>
           </div>
           <div class="removeBtn">
             <md-button
@@ -124,7 +134,11 @@ export default {
   font-weight: 100;
 }
 
-/* Players */
+.ghost {
+  opacity: 0;
+}
+
+/* Player */
 .player {
   padding: 2%;
   display: flex;
@@ -134,9 +148,23 @@ export default {
 .player:nth-child(2n) {
   background-color: #9fa65e;
 }
+
+.player .draggable {
+  cursor: move;
+  display: flex;
+  overflow: hidden;
+  flex:1;
+}
+.player .dragIcon {
+  color: #687555 !important;
+}
 .player .name {
+  flex:1;
   border-bottom: solid 4px #5E8C6A;
   margin-left: 4%;
+
+  /* Text: */
+  text-align: left;
   font-size: 1.5em;
   overflow: hidden;
   white-space: nowrap;
@@ -155,6 +183,7 @@ export default {
 .md-button {
   background-color: #687555 !important;
 }
+
 .md-icon {
   color: white !important;
 }
