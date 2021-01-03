@@ -76,4 +76,46 @@ describe('TurnComponent', () => {
     wrapper.find(InputSelector).trigger('blur')
     expect(wrapper.vm.turnCount).toBe(10)
   })
+
+  test('setValueVoid', async () => {
+    const wrapper = mountComponent()
+
+    await wrapper.find(InputSelector).setValue('')
+
+    expect(wrapper.vm.turnCount).toBe('')
+    wrapper.find(InputSelector).trigger('blur')
+    expect(wrapper.vm.turnCount).toBe(NaN)
+    // NaN trigger watch on count next tick
+    wrapper.vm.$nextTick(() => {
+      expect(wrapper.vm.turnCount).toBe(10)
+    })
+  })
+
+  test('setValueSpace', async () => {
+    const wrapper = mountComponent()
+
+    await wrapper.find(InputSelector).setValue(' ')
+
+    expect(wrapper.vm.turnCount).toBe('')
+    wrapper.find(InputSelector).trigger('blur')
+    expect(wrapper.vm.turnCount).toBe(NaN)
+    // NaN trigger watch on count next tick
+    wrapper.vm.$nextTick(() => {
+      expect(wrapper.vm.turnCount).toBe(10)
+    })
+  })
+
+  test('setValueString', async () => {
+    const wrapper = mountComponent()
+
+    await wrapper.find(InputSelector).setValue('string')
+
+    expect(wrapper.vm.turnCount).toBe('')
+    wrapper.find(InputSelector).trigger('blur')
+    expect(wrapper.vm.turnCount).toBe(NaN)
+    // NaN trigger watch on count next tick
+    wrapper.vm.$nextTick(() => {
+      expect(wrapper.vm.turnCount).toBe(10)
+    })
+  })
 })
