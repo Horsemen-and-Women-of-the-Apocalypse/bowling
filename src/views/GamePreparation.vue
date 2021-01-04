@@ -58,16 +58,16 @@
   margin: 0px;
 }
 .md-steppers {
-  background-color: #bfb35a !important;
-  height: 90vh;
+  background-color: var(--cantaloupeSkin) !important;
+  min-height: 90vh;
 }
 .md-stepper {
   padding-left: 0px;
   padding-right: 0px;
 }
 .md-button {
-  background-color: #f2c45a !important;
-  color: #88a65e !important;
+  background-color: var(--vernerPanton) !important;
+  color: var(--hansWegner) !important;
   font-weight: bold;
 }
 #nav {

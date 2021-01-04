@@ -110,25 +110,23 @@ export default {
 
 <style scoped>
 #PlayerListCreator {
-  background-color: #bfb35a;
   height: 100%;
 }
 
 /* Title */
 #title {
-  background-color: #bdbf5a;
   padding: 10px;
   text-align: left;
 }
 #title h1 {
-  color: #8C2318;
+  color: var(--eames);
   margin-bottom: 0px;
 }
 #title h1 span {
-  color: #88A65E;
+  color: var(--hansWenger);
 }
 #title h2 {
-  color: #8C2318;
+  color: var(--eames);
   font-size: 1em;
   margin-top: 0px;
   font-weight: 100;
@@ -145,8 +143,11 @@ export default {
   justify-content: space-between;
   align-items: center;
 }
+.player:nth-child(n) {
+  background-color: var(--playerListLight);
+}
 .player:nth-child(2n) {
-  background-color: #9fa65e;
+  background-color: var(--playerListDark);
 }
 
 .player .draggable {
@@ -156,11 +157,10 @@ export default {
   flex:1;
 }
 .player .dragIcon {
-  color: #687555 !important;
+  color: var(--knoll) !important;
 }
 .player .name {
   flex:1;
-  border-bottom: solid 4px #5E8C6A;
   margin-left: 4%;
 
   /* Text: */
@@ -176,12 +176,12 @@ export default {
 }
 
 .player.add {
-  background-color: #F2C45A;
+  background-color: var(--vernerPanton);
 }
 
 /* Buttons */
 .md-button {
-  background-color: #687555 !important;
+  background-color: var(--knoll)  !important;
 }
 
 .md-icon {

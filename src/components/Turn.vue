@@ -24,23 +24,23 @@
 </template>
 
 <style scoped>
+
 .eames {
-  color: #8C2318;
+  color: var(--eames);
 }
 .spacing {
   padding-top: 5%;
 }
 .hansWegner {
-  color: #88A65E;
+  color: var(--hansWegner);
 }
 .md-button {
-  background-color: #88A65E !important;
+  background-color: var(--hansWegner) !important;
 }
 .md-icon {
   color: white !important;
 }
 .turn {
-  background-color: #BFB35A;
   height: 100%;
 }
 @media only screen and (max-device-width: 480px) {
