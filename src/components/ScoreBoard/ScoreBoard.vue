@@ -22,7 +22,7 @@
 
     <!-- Score col -->
     <div id="scores">
-      <div id="title" class="curent">
+      <div id="title">
         <div class="turnNumber" v-for="turn in game.getTurn()" :key="turn">
           {{ turn }}
         </div>
@@ -44,7 +44,6 @@
     <div id="totalScores">
       <div id="title"><b>TOT</b></div>
       <div class="score" v-for="(player, i) in game.getPlayers()" :key="i">
-        265
       </div>
     </div>
   </div>
@@ -83,9 +82,6 @@ export default {
     })
 
     this.globalScore = playerScores
-    try {
-      this.registerThrow(this.game.getPlayers()[2].getName(), 5, 2, 5)
-    } catch (error) {}
   },
   methods: {
     registerThrow (playerName, turnNumber, throwNumber, pinsNumber) {
@@ -110,6 +106,14 @@ export default {
       this.globalScore[playerName][turnNumber - 1].throws[
         throwNumber - 1
       ] = pinsNumber
+
+      // Calculate Score
+
+      // TODO
+
+      // Update total Score
+
+      // TODO
     }
   }
 }
