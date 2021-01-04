@@ -12,9 +12,9 @@
 #title{
   width: 100%;
   height: 50%;
-  background-color: #5E8C6A;
+  background-color: var(--knoll);
   font-size: 2em;
-  color: #BFB35A;
+  color: var(--cantaloupeSkin);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,8 +22,8 @@
 #gamePrep{
   width: 100%;
   height: 50%;
-  background-color: #88A65E;
-  color: #8C2318;
+  background-color: var(--hansWegner);
+  color: var(--eames);
   font-size: 1.5em;
   display: flex;
   align-items: center;
