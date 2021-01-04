@@ -36,7 +36,7 @@
           <div class="removeBtn">
             <md-button
               v-on:click="removePlayer(i)"
-              class="removePlayerBtn md-icon-button"
+              class="removePlayerBtn md-icon-button md-raised md-primary"
             >
               <md-icon>remove</md-icon>
             </md-button>
@@ -53,7 +53,7 @@
             type="submit"
             id="addPlayerBtn"
             @click="addPlayer"
-            class="md-icon-button"
+            class="md-icon-button md-raised md-primary"
           >
             <md-icon>add</md-icon>
           </md-button>
@@ -162,6 +162,7 @@ export default {
 .player .name {
   flex:1;
   margin-left: 4%;
+  user-select: none;
 
   /* Text: */
   text-align: left;
@@ -174,19 +175,12 @@ export default {
   color: red;
   font-weight: bold;
 }
-
 .player.add {
   background-color: var(--vernerPanton);
 }
 
 /* Buttons */
-.md-button {
-  background-color: var(--knoll)  !important;
-}
 
-.md-icon {
-  color: white !important;
-}
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   /* Chrome, Safari, Edge, Opera support */

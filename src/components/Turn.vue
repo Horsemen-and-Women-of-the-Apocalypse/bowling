@@ -5,7 +5,7 @@
     </div>
     <div class="md-layout md-alignment-center-center">
       <div class="md-layout-item">
-        <md-button id='minus' v-on:click="minus" class="md-icon-button">
+        <md-button id='minus' v-on:click="minus" class="md-icon-button md-raised md-primary">
           <md-icon>remove</md-icon>
         </md-button>
       </div>
@@ -15,9 +15,9 @@
         </md-field>
       </div>
       <div class="md-layout-item">
-        <md-button id='add' v-on:click="add" class="md-icon-button">
-        <md-icon>add</md-icon>
-      </md-button>
+        <md-button id='add' v-on:click="add" class="md-icon-button md-raised md-primary">
+          <md-icon>add</md-icon>
+        </md-button>
       </div>
     </div>
   </div>
@@ -34,12 +34,7 @@
 .hansWegner {
   color: var(--hansWegner);
 }
-.md-button {
-  background-color: var(--hansWegner) !important;
-}
-.md-icon {
-  color: white !important;
-}
+
 .turn {
   height: 100%;
 }
