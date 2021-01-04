@@ -127,8 +127,6 @@ export default {
   --cellWidth: 60px;
   --cellHeigth: 60px;
 
-  user-select: none;
-
   display: flex;
   align-items: flex-start;
   height: 100%;
@@ -179,6 +177,7 @@ export default {
 
   /* TODO animate long names */
 
+  user-select: none;
   border: solid black 1px;
   padding: 5px;
 }
