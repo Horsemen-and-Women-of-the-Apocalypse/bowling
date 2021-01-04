@@ -2,11 +2,13 @@
   <div id="ScoreBoard">
     <!-- Players col -->
     <div id="playerNames">
-      <div id="curentTurnNumber">{{ curentTurn }}</div>
+      <div id="currentTurnNumber">{{ currentTurn }}</div>
       <div
         v-for="(player, i) in game.getPlayers()"
         :key="i"
-        :class="'player ' + (player.getName() == curentPlayer ? 'curent' : '')"
+        :class="
+          'player ' + (player.getName() === currentPlayer ? 'current' : '')
+        "
         :title="player.getName()"
       >
         <div class="turnNumber">
@@ -23,18 +25,22 @@
     <!-- Score col -->
     <div id="scores">
       <div id="title">
-        <div class="turnNumber" v-for="turn in game.getTurn()" :key="turn">
+        <div
+          v-for="turn in game.getTurn()"
+          :key="turn"
+          :class="'turnNumber ' + (turn === currentTurn ? 'current' : '')"
+        >
           {{ turn }}
         </div>
       </div>
       <div id="players">
         <div class="player" v-for="(player, i) in game.getPlayers()" :key="i">
           <Score
-            class="score"
             v-for="(turn, j) in game.getTurn()"
             :key="turn"
-            :last="j == game.getTurn() - 1"
+            :last="j === game.getTurn() - 1"
             :score="globalScore[player.getName()][j]"
+            :class="'score ' + (j === currentTurn - 1 ? 'current' : '')"
           />
         </div>
       </div>
@@ -43,8 +49,11 @@
     <!-- Total score col -->
     <div id="totalScores">
       <div id="title"><b>TOT</b></div>
-      <div class="score" v-for="(player, i) in game.getPlayers()" :key="i">
-      </div>
+      <div
+        class="score"
+        v-for="(player, i) in game.getPlayers()"
+        :key="i"
+      ></div>
     </div>
   </div>
 </template>
@@ -57,8 +66,8 @@ export default {
   name: 'ScoreBoard',
   props: {
     game: { type: Object, requiered: true },
-    curentPlayer: { type: String, default: null },
-    curentTurn: { type: Number, default: null }
+    currentPlayer: { type: String, default: null },
+    currentTurn: { type: Number, default: null }
   },
   data () {
     return {
@@ -72,9 +81,13 @@ export default {
       const turns = []
 
       for (let i = 0; i < this.game.getTurn(); i++) {
+        // const score = {
+        //   throws: [null, null, null],
+        //   score: null
+        // }
         const score = {
-          throws: [null, null, null],
-          score: null
+          throws: [Math.floor(Math.random() * 20), Math.floor(Math.random() * 20), Math.floor(Math.random() * 20)],
+          score: Math.floor(Math.random() * 20)
         }
         turns.push(score)
       }
@@ -84,6 +97,12 @@ export default {
     this.globalScore = playerScores
   },
   methods: {
+    /**
+     * @param {String} playerName -Existing name of a player
+     * @param {int} turnNumber - number of the turn to register the score
+     * @param {int} throwNumber - number of the throw to register the score (1, 2 or 3 (only for the last turn))
+     * @param {int} pinsNumber - number of fallen pins
+     */
     registerThrow (playerName, turnNumber, throwNumber, pinsNumber) {
       if (
         this.game.getPlayers().find((p) => p.getName() === playerName) ===
@@ -129,18 +148,17 @@ export default {
 
   display: flex;
   align-items: flex-start;
-  height: 100%;
   overflow-y: auto;
 
   border: solid black 1px;
-  font-size: 20px;
+  font-size: 1.5em;
 }
 
 /* player Names */
 #playerNames {
   max-width: 200px;
 }
-#playerNames #curentTurnNumber {
+#playerNames #currentTurnNumber {
   height: var(--headerHeigth);
   padding: 5px;
   display: flex;
@@ -149,7 +167,7 @@ export default {
 
   background: lightgray;
   font-weight: bold;
-  font-size: 30px;
+  font-size: 1.5em;
   border: solid black 1px;
 }
 #playerNames .player {
@@ -175,14 +193,12 @@ export default {
   white-space: nowrap;
   text-overflow: ellipsis;
 
-  /* TODO animate long names */
-
   user-select: none;
   border: solid black 1px;
   padding: 5px;
 }
-#playerNames .player.curent .turnNumber,
-.player.curent .name {
+#playerNames .player.current .turnNumber,
+.player.current .name {
   background: red;
   color: white;
 }
@@ -207,6 +223,9 @@ export default {
   border-left: none;
   background: lightgray;
 }
+#scores #title .turnNumber.current {
+  background: red;
+}
 #scores #players .player {
   height: var(--cellHeigth);
   flex: 1;
@@ -218,7 +237,9 @@ export default {
   border: solid black 1px;
   border-left: none;
 }
-
+#scores #players .score.current {
+  background: rgba(255, 0, 0, 0.2);
+}
 /* Total scores */
 #totalScores {
   width: 70px;

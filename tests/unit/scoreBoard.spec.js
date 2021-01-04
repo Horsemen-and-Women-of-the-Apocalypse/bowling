@@ -10,17 +10,17 @@ import GameParam from '../../src/objets/gameparam'
 /**
  * Mount a mocked version of ScoreBoard component
  *
- * @return {Wrapper<ScoreBoard>} PlayerListCreator component
+ * @return {Wrapper<ScoreBoard>} ScoreBoard component
  */
-const mountComponent = (gameParams, curentPlayer, curentTurn) => {
+const mountComponent = (gameParams, currentPlayer, currentTurn) => {
   return mount(ScoreBoard, {
     mocks: {
       $t: () => 'i18n is mocked' // Mock i18n function
     },
     propsData: {
       game: gameParams,
-      curentPlayer,
-      curentTurn
+      currentPlayer,
+      currentTurn
     }
   })
 }
@@ -78,12 +78,12 @@ describe('ScoreBoard component', () => {
       }
     })
   })
-  test('curentPlayer props', async () => {
+  test('currentPlayer props', async () => {
     // create games params
     const nbTurn = 20
     const nbPins = 100
     const playerNames = ['tata', 'tutu', 'toto']
-    const curentplayerIndex = 1
+    const currentplayerIndex = 1
     const players = []
 
     playerNames.forEach(pn => {
@@ -91,19 +91,19 @@ describe('ScoreBoard component', () => {
     })
 
     const gameParam = new GameParam(players, nbTurn, nbPins)
-    const wrapperWithPlayerProps = mountComponent(gameParam, playerNames[curentplayerIndex], null)
+    const wrapperWithPlayerProps = mountComponent(gameParam, playerNames[currentplayerIndex], null)
 
-    expect(wrapperWithPlayerProps.find('#playerNames .curent').text()).toContain(playerNames[curentplayerIndex])
+    expect(wrapperWithPlayerProps.find('#playerNames .current').text()).toContain(playerNames[currentplayerIndex])
 
     const wrapperWithNoPlayerProps = mountComponent(gameParam, null, null)
-    expect(wrapperWithNoPlayerProps.find('#playerNames .curent').exists()).toBe(false)
+    expect(wrapperWithNoPlayerProps.find('#playerNames .current').exists()).toBe(false)
   })
-  test('curentTurn props', async () => {
+  test('currentTurn props', async () => {
     // create games params
     const nbTurn = 20
     const nbPins = 100
     const playerNames = ['tata', 'tutu', 'toto']
-    const curentTurn = 69420
+    const currentTurn = 69420
     const players = []
 
     playerNames.forEach(pn => {
@@ -111,12 +111,12 @@ describe('ScoreBoard component', () => {
     })
 
     const gameParam = new GameParam(players, nbTurn, nbPins)
-    const wrapperWithCurTurnProps = mountComponent(gameParam, null, curentTurn)
+    const wrapperWithCurTurnProps = mountComponent(gameParam, null, currentTurn)
 
-    expect(wrapperWithCurTurnProps.find('#playerNames #curentTurnNumber').text()).toContain(curentTurn)
+    expect(wrapperWithCurTurnProps.find('#playerNames #currentTurnNumber').text()).toContain(currentTurn)
 
     const wrapperWithNoCurTurnProps = mountComponent(gameParam, null, null)
-    expect(wrapperWithNoCurTurnProps.find('#playerNames #curentTurnNumber').text()).toContain('')
+    expect(wrapperWithNoCurTurnProps.find('#playerNames #currentTurnNumber').text()).toContain('')
   })
   test('Classic game, wrong insertions', async () => {
     // create games params
@@ -140,6 +140,7 @@ describe('ScoreBoard component', () => {
         // Wrong player
         try {
           wrapper.vm.registerThrow('IDONTEXIST', i + 1, 1, pinsFallen1)
+          throw (Error('The test should have failed'))
         } catch (error) {
           expect(error.toString()).toBe('Error: Player not found')
         }
@@ -147,12 +148,14 @@ describe('ScoreBoard component', () => {
         // Wrong turn (3, but too low)
         try {
           wrapper.vm.registerThrow(pn, -1, 1, pinsFallen1)
+          throw (Error('The test should have failed'))
         } catch (error) {
           expect(error.toString()).toBe('Error: Invalid turn number')
         }
         // Wrong turn 2 (too high)
         try {
           wrapper.vm.registerThrow(pn, nbTurn + 5, 1, pinsFallen1)
+          throw (Error('The test should have failed'))
         } catch (error) {
           expect(error.toString()).toBe('Error: Invalid turn number')
         }
@@ -160,12 +163,14 @@ describe('ScoreBoard component', () => {
         // Invalid trow (too low)
         try {
           wrapper.vm.registerThrow(pn, i + 1, 0, pinsFallen1)
+          throw (Error('The test should have failed'))
         } catch (error) {
           expect(error.toString()).toBe('Error: Invalid throw number')
         }
         // Invalid trow (too high)
         try {
           wrapper.vm.registerThrow(pn, i + 1, 5, pinsFallen1)
+          throw (Error('The test should have failed'))
         } catch (error) {
           expect(error.toString()).toBe('Error: Invalid throw number')
         }
@@ -173,6 +178,7 @@ describe('ScoreBoard component', () => {
         if ((i + 1) !== nbTurn) {
           try {
             wrapper.vm.registerThrow(pn, i + 1, 3, pinsFallen1)
+            throw (Error('The test should have failed'))
           } catch (error) {
             expect(error.toString()).toBe('Error: Invalid throw number')
           }
