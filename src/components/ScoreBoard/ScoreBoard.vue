@@ -13,7 +13,9 @@
           {{ i + 1 }}
         </div>
         <div class="name">
-          {{ player.getName() }}
+          <span>
+            {{ player.getName() }}
+          </span>
         </div>
       </div>
     </div>
@@ -83,9 +85,7 @@ export default {
     this.globalScore = playerScores
     try {
       this.registerThrow(this.game.getPlayers()[2].getName(), 5, 2, 5)
-    } catch (error) {
-
-    }
+    } catch (error) {}
   },
   methods: {
     registerThrow (playerName, turnNumber, throwNumber, pinsNumber) {
@@ -122,6 +122,8 @@ export default {
 
   --cellWidth: 60px;
   --cellHeigth: 60px;
+
+  user-select: none;
 
   display: flex;
   align-items: flex-start;
@@ -242,6 +244,29 @@ export default {
   }
   #totalScores {
     width: 50px;
+  }
+  /* scrolling text */
+  #playerNames .player .name {
+    overflow: hidden;
+    position: relative;
+    width: 100px;
+  }
+  #playerNames .player .name span {
+    position: absolute;
+    text-align: left;
+    height: 100%;
+    line-height: var(--cellHeigth);
+    /* Apply animation to this element */
+    animation: scroll 8s ease-in infinite alternate;
+  }
+  /* Move it (define the animation) */
+  @keyframes scroll {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
   }
 }
 </style>
