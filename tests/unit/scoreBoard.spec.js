@@ -137,21 +137,20 @@ describe('ScoreBoard component', () => {
       for (let i = 0; i < nbTurn; i++) {
         const pinsFallen1 = Math.floor(Math.random() * nbPins)
 
-        // First throw, wrong player
+        // Wrong player
         try {
           wrapper.vm.registerThrow('IDONTEXIST', i + 1, 1, pinsFallen1)
         } catch (error) {
           expect(error.toString()).toBe('Error: Player not found')
         }
 
-        // First throw, wrong turn (3, but too low)
+        // Wrong turn (3, but too low)
         try {
           wrapper.vm.registerThrow(pn, -1, 1, pinsFallen1)
         } catch (error) {
           expect(error.toString()).toBe('Error: Invalid turn number')
         }
-
-        // First throw, wrong turn 2 (too high)
+        // Wrong turn 2 (too high)
         try {
           wrapper.vm.registerThrow(pn, nbTurn + 5, 1, pinsFallen1)
         } catch (error) {
@@ -170,7 +169,6 @@ describe('ScoreBoard component', () => {
         } catch (error) {
           expect(error.toString()).toBe('Error: Invalid throw number')
         }
-
         // Invalid trow (3, but not last turn)
         if ((i + 1) !== nbTurn) {
           try {
