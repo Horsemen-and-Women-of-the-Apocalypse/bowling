@@ -262,21 +262,21 @@ describe('gameparam', () => {
       test('Not null', () => {
         var p = new Player('Nom')
         var p2 = new Player('Nom2')
-  
+
         var players = [p, p2]
-  
+
         var g = new GameParam(players, 10, 5)
-  
+
         var a = new Automaton(g)
 
         expect(a).not.toBeNull()
       })
     })
-  
+
     describe('errorConstruct', () => {
       test('Throw', () => {
         const t = () => {
-          var p = new Player("Jean Robert")
+          var p = new Player('Jean Robert')
 
           return new Automaton(p)
         }
@@ -289,13 +289,13 @@ describe('gameparam', () => {
       test('Assert contents', () => {
         var p = new Player('Nom')
         var p2 = new Player('Nom2')
-  
+
         var players = [p, p2]
-  
+
         var g = new GameParam(players, 10, 5)
-  
+
         var a = new Automaton(g)
-        
+
         expect(a.getCurrentPlayer()).toBe(p)
         a.advance()
         expect(a.getCurrentPlayer()).toBe(p2)
@@ -306,13 +306,13 @@ describe('gameparam', () => {
       test('Assert contents', () => {
         var p = new Player('Nom')
         var p2 = new Player('Nom2')
-  
+
         var players = [p, p2]
-  
+
         var g = new GameParam(players, 1, 5)
-  
+
         var a = new Automaton(g)
-        
+
         expect(a.getCurrentPlayer()).toBe(p)
         a.advance()
         a.advance()
@@ -327,13 +327,13 @@ describe('gameparam', () => {
       test('Assert contents', () => {
         var p = new Player('Nom')
         var p2 = new Player('Nom2')
-  
+
         var players = [p, p2]
-  
+
         var g = new GameParam(players, 10, 5)
-  
+
         var a = new Automaton(g)
-        
+
         expect(a.getCurrentPlayer()).toBe(p)
         a.advance()
         expect(a.getCurrentPlayer()).toBe(p2)
@@ -346,13 +346,13 @@ describe('gameparam', () => {
       test('Assert contents', () => {
         var p = new Player('Nom')
         var p2 = new Player('Nom2')
-  
+
         var players = [p, p2]
-  
+
         var g = new GameParam(players, 10, 5)
-  
+
         var a = new Automaton(g)
-        
+
         expect(a.getCurrentTurn()).toBe(0)
         a.advance()
         a.advance()
@@ -368,13 +368,13 @@ describe('gameparam', () => {
       test('Assert contents', () => {
         var p = new Player('Nom')
         var p2 = new Player('Nom2')
-  
+
         var players = [p, p2]
-  
+
         var g = new GameParam(players, 2, 10)
-  
+
         var a = new Automaton(g)
-        
+
         expect(a.isEnd()).toBe(false)
         a.advance()
         a.advance()

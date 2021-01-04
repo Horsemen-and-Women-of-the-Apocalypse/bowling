@@ -1,4 +1,4 @@
-import GameParam from "./gameparam"
+import GameParam from './gameparam'
 
 /**
  * Class to describe automaton
@@ -10,10 +10,10 @@ export default class Automaton {
     /**
      * @param {GameParam} cGameParam - Game Parameter
      */
-    constructor (cGameParam) {   
+    constructor (cGameParam) {
       if (cGameParam instanceof GameParam) {
         this.#gameParam = cGameParam
-    } else {
+      } else {
         throw new Error('bad type argument')
       }
     }
@@ -21,33 +21,33 @@ export default class Automaton {
     /**
      * advance turn
      */
-    advance() {
-        if(!this.isEnd()) {
-            this.#current = this.#current + 1
-        }
+    advance () {
+      if (!this.isEnd()) {
+        this.#current = this.#current + 1
+      }
     }
 
     /**
      * Get current player
      * @return {Player} - current player
      */
-    getCurrentPlayer() {
-        return this.#gameParam.getPlayerAt(this.#current%this.#gameParam.getPlayers().length)
+    getCurrentPlayer () {
+      return this.#gameParam.getPlayerAt(this.#current % this.#gameParam.getPlayers().length)
     }
 
     /**
      * Get current turn
      * @return {int} - current turn
      */
-    getCurrentTurn() {
-        return parseInt(this.#current / this.#gameParam.getPlayers().length)
+    getCurrentTurn () {
+      return parseInt(this.#current / this.#gameParam.getPlayers().length)
     }
 
     /**
      * Get true if game is finish
      * @return {bool} - game status
      */
-    isEnd() {
-        return this.#current >= (this.#gameParam.getTurn() * this.#gameParam.getPlayers().length)
+    isEnd () {
+      return this.#current >= (this.#gameParam.getTurn() * this.#gameParam.getPlayers().length)
     }
 }
