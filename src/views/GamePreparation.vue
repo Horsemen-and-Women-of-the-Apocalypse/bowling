@@ -1,61 +1,13 @@
 <template>
   <div class="gamepreparation">
-    <div id="nav">
-      <Header/>
-    </div>
-    <md-steppers :md-active-step.sync="active" md-linear  md-alternative>
-      <md-step id="first" :md-label="$t('gamepreparation.turn')" :md-done.sync="first">
-        <Turn ref="turn" />
-        <md-button
-          name="firstBtnValidate"
-          class="md-raised md-primary"
-          @click="setDone('first', 'second')"
-          >{{ $t("gamepreparation.continue") }}</md-button
-        >
-      </md-step>
-
-      <md-step id="second" :md-label="$t('gamepreparation.pins')" :md-done.sync="second">
-        <Pins ref="pins" />
-        <md-button
-          name="secondBtnValidate"
-          class="md-raised md-primary"
-          @click="setDone('second', 'third')"
-          >{{ $t("gamepreparation.continue") }}</md-button
-        >
-      </md-step>
-
-      <md-step id="third" :md-label="$t('gamepreparation.players')" :md-done.sync="third">
-        <Players ref="players" @playerListChange="playerListChange" />
-        <md-button
-          name="thirdBtnValidate"
-          :disabled="players.length == 0"
-          class="md-raised md-primary"
-          @click="createGameParam()"
-          >{{ $t("gamepreparation.play") }}</md-button
-        >
-      </md-step>
-    </md-steppers>
-
-    <!-- Error msg -->
-
-    <md-snackbar
-      id="errorMsg"
-      md-position="center"
-      :md-duration="4000"
-      :md-active.sync="errorMsg"
-      md-persistent
-    >
-      <span>{{ $t("gamepreparation.errorMsg") }}</span>
-      <md-button class="md-primary" @click="errorMsg = false"
-        >{{ $t("gamepreparation.errorMsgCloseBtn") }}</md-button
-      >
-    </md-snackbar>
+    <scoreBoard :game="gameParam" curentPlayer="player 3" :curentTurn="5"/>
   </div>
 </template>
 
 <style scoped>
 .gamepreparation {
   margin: 0px;
+  height: 100%;
 }
 .md-steppers {
   background-color: #bfb35a !important;
@@ -79,19 +31,14 @@
 </style>
 
 <script>
-import Turn from '../components/Turn'
-import Pins from '../components/Pins'
-import Players from '../components/PlayerListCreator'
+import ScoreBoard from '../components/ScoreBoard/ScoreBoard'
 import GameParam from '../objets/gameparam'
-import Header from '../components/GamePrepHeader.vue'
+import Player from '../objets/player'
 
 export default {
   name: 'GamePreparation',
   components: {
-    Turn,
-    Pins,
-    Players,
-    Header
+    ScoreBoard
   },
   data: () => ({
     active: 'first',
@@ -102,6 +49,9 @@ export default {
     players: [],
     errorMsg: false
   }),
+  created () {
+    this.createGameParam()
+  },
   methods: {
     setDone (id, index) {
       this[id] = true
@@ -114,13 +64,17 @@ export default {
       return this.gameParam
     },
     createGameParam () {
-      this.setDone('third')
+      const turn = Math.floor(Math.random() * 5) * 10 + 1
+      const pins = Math.floor(Math.random() * 15) + 1
+      const nbPlayer = Math.floor(Math.random() * 15) + 1
 
-      const turn = this.$refs.turn.turnCount
-      const pins = this.$refs.pins.pinsCount
+      const players = []
 
+      for (let i = 0; i < nbPlayer; i++) {
+        players.push(new Player('player ' + i))
+      }
       try {
-        this.gameParam = new GameParam(this.players, turn, pins)
+        this.gameParam = new GameParam(players, turn, pins)
       } catch (error) {
         this.errorMsg = true
       }

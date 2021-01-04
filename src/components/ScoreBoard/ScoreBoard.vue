@@ -3,7 +3,12 @@
     <!-- Players col -->
     <div id="playerNames">
       <div id="curentTurnNumber">{{ curentTurn }}</div>
-      <div class="player" v-for="(player, i) in game.getPlayers()" :key="i">
+      <div
+        v-for="(player, i) in game.getPlayers()"
+        :key="i"
+        :class="'player ' + (player.getName() == curentPlayer ? 'curent' : '')"
+        :title="player.getName()"
+      >
         <div class="turnNumber">
           {{ i + 1 }}
         </div>
@@ -15,22 +20,27 @@
 
     <!-- Score col -->
     <div id="scores">
-      <div id="title">
+      <div id="title" class="curent">
         <div class="turnNumber" v-for="turn in game.getTurn()" :key="turn">
           {{ turn }}
         </div>
       </div>
       <div id="players">
         <div class="player" v-for="(player, i) in game.getPlayers()" :key="i">
-          <div class="score" v-for="turn in game.getTurn()" :key="turn">
-          </div>
+          <Score
+            class="score"
+            v-for="(turn, j) in game.getTurn()"
+            :key="turn"
+            :last="j == game.getTurn() - 1"
+            :score="globalScore[player.getName()][j]"
+          />
         </div>
       </div>
     </div>
 
     <!-- Total score col -->
     <div id="totalScores">
-      <div id="title"><b>TOTAL</b></div>
+      <div id="title"><b>TOT</b></div>
       <div class="score" v-for="(player, i) in game.getPlayers()" :key="i">
         265
       </div>
@@ -39,20 +49,73 @@
 </template>
 
 <script>
+import Score from './Score'
+
 export default {
+  components: { Score },
   name: 'ScoreBoard',
   props: {
-    game: { type: Object, requiered: true }
+    game: { type: Object, requiered: true },
+    curentPlayer: { type: String, default: null },
+    curentTurn: { type: Number, default: null }
   },
   data () {
     return {
-      curentTurn: 5
+      globalScore: null
+    }
+  },
+  created () {
+    const playerScores = []
+
+    this.game.getPlayers().forEach((p) => {
+      const turns = []
+
+      for (let i = 0; i < this.game.getTurn(); i++) {
+        const score = {
+          throws: [null, null, null],
+          score: null
+        }
+        turns.push(score)
+      }
+      playerScores[p.getName()] = turns
+    })
+
+    this.globalScore = playerScores
+    try {
+      this.registerThrow(this.game.getPlayers()[2].getName(), 5, 2, 5)
+    } catch (error) {
+
+    }
+  },
+  methods: {
+    registerThrow (playerName, turnNumber, throwNumber, pinsNumber) {
+      if (
+        this.game.getPlayers().find((p) => p.getName() === playerName) ===
+        undefined
+      ) {
+        throw Error('Player not found')
+      }
+      if (turnNumber <= 0 || turnNumber > this.game.getTurn()) {
+        throw Error('Invalid turn number')
+      }
+      if (
+        throwNumber <= 0 ||
+        (turnNumber === this.game.getTurn() && throwNumber > 3) ||
+        (turnNumber < this.game.getTurn() && throwNumber > 2)
+      ) {
+        throw Error('Invalid throw number')
+      }
+
+      // Register throw
+      this.globalScore[playerName][turnNumber - 1].throws[
+        throwNumber - 1
+      ] = pinsNumber
     }
   }
 }
 </script>
 
-<style>
+<style scoped>
 #ScoreBoard {
   /* Variable */
   --headerHeigth: 40px;
@@ -113,6 +176,11 @@ export default {
   border: solid black 1px;
   padding: 5px;
 }
+#playerNames .player.curent .turnNumber,
+.player.curent .name {
+  background: red;
+  color: white;
+}
 
 /* Scores */
 #scores {
@@ -131,7 +199,7 @@ export default {
 
   font-weight: bold;
   border: solid black 1px;
-  border-left:none;
+  border-left: none;
   background: lightgray;
 }
 #scores #players .player {
@@ -139,11 +207,11 @@ export default {
   flex: 1;
   display: flex;
 }
-#scores #players .player .score{
+#scores #players .player .score {
   height: var(--cellHeigth);
   min-width: var(--cellWidth);
   border: solid black 1px;
-  border-left:none;
+  border-left: none;
 }
 
 /* Total scores */
@@ -166,5 +234,14 @@ export default {
 
   border: solid black 1px;
   font-weight: bold;
+}
+
+@media only screen and (max-device-width: 480px) {
+  #playerNames {
+    max-width: 50px;
+  }
+  #totalScores {
+    width: 50px;
+  }
 }
 </style>
