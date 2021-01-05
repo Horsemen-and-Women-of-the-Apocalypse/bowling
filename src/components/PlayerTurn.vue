@@ -27,7 +27,6 @@
             <div class="md-layout-item">
               <md-field md-inline>
                 <md-input v-model="count1" type="number" name="pinsFallen1" @blur="updatepinsFallen1($event)"/>
-                {{count1}}
               </md-field>
             </div>
             <div class="md-layout-item">
@@ -179,9 +178,6 @@ export default {
     },
     pinsFallen2 () { // Method to get the number of pins fallen during the second throw
       return this.count2
-    },
-    test () {
-      return parseInt(this.count1)
     }
   },
   watch: {
@@ -199,11 +195,15 @@ export default {
   },
   methods: {
     updatepinsFallen1: function (e) { // Update pins count1 if value >= 0
+      const value = parseInt(e.target.value)
+      this.count1 = value
       if (this.count1 < 0 || this.count1 > this.totalPins) {
         this.count1 = this.totalPins
       }
     },
     updatepinsFallen2: function (e) { // Update pins count2 if value >= 0
+      const value = parseInt(e.target.value)
+      this.count2 = value
       if (this.count2 < 0 || this.count2 > this.maxPinsSecondThrow) {
         this.count2 = this.maxPinsSecondThrow
       }
