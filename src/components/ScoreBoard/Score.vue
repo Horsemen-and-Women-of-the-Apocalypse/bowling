@@ -1,5 +1,5 @@
 <template>
-  <div id="Score">
+  <div :class="turn % 2 ? 'odd' : ''" id="Score">
     <div id="top">
       <div class="throw" id="first">{{ processedScore.throw1 }}</div>
       <div class="throw" id="second">{{ processedScore.throw2 }}</div>
@@ -24,7 +24,8 @@ export default {
   props: {
     game: { type: Object, requiered: true },
     last: { type: Boolean, default: false },
-    score: { type: Object, requiered: true }
+    score: { type: Object, requiered: true },
+    turn: { type: Number, requiered: true }
   },
   computed: {
     processedScore () {
@@ -99,16 +100,21 @@ export default {
   display: flex;
   flex-direction: column;
 }
+#Score.odd {
+  display: flex;
+  flex-direction: column;
+  background: var(--dark);
+}
 #top {
   flex: 0.8;
   display: flex;
-  border-bottom: solid black 1px;
+  border-bottom: solid white 1px;
 }
 #top .throw {
   flex: 1;
 }
 #top .throw + .throw {
-  border-left: solid black 1px;
+  border-left: solid white 1px;
 }
 
 #bot {

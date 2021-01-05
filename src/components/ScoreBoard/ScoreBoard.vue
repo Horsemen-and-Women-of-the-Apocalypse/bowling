@@ -2,7 +2,7 @@
   <div id="ScoreBoard">
     <!-- Players col -->
     <div id="playerNames">
-      <div id="currentTurnNumber"/>
+      <div id="currentTurnNumber" />
       <div
         v-for="(player, i) in game.getPlayers()"
         :key="i"
@@ -41,6 +41,7 @@
             :game="game"
             :last="j === game.getTurn() - 1"
             :score="globalScore[player.getName()][j]"
+            :turn="i"
             :class="'score ' + (j === currentTurn - 1 ? 'current' : '')"
           />
         </div>
@@ -153,33 +154,48 @@ export default {
   align-items: flex-start;
   overflow-y: auto;
 
-  border: solid black 1px;
+  border: solid white 1px;
   font-size: 1.5em;
+  height: 100%;
+  width: 100%;
 }
 
 /* player Names */
 #playerNames {
-  max-width: 15%;
+  max-width: 40%;
 }
 #playerNames #currentTurnNumber {
   height: var(--headerHeigth);
 
-  background: lightgray;
-  border: solid black 1px;
+  background: var(--secondaryDarker);
+  border: solid white 1px;
 }
 #playerNames .player {
   height: var(--cellHeigth);
   display: flex;
+  background: var(--darker);
 }
+#playerNames .player:nth-child(odd) {
+  background: var(--dark);
+}
+
 #playerNames .player .turnNumber {
   display: flex;
   align-items: center;
   justify-content: center;
 
-  width: 20px;
+  width: 25px;
   font-weight: bold;
-  background: lightgray;
-  border: solid black 1px;
+  background: var(--secondaryDarker);
+  border: solid white 1px;
+  color: var(--accent);
+}
+#playerNames .player:nth-child(odd) .turnNumber {
+  background: var(--secondary);
+}
+#playerNames .player.current .turnNumber {
+  background: var(--accent);
+  color: black;
 }
 #playerNames .player .name {
   flex: 1;
@@ -191,19 +207,19 @@ export default {
   text-overflow: ellipsis;
 
   user-select: none;
-  border: solid black 1px;
+  border: solid white 1px;
   padding: 5px;
 }
-#playerNames .player.current .turnNumber,
-.player.current .name {
-  background: red;
-  color: white;
+#playerNames .player.current .name {
+  background: var(--primary);
+  color: black;
 }
-
 /* Scores */
 #scores {
   flex: 1;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* on laisse le défilement se poursuivre */
+  background: var(--darker);
 }
 #scores #title {
   display: flex;
@@ -216,22 +232,25 @@ export default {
   justify-content: center;
 
   font-weight: bold;
-  border: solid black 1px;
+  background: var(--secondaryDarker);
+  border: solid white 1px;
   border-left: none;
-  background: lightgray;
 }
 #scores #title .turnNumber.current {
-  background: red;
+  background: var(--accent);
+}
+#scores #players {
+  flex: 1;
 }
 #scores #players .player {
   height: var(--cellHeigth);
-  flex: 1;
   display: flex;
 }
+
 #scores #players .player .score {
   height: var(--cellHeigth);
   min-width: var(--cellWidth);
-  border: solid black 1px;
+  border: solid white 1px;
   border-left: none;
 }
 #scores #players .score.current {
@@ -240,14 +259,14 @@ export default {
 /* Total scores */
 #totalScores {
   width: 70px;
-  background: lightgray;
+  background: var(--secondaryDarker);
 }
 #totalScores #title {
   height: var(--headerHeigth);
   display: flex;
   align-items: center;
   justify-content: center;
-  border: solid black 1px;
+  border: solid white 1px;
 }
 #totalScores .score {
   height: var(--cellHeigth);
@@ -255,7 +274,7 @@ export default {
   align-items: center;
   justify-content: center;
 
-  border: solid black 1px;
+  border: solid white 1px;
   font-weight: bold;
 }
 
