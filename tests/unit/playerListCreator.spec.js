@@ -35,7 +35,7 @@ describe('PlayerListCreator component', () => {
 
     expect(wrapper.vm.getPlayers().length).toBe(0)
   })
-  
+
   test('Add a new player with no name', async () => {
     const wrapper = mountComponent()
 
