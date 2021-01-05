@@ -138,51 +138,19 @@ describe('ScoreBoard component', () => {
         const pinsFallen1 = Math.floor(Math.random() * nbPins)
 
         // Wrong player
-        try {
-          wrapper.vm.registerThrow('IDONTEXIST', i + 1, 1, pinsFallen1)
-          throw (Error('The test should have failed'))
-        } catch (error) {
-          expect(error.toString()).toBe('Error: Player not found')
-        }
+        expect(() => wrapper.vm.registerThrow('IDONTEXIST', i + 1, 1, pinsFallen1)).toThrow('Player not found')
 
         // Wrong turn (3, but too low)
-        try {
-          wrapper.vm.registerThrow(pn, -1, 1, pinsFallen1)
-          throw (Error('The test should have failed'))
-        } catch (error) {
-          expect(error.toString()).toBe('Error: Invalid turn number')
-        }
+        expect(() => wrapper.vm.registerThrow(pn, -1, 1, pinsFallen1)).toThrow('Invalid turn number')
         // Wrong turn 2 (too high)
-        try {
-          wrapper.vm.registerThrow(pn, nbTurn + 5, 1, pinsFallen1)
-          throw (Error('The test should have failed'))
-        } catch (error) {
-          expect(error.toString()).toBe('Error: Invalid turn number')
-        }
+        expect(() => wrapper.vm.registerThrow(pn, nbTurn + 5, 1, pinsFallen1)).toThrow('Invalid turn number')
 
         // Invalid trow (too low)
-        try {
-          wrapper.vm.registerThrow(pn, i + 1, 0, pinsFallen1)
-          throw (Error('The test should have failed'))
-        } catch (error) {
-          expect(error.toString()).toBe('Error: Invalid throw number')
-        }
+        expect(() => wrapper.vm.registerThrow(pn, i + 1, 0, pinsFallen1)).toThrow('Invalid throw number')
         // Invalid trow (too high)
-        try {
-          wrapper.vm.registerThrow(pn, i + 1, 5, pinsFallen1)
-          throw (Error('The test should have failed'))
-        } catch (error) {
-          expect(error.toString()).toBe('Error: Invalid throw number')
-        }
+        expect(() => wrapper.vm.registerThrow(pn, i + 1, 5, pinsFallen1)).toThrow('Invalid throw number')
         // Invalid trow (3, but not last turn)
-        if ((i + 1) !== nbTurn) {
-          try {
-            wrapper.vm.registerThrow(pn, i + 1, 3, pinsFallen1)
-            throw (Error('The test should have failed'))
-          } catch (error) {
-            expect(error.toString()).toBe('Error: Invalid throw number')
-          }
-        }
+        expect(() => wrapper.vm.registerThrow(pn, i + 1, 3, pinsFallen1)).toThrow('Invalid throw number')
 
         expect(wrapper.vm.globalScore[pn][i].throws[0]).toBe(null)
       }

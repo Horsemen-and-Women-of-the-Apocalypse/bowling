@@ -2,7 +2,7 @@
   <div id="ScoreBoard">
     <!-- Players col -->
     <div id="playerNames">
-      <div id="currentTurnNumber">{{ currentTurn }}</div>
+      <div id="currentTurnNumber"/>
       <div
         v-for="(player, i) in game.getPlayers()"
         :key="i"
@@ -48,7 +48,9 @@
 
     <!-- Total score col -->
     <div id="totalScores">
-      <div id="title"><b>TOT</b></div>
+      <div id="title">
+        <b>{{ $t("scoreBoard.total") }}</b>
+      </div>
       <div
         class="score"
         v-for="(player, i) in game.getPlayers()"
@@ -81,14 +83,14 @@ export default {
       const turns = []
 
       for (let i = 0; i < this.game.getTurn(); i++) {
-        // const score = {
-        //   throws: [null, null, null],
-        //   score: null
-        // }
         const score = {
-          throws: [Math.floor(Math.random() * 20), Math.floor(Math.random() * 20), Math.floor(Math.random() * 20)],
-          score: Math.floor(Math.random() * 20)
+          throws: [null, null, null],
+          score: null
         }
+        // const score = {
+        //   throws: [Math.floor(Math.random() * 20), Math.floor(Math.random() * 20), Math.floor(Math.random() * 20)],
+        //   score: Math.floor(Math.random() * 20)
+        // }
         turns.push(score)
       }
       playerScores[p.getName()] = turns
@@ -156,18 +158,12 @@ export default {
 
 /* player Names */
 #playerNames {
-  max-width: 200px;
+  max-width: 15%;
 }
 #playerNames #currentTurnNumber {
   height: var(--headerHeigth);
-  padding: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
 
   background: lightgray;
-  font-weight: bold;
-  font-size: 1.5em;
   border: solid black 1px;
 }
 #playerNames .player {
