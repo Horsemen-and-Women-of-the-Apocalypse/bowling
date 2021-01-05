@@ -1,7 +1,7 @@
 <template>
   <div id="PlayerListCreator">
     <div id="title">
-      <h1>
+      <h1 class="names">
         {{ $t("playerListCreator.title1_1") }}
         <span>{{ $t("playerListCreator.title1_2") }}</span> ?
       </h1>
@@ -15,7 +15,7 @@
         v-model="players"
         handle=".draggable"
         ghostClass="ghost"
-        animation=200
+        animation="200"
       >
         <div
           class="player"
@@ -23,12 +23,12 @@
           :key="i"
           :id="'player_' + (i + 1)"
         >
-          <div
-          class="draggable"
-          >
-            <md-icon class="dragIcon">drag_indicator </md-icon>
+          <div class="draggable">
+            <md-icon class="dragIcon md-accent">drag_indicator </md-icon>
             <div
-              :class="'name ' + (newPlayerName === player.getName() ? 'red' : '')"
+              :class="
+                'name ' + (newPlayerName === player.getName() ? 'red' : '')
+              "
             >
               {{ i + 1 + " : " + player.getName() }}
             </div>
@@ -36,7 +36,7 @@
           <div class="removeBtn">
             <md-button
               v-on:click="removePlayer(i)"
-              class="removePlayerBtn md-icon-button"
+              class="removePlayerBtn md-icon-button md-raised md-primary"
             >
               <md-icon>remove</md-icon>
             </md-button>
@@ -46,14 +46,18 @@
       <!-- Add player line -->
       <form class="player add" @submit.prevent="">
         <md-field class="name">
-          <md-input type="text" name="newPlayerName" v-model="newPlayerName"></md-input>
+          <md-input
+            type="text"
+            name="newPlayerName"
+            v-model="newPlayerName"
+          ></md-input>
         </md-field>
         <div class="addBtn">
           <md-button
             type="submit"
             id="addPlayerBtn"
             @click="addPlayer"
-            class="md-icon-button"
+            class="md-icon-button md-raised md-primary"
           >
             <md-icon>add</md-icon>
           </md-button>
@@ -80,7 +84,7 @@ export default {
     addPlayer () {
       // Add a new player object to the player list
       if (
-        this.newPlayerName.length > 0 &&
+        this.newPlayerName.length > 0 && this.newPlayerName.length < 28 &&
         this.players.find((p) => p.getName() === this.newPlayerName) ===
           undefined
       ) {
@@ -110,28 +114,26 @@ export default {
 
 <style scoped>
 #PlayerListCreator {
-  background-color: #bfb35a;
   height: 100%;
 }
 
 /* Title */
 #title {
-  background-color: #bdbf5a;
   padding: 10px;
   text-align: left;
 }
 #title h1 {
-  color: #8C2318;
   margin-bottom: 0px;
 }
-#title h1 span {
-  color: #88A65E;
-}
+
 #title h2 {
-  color: #8C2318;
   font-size: 1em;
-  margin-top: 0px;
+  margin-top: 1vh;
   font-weight: 100;
+}
+
+#addPlayerBtn {
+  background-color: var(--secondaryLighter) !important;
 }
 
 .ghost {
@@ -145,25 +147,27 @@ export default {
   justify-content: space-between;
   align-items: center;
 }
+.player:nth-child(n) {
+  background-color: var(--darkOdd);
+}
 .player:nth-child(2n) {
-  background-color: #9fa65e;
+  background-color: var(--dark);
 }
 
 .player .draggable {
   cursor: move;
   display: flex;
   overflow: hidden;
-  flex:1;
+  flex: 1;
 }
-.player .dragIcon {
-  color: #687555 !important;
-}
+
 .player .name {
-  flex:1;
-  border-bottom: solid 4px #5E8C6A;
+  flex: 1;
   margin-left: 4%;
+  user-select: none;
 
   /* Text: */
+  color: var(--text);
   text-align: left;
   font-size: 1.5em;
   overflow: hidden;
@@ -171,22 +175,15 @@ export default {
   text-overflow: ellipsis;
 }
 .player .name.red {
-  color: red;
+  color: var(--accent);
   font-weight: bold;
 }
-
 .player.add {
-  background-color: #F2C45A;
+  background-color: var(--darkLighter);
 }
 
 /* Buttons */
-.md-button {
-  background-color: #687555 !important;
-}
 
-.md-icon {
-  color: white !important;
-}
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   /* Chrome, Safari, Edge, Opera support */
