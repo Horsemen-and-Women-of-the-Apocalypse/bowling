@@ -1,7 +1,7 @@
 <template>
   <div class="pins">
     <div class='spacing md-alignment-center-center'>
-      <h1 class='names'>{{ $t('pins.title') }} <span class="hansWegner">{{$t('pins.pins')}}</span> :</h1>
+      <h1 class='names'>{{ $t('pins.title') }} <span class="hansWegner spicyRice">{{$t('pins.pins')}}</span> :</h1>
     </div>
     <div class="md-layout md-alignment-center-center">
       <div class="md-layout-item">

@@ -1,7 +1,7 @@
 <template>
   <div class="gameprepheader">
-    <div id="title">{{ $t('gameprepheader.title')}}</div>
-    <div id="gamePrep">{{ $t('gameprepheader.prep')}}</div>
+    <div class="spicyRice" id="title">{{ $t('gameprepheader.title')}}</div>
+    <div class="ralewayExtraBold" id="gamePrep">{{ $t('gameprepheader.prep')}}</div>
   </div>
 </template>
 
