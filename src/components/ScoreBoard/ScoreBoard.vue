@@ -212,7 +212,6 @@ export default {
 }
 #playerNames .player.current .name {
   background: var(--primary);
-  color: black;
 }
 /* Scores */
 #scores {
