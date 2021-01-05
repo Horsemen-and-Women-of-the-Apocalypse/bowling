@@ -33,8 +33,8 @@ beforeAll(() => {
 describe('ScoreBoard component', () => {
   test('Classic game', async () => {
     // create games params
-    const nbTurn = 100
-    const nbPins = 100
+    const nbTurn = 30
+    const nbPins = 30
     const playerNames = ['tata', 'tutu', 'toto']
     const players = []
 
@@ -79,7 +79,7 @@ describe('ScoreBoard component', () => {
   test('currentPlayer props', async () => {
     // create games params
     const nbTurn = 20
-    const nbPins = 100
+    const nbPins = 30
     const playerNames = ['tata', 'tutu', 'toto']
     const currentplayerIndex = 1
     const players = []
@@ -97,7 +97,7 @@ describe('ScoreBoard component', () => {
   test('currentTurn props', async () => {
     // create games params
     const nbTurn = 20
-    const nbPins = 100
+    const nbPins = 30
     const playerNames = ['tata', 'tutu', 'toto']
     const currentTurn = 10
     const players = []
@@ -114,7 +114,7 @@ describe('ScoreBoard component', () => {
   test('Classic game, wrong insertions', async () => {
     // create games params
     const nbTurn = 20
-    const nbPins = 100
+    const nbPins = 30
     const playerNames = ['tata', 'tutu', 'toto']
     const players = []
 
