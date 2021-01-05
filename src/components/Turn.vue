@@ -1,7 +1,7 @@
 <template>
   <div class="turn">
     <div class='spacing md-alignment-center-center'>
-      <h1 class='eames ralewayExtraBold'>{{ $t('turn.title') }} <span class="hansWegner spicyRice">{{$t('turn.turn')}}</span> :</h1>
+      <h1 class='names'>{{ $t('turn.title') }} <span>{{$t('turn.turn')}}</span> :</h1>
     </div>
     <div class="md-layout md-alignment-center-center">
       <div class="md-layout-item">
@@ -25,19 +25,14 @@
 
 <style scoped>
 
-.eames {
-  color: var(--eames);
-}
-.spacing {
-  padding-top: 5%;
-}
-.hansWegner {
-  color: var(--hansWegner);
-}
-
 .turn {
   height: 100%;
 }
+
+.spacing {
+  padding-top: 5%;
+}
+
 @media only screen and (max-device-width: 480px) {
   .turn {
       font-size: 1em;

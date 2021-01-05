@@ -1,0 +1,56 @@
+// Define font 
+
+@font-face {
+    font-family: "SpicyRice-Regular";
+    src: url("../font/SpicyRice-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Raleway-Regular";
+    src: url("../font/Raleway-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Raleway-Bold";
+    src: url("../font/Raleway-Bold.ttf");
+}
+
+@font-face {
+    font-family: "Raleway-ExtraBold";
+    src: url("../font/Raleway-ExtraBold.ttf");
+}
+
+.spicyRice {
+    font-family: SpicyRice-Regular !important;
+}
+
+.ralewayRegular {
+    font-family: Raleway-Regular !important;
+}
+
+.ralewayBold {
+    font-family: Raleway-Bold !important;
+}
+
+.ralewayExtraBold {
+    font-family: Raleway-ExtraBold !important;
+}
+
+.md-input {
+    -webkit-text-fill-color: var(--text) !important;
+    @extend .ralewayRegular
+}
+
+.names {
+    color: var(--text);
+    @extend .ralewayBold
+}
+  
+.names > span {
+    color: var(--accent) !important;
+    @extend .spicyRice
+}
+
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { /* Chrome, Safari, Edge, Opera support */
+    -webkit-appearance: none;
+  }

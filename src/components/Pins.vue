@@ -1,7 +1,7 @@
 <template>
   <div class="pins">
     <div class='spacing md-alignment-center-center'>
-      <h1 class='names'>{{ $t('pins.title') }} <span class="hansWegner spicyRice">{{$t('pins.pins')}}</span> :</h1>
+      <h1 class='names'>{{ $t('pins.title') }} <span>{{$t('pins.pins')}}</span> :</h1>
     </div>
     <div class="md-layout md-alignment-center-center">
       <div class="md-layout-item">
@@ -24,24 +24,21 @@
 </template>
 
 <style scoped>
-.names {
-  color: var(--eames);
-}
-.spacing {
-  padding-top: 5%;
-}
-.hansWegner {
-  color: var(--hansWegner);
-}
 
 .pins {
   height: 100%;
 }
+
+.spacing {
+  padding-top: 5%;
+}
+
 @media only screen and (max-device-width: 480px) {
   .pins {
       font-size: 1em;
   }
 }
+
 input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { /* Chrome, Safari, Edge, Opera support */
   -webkit-appearance: none;
 }

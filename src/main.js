@@ -9,6 +9,7 @@ import 'vue-material/dist/vue-material.min.css'
 
 import './assets/style/theme.scss'
 import './assets/style/colors.scss'
+import './assets/style/style.scss'
 
 import lang from './assets/lang'
 
