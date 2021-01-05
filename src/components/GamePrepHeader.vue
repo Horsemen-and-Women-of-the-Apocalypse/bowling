@@ -1,7 +1,7 @@
 <template>
   <div class="gameprepheader">
-    <div id="title">{{ $t('gameprepheader.title')}}</div>
-    <div id="gamePrep">{{ $t('gameprepheader.prep')}}</div>
+    <div class="spicyRice" id="title">{{ $t('gameprepheader.title')}}</div>
+    <div class="ralewayBold" id="gamePrep">{{ $t('gameprepheader.prep')}}</div>
   </div>
 </template>
 
@@ -12,9 +12,9 @@
 #title{
   width: 100%;
   height: 50%;
-  background-color: var(--knoll);
+  background-color: var(--secondaryDarker);
   font-size: 2em;
-  color: var(--cantaloupeSkin);
+  color: var(--secondaryLighter);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -22,8 +22,8 @@
 #gamePrep{
   width: 100%;
   height: 50%;
-  background-color: var(--hansWegner);
-  color: var(--eames);
+  background-color: var(--secondary);
+  color: var(--secondaryLighter);
   font-size: 1.5em;
   display: flex;
   align-items: center;

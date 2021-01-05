@@ -1,5 +1,6 @@
 import Player from '../../src/objets/player'
 import GameParam from '../../src/objets/gameparam'
+import Automaton from '../../src/objets/automaton'
 
 describe('player', () => {
   describe('constructor', () => {
@@ -253,6 +254,135 @@ describe('gameparam', () => {
       }
 
       expect(h).toThrow('wrong number of pins')
+    })
+  })
+
+  describe('automaton', () => {
+    describe('constructor', () => {
+      test('Not null', () => {
+        var p = new Player('Nom')
+        var p2 = new Player('Nom2')
+
+        var players = [p, p2]
+
+        var g = new GameParam(players, 10, 5)
+
+        var a = new Automaton(g)
+
+        expect(a).not.toBeNull()
+      })
+    })
+
+    describe('errorConstruct', () => {
+      test('Throw', () => {
+        const t = () => {
+          var p = new Player('Jean Robert')
+
+          return new Automaton(p)
+        }
+
+        expect(t).toThrow('bad type argument')
+      })
+    })
+
+    describe('advance', () => {
+      test('Assert contents', () => {
+        var p = new Player('Nom')
+        var p2 = new Player('Nom2')
+
+        var players = [p, p2]
+
+        var g = new GameParam(players, 10, 5)
+
+        var a = new Automaton(g)
+
+        expect(a.getCurrentPlayer()).toBe(p)
+        a.advance()
+        expect(a.getCurrentPlayer()).toBe(p2)
+      })
+    })
+
+    describe('advanceIfFinish', () => {
+      test('Assert contents', () => {
+        var p = new Player('Nom')
+        var p2 = new Player('Nom2')
+
+        var players = [p, p2]
+
+        var g = new GameParam(players, 1, 5)
+
+        var a = new Automaton(g)
+
+        expect(a.getCurrentPlayer()).toBe(p)
+        a.advance()
+        a.advance()
+        expect(a.isEnd()).toBe(true)
+        a.advance()
+        expect(a.isEnd()).toBe(true)
+        expect(a.getCurrentPlayer()).toBe(p)
+      })
+    })
+
+    describe('currentPlayer', () => {
+      test('Assert contents', () => {
+        var p = new Player('Nom')
+        var p2 = new Player('Nom2')
+
+        var players = [p, p2]
+
+        var g = new GameParam(players, 10, 5)
+
+        var a = new Automaton(g)
+
+        expect(a.getCurrentPlayer()).toBe(p)
+        a.advance()
+        expect(a.getCurrentPlayer()).toBe(p2)
+        a.advance()
+        expect(a.getCurrentPlayer()).toBe(p)
+      })
+    })
+
+    describe('currentTurn', () => {
+      test('Assert contents', () => {
+        var p = new Player('Nom')
+        var p2 = new Player('Nom2')
+
+        var players = [p, p2]
+
+        var g = new GameParam(players, 10, 5)
+
+        var a = new Automaton(g)
+
+        expect(a.getCurrentTurn()).toBe(0)
+        a.advance()
+        a.advance()
+        expect(a.getCurrentTurn()).toBe(1)
+        a.advance()
+        expect(a.getCurrentTurn()).toBe(1)
+        a.advance()
+        expect(a.getCurrentTurn()).toBe(2)
+      })
+    })
+
+    describe('isEnd', () => {
+      test('Assert contents', () => {
+        var p = new Player('Nom')
+        var p2 = new Player('Nom2')
+
+        var players = [p, p2]
+
+        var g = new GameParam(players, 2, 10)
+
+        var a = new Automaton(g)
+
+        expect(a.isEnd()).toBe(false)
+        a.advance()
+        a.advance()
+        expect(a.isEnd()).toBe(false)
+        a.advance()
+        a.advance()
+        expect(a.isEnd()).toBe(true)
+      })
     })
   })
 })
