@@ -33,14 +33,12 @@ beforeAll(() => {
 describe('ScoreBoard component', () => {
   test('Classic game', async () => {
     // create games params
-    const nbTurn = 20
+    const nbTurn = 100
     const nbPins = 100
     const playerNames = ['tata', 'tutu', 'toto']
     const players = []
 
-    playerNames.forEach(pn => {
-      players.push(new Player(pn))
-    })
+    playerNames.forEach(pn => players.push(new Player(pn)))
 
     const gameParam = new GameParam(players, nbTurn, nbPins)
     const wrapper = mountComponent(gameParam, null, null)
@@ -86,9 +84,7 @@ describe('ScoreBoard component', () => {
     const currentplayerIndex = 1
     const players = []
 
-    playerNames.forEach(pn => {
-      players.push(new Player(pn))
-    })
+    playerNames.forEach(pn => players.push(new Player(pn)))
 
     const gameParam = new GameParam(players, nbTurn, nbPins)
     const wrapperWithPlayerProps = mountComponent(gameParam, playerNames[currentplayerIndex], null)
@@ -106,9 +102,7 @@ describe('ScoreBoard component', () => {
     const currentTurn = 10
     const players = []
 
-    playerNames.forEach(pn => {
-      players.push(new Player(pn))
-    })
+    playerNames.forEach(pn => players.push(new Player(pn)))
 
     const gameParam = new GameParam(players, nbTurn, nbPins)
     const wrapperWithCurTurnProps = mountComponent(gameParam, null, currentTurn)
@@ -124,9 +118,7 @@ describe('ScoreBoard component', () => {
     const playerNames = ['tata', 'tutu', 'toto']
     const players = []
 
-    playerNames.forEach(pn => {
-      players.push(new Player(pn))
-    })
+    playerNames.forEach(pn => players.push(new Player(pn)))
 
     const gameParam = new GameParam(players, nbTurn, nbPins)
     const wrapper = mountComponent(gameParam)
@@ -154,5 +146,50 @@ describe('ScoreBoard component', () => {
         expect(wrapper.vm.globalScore[pn][i].throws[0]).toBe(null)
       }
     })
+  })
+  test('Classic game score display', async () => {
+    // create games params
+    const nbTurn = 10
+    const nbPins = 10
+    const playerNames = ['Mister tester']
+    const players = []
+
+    playerNames.forEach(pn => players.push(new Player(pn)))
+
+    const gameParam = new GameParam(players, nbTurn, nbPins)
+    const wrapper = mountComponent(gameParam, null, null)
+
+    // Normal turn
+    // No pins fallen throws
+    expect(wrapper.find('#scores #players .score[name=turn_1] #first').text()).toContain('')
+    expect(wrapper.find('#scores #players .score[name=turn_1] #second').text()).toContain('')
+
+    wrapper.vm.registerThrow('Mister tester', 1, 1, 0)
+    wrapper.vm.registerThrow('Mister tester', 1, 2, 0)
+
+    expect(wrapper.find('#scores #players .score[name=turn_1] #first').text()).toContain('0')
+    expect(wrapper.find('#scores #players .score[name=turn_1] #second').text()).toContain('0')
+
+    // Normal fallen throws
+    wrapper.vm.registerThrow('Mister tester', 2, 1, 6)
+    wrapper.vm.registerThrow('Mister tester', 2, 2, 2)
+
+    expect(wrapper.find('#scores #players .score[name=turn_2] #first').text()).toContain('6')
+    expect(wrapper.find('#scores #players .score[name=turn_2] #second').text()).toContain('2')
+
+    // Spare
+    wrapper.vm.registerThrow('Mister tester', 3, 1, 5)
+    wrapper.vm.registerThrow('Mister tester', 3, 2, 5)
+
+    expect(wrapper.find('#scores #players .score[name=turn_3] #first').text()).toContain('5')
+    expect(wrapper.find('#scores #players .score[name=turn_3] #second').text()).toContain('/')
+
+    // Strike
+    wrapper.vm.registerThrow('Mister tester', 3, 1, 10)
+    wrapper.vm.registerThrow('Mister tester', 3, 2, 2) // Useless, should have no effects
+
+    expect(wrapper.find('#scores #players .score[name=turn_3] #first').text()).toContain('X')
+    expect(wrapper.find('#scores #players .score[name=turn_3] #second').text()).toContain('')
+
   })
 })
