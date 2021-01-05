@@ -103,7 +103,7 @@ describe('ScoreBoard component', () => {
     const nbTurn = 20
     const nbPins = 100
     const playerNames = ['tata', 'tutu', 'toto']
-    const currentTurn = 69420
+    const currentTurn = 10
     const players = []
 
     playerNames.forEach(pn => {
@@ -112,11 +112,10 @@ describe('ScoreBoard component', () => {
 
     const gameParam = new GameParam(players, nbTurn, nbPins)
     const wrapperWithCurTurnProps = mountComponent(gameParam, null, currentTurn)
-
-    expect(wrapperWithCurTurnProps.find('#playerNames #currentTurnNumber').text()).toContain(currentTurn)
+    expect(wrapperWithCurTurnProps.find('#scores #title .current').text()).toContain(currentTurn)
 
     const wrapperWithNoCurTurnProps = mountComponent(gameParam, null, null)
-    expect(wrapperWithNoCurTurnProps.find('#playerNames #currentTurnNumber').text()).toContain('')
+    expect(wrapperWithNoCurTurnProps.find('#scores #title .current').exists()).toBe(false)
   })
   test('Classic game, wrong insertions', async () => {
     // create games params
@@ -145,12 +144,12 @@ describe('ScoreBoard component', () => {
         // Wrong turn 2 (too high)
         expect(() => wrapper.vm.registerThrow(pn, nbTurn + 5, 1, pinsFallen1)).toThrow('Invalid turn number')
 
-        // Invalid trow (too low)
+        // Invalid throw (too low)
         expect(() => wrapper.vm.registerThrow(pn, i + 1, 0, pinsFallen1)).toThrow('Invalid throw number')
-        // Invalid trow (too high)
+        // Invalid throw (too high)
         expect(() => wrapper.vm.registerThrow(pn, i + 1, 5, pinsFallen1)).toThrow('Invalid throw number')
-        // Invalid trow (3, but not last turn)
-        expect(() => wrapper.vm.registerThrow(pn, i + 1, 3, pinsFallen1)).toThrow('Invalid throw number')
+        // Invalid throw (3, but not last turn)
+        if (i !== nbTurn - 1) expect(() => wrapper.vm.registerThrow(pn, i + 1, 3, pinsFallen1)).toThrow('Invalid throw number')
 
         expect(wrapper.vm.globalScore[pn][i].throws[0]).toBe(null)
       }
