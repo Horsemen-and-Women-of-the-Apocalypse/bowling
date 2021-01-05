@@ -87,14 +87,6 @@ export default {
           throws: [null, null, null],
           score: null
         }
-        // const score = {
-        //   throws: [
-        //     Math.floor(Math.random() * (this.game.getPins() + 1)),
-        //     Math.floor(Math.random() * (this.game.getPins() + 1)),
-        //     Math.floor(Math.random() * (this.game.getPins() + 1))
-        //   ],
-        //   score: Math.floor(Math.random() * 20)
-        // }
         turns.push(score)
       }
       playerScores[p.getName()] = turns
