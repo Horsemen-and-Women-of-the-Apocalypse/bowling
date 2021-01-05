@@ -24,7 +24,6 @@ const mountComponent = (gameParams, last, score) => {
 
 describe('Score component', () => {
   test('Strike', () => {
-    // Init component
     const nbPins = 10
     const isLast = false
     const firstThrow = nbPins
@@ -42,7 +41,6 @@ describe('Score component', () => {
     expect(wrapper.find('#Score #second').text()).toContain('')
   })
   test('Spare', () => {
-    // Init component
     const nbPins = 10
     const isLast = false
     const firstThrow = 2
@@ -60,7 +58,6 @@ describe('Score component', () => {
     expect(wrapper.find('#Score #second').text()).toContain('/')
   })
   test('Normal', () => {
-    // Init component
     const nbPins = 10
     const isLast = false
     const firstThrow = 2
@@ -78,7 +75,6 @@ describe('Score component', () => {
     expect(wrapper.find('#Score #second').text()).toContain(secondThrow)
   })
   test('nul', () => {
-    // Init component
     const nbPins = 10
     const isLast = false
     const firstThrow = 0
@@ -96,7 +92,6 @@ describe('Score component', () => {
     expect(wrapper.find('#Score #second').text()).toContain(secondThrow)
   })
   test('Strike - more pins', () => {
-    // Init component
     const nbPins = 100
     const isLast = false
     const firstThrow = nbPins
@@ -114,7 +109,6 @@ describe('Score component', () => {
     expect(wrapper.find('#Score #second').text()).toContain('')
   })
   test('Spare - more pins', () => {
-    // Init component
     const nbPins = 100
     const isLast = false
     const firstThrow = 20
@@ -132,7 +126,6 @@ describe('Score component', () => {
     expect(wrapper.find('#Score #second').text()).toContain('/')
   })
   test('Normal - more pins', () => {
-    // Init component
     const nbPins = 100
     const isLast = false
     const firstThrow = 20
@@ -150,7 +143,6 @@ describe('Score component', () => {
     expect(wrapper.find('#Score #second').text()).toContain(secondThrow)
   })
   test('nul - more pins', () => {
-    // Init component
     const nbPins = 100
     const isLast = false
     const firstThrow = 0
@@ -168,9 +160,8 @@ describe('Score component', () => {
     expect(wrapper.find('#Score #second').text()).toContain(secondThrow)
   })
 })
-describe('last Score component', () => {
+describe('Last Score component', () => {
   test('3 strikes', () => {
-    // Init component
     const nbPins = 10
     const isLast = true
     const firstThrow = nbPins
@@ -190,7 +181,6 @@ describe('last Score component', () => {
     expect(wrapper.find('#Score #third').text()).toContain('X')
   })
   test('2 strikes - 1 normal', () => {
-    // Init component
     const nbPins = 10
     const isLast = true
     const firstThrow = nbPins
@@ -210,7 +200,6 @@ describe('last Score component', () => {
     expect(wrapper.find('#Score #third').text()).toContain(thirdThrow)
   })
   test('Strike, normal and spare', () => {
-    // Init component
     const nbPins = 10
     const isLast = true
     const firstThrow = nbPins
@@ -229,8 +218,26 @@ describe('last Score component', () => {
     expect(wrapper.find('#Score #second').text()).toContain(secondThrow)
     expect(wrapper.find('#Score #third').text()).toContain('/')
   })
+  test('Strike and 2 normal ', () => {
+    const nbPins = 10
+    const isLast = true
+    const firstThrow = nbPins
+    const secondThrow = 2
+    const thirdThrow = 7
+
+    const gameParam = new GameParam([], 1, nbPins)
+
+    const score = {
+      throws: [firstThrow, secondThrow, thirdThrow],
+      score: null
+    }
+    const wrapper = mountComponent(gameParam, isLast, score)
+
+    expect(wrapper.find('#Score #first').text()).toContain('X')
+    expect(wrapper.find('#Score #second').text()).toContain(secondThrow)
+    expect(wrapper.find('#Score #third').text()).toContain(thirdThrow)
+  })
   test('Normal spare and strike', () => {
-    // Init component
     const nbPins = 10
     const isLast = true
     const firstThrow = 9
@@ -250,7 +257,6 @@ describe('last Score component', () => {
     expect(wrapper.find('#Score #third').text()).toContain('X')
   })
   test('Normal spare and normal', () => {
-    // Init component
     const nbPins = 10
     const isLast = true
     const firstThrow = 9
@@ -270,7 +276,6 @@ describe('last Score component', () => {
     expect(wrapper.find('#Score #third').text()).toContain(thirdThrow)
   })
   test('2 Normal', () => {
-    // Init component
     const nbPins = 10
     const isLast = true
     const firstThrow = 1

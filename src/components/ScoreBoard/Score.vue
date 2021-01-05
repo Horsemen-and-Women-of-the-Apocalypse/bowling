@@ -1,9 +1,11 @@
 <template>
   <div id="Score">
     <div id="top">
-      <div class="throw" id="first">{{ throw1 }}</div>
-      <div class="throw" id="second">{{ throw2 }}</div>
-      <div v-if="last" class="throw" id="third">{{ throw3 }}</div>
+      <div class="throw" id="first">{{ processedScore.throw1 }}</div>
+      <div class="throw" id="second">{{ processedScore.throw2 }}</div>
+      <div v-if="last" class="throw" id="third">
+        {{ processedScore.throw3 }}
+      </div>
     </div>
     <div id="bot">{{ score.score }}</div>
   </div>
@@ -24,40 +26,69 @@ export default {
     last: { type: Boolean, default: false },
     score: { type: Object, requiered: true }
   },
-  created () {
-    this.convertScoresToSymbol()
-  },
-  methods: {
-    convertScoresToSymbol () {
+  computed: {
+    processedScore () {
       // fallen pins to X & / symbols convertion
-      this.throw1 = null
-      this.throw2 = null
-      this.throw3 = null
+      var throw1 = null
+      var throw2 = null
+      var throw3 = null
 
       if (this.last) {
         // Last turn exeption
-      } else {
-        // First case : strike
         if (this.score.throws[0] >= this.game.getPins()) {
-          this.throw1 = 'X'
-          return
-        }
+          throw1 = 'X'
 
-        this.throw1 = this.score.throws[0]
+          if (this.score.throws[1] >= this.game.getPins()) {
+            throw2 = 'X'
 
-        // Second case : spare
-        if (
+            if (this.score.throws[2] >= this.game.getPins()) throw3 = 'X'
+            // Strike - Strike - Strike
+            else throw3 = this.score.throws[2] // Strike - Strike - Normal
+          } else if (
+            this.score.throws[1] + this.score.throws[2] >=
+            this.game.getPins()
+          ) {
+            // Strike - Normal - Spare
+            throw2 = this.score.throws[1]
+            throw3 = '/'
+          } else {
+            // Strike - Normal - Normal
+            throw2 = this.score.throws[1]
+            throw3 = this.score.throws[2]
+          }
+        } else if (
           this.score.throws[0] + this.score.throws[1] >=
           this.game.getPins()
         ) {
-          this.throw2 = '/'
-        } else this.throw2 = this.score.throws[1]
+          throw1 = this.score.throws[0]
+          throw2 = '/'
+
+          if (this.score.throws[2] >= this.game.getPins()) throw3 = 'X'
+          // Normal - Spare - Strike
+          else throw3 = this.score.throws[2] // Normal - Spare - Normal
+        } else {
+          // Normal - Normal
+          throw1 = this.score.throws[0]
+          throw2 = this.score.throws[1]
+        }
+      } else {
+        // First case : strike
+        if (this.score.throws[0] >= this.game.getPins()) {
+          throw1 = 'X'
+        } else {
+          throw1 = this.score.throws[0]
+
+          // Second case : spare
+          if (
+            this.score.throws[0] + this.score.throws[1] >=
+            this.game.getPins()
+          ) {
+            throw2 = '/'
+          } else throw2 = this.score.throws[1]
+        }
       }
-    }
-  },
-  watch: {
-    score () {
-      this.convertScoresToSymbol()
+
+      return { throw1, throw2, throw3 }
     }
   }
 }
