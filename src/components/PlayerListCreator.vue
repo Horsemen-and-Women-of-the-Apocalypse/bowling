@@ -11,7 +11,12 @@
     </div>
     <div id="playerList">
       <!-- Created player list -->
-      <draggable v-model="players">
+      <draggable
+        v-model="players"
+        handle=".draggable"
+        ghostClass="ghost"
+        animation=200
+      >
         <div
           class="player"
           v-for="(player, i) in players"
@@ -19,14 +24,19 @@
           :id="'player_' + (i + 1)"
         >
           <div
-            :class="'name ' + (newPlayerName === player.getName() ? 'red' : '')"
+          class="draggable"
           >
-            {{ i + 1 + " : " + player.getName() }}
+            <md-icon class="dragIcon">drag_indicator </md-icon>
+            <div
+              :class="'name ' + (newPlayerName === player.getName() ? 'red' : '')"
+            >
+              {{ i + 1 + " : " + player.getName() }}
+            </div>
           </div>
           <div class="removeBtn">
             <md-button
               v-on:click="removePlayer(i)"
-              class="removePlayerBtn md-icon-button"
+              class="removePlayerBtn md-icon-button md-raised md-primary"
             >
               <md-icon>remove</md-icon>
             </md-button>
@@ -43,7 +53,7 @@
             type="submit"
             id="addPlayerBtn"
             @click="addPlayer"
-            class="md-icon-button"
+            class="md-icon-button md-raised md-primary"
           >
             <md-icon>add</md-icon>
           </md-button>
@@ -100,43 +110,62 @@ export default {
 
 <style scoped>
 #PlayerListCreator {
-  background-color: #bfb35a;
   height: 100%;
 }
 
 /* Title */
 #title {
-  background-color: #bdbf5a;
   padding: 10px;
   text-align: left;
 }
 #title h1 {
-  color: #8C2318;
+  color: var(--eames);
   margin-bottom: 0px;
 }
 #title h1 span {
-  color: #88A65E;
+  color: var(--hansWenger);
 }
 #title h2 {
-  color: #8C2318;
+  color: var(--eames);
   font-size: 1em;
   margin-top: 0px;
   font-weight: 100;
 }
 
-/* Players */
+.ghost {
+  opacity: 0;
+}
+
+/* Player */
 .player {
   padding: 2%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+.player:nth-child(n) {
+  background-color: var(--playerListLight);
+}
 .player:nth-child(2n) {
-  background-color: #9fa65e;
+  background-color: var(--playerListDark);
+}
+
+.player .draggable {
+  cursor: move;
+  display: flex;
+  overflow: hidden;
+  flex:1;
+}
+.player .dragIcon {
+  color: var(--knoll) !important;
 }
 .player .name {
-  border-bottom: solid 4px #5E8C6A;
+  flex:1;
   margin-left: 4%;
+  user-select: none;
+
+  /* Text: */
+  text-align: left;
   font-size: 1.5em;
   overflow: hidden;
   white-space: nowrap;
@@ -146,18 +175,12 @@ export default {
   color: red;
   font-weight: bold;
 }
-
 .player.add {
-  background-color: #F2C45A;
+  background-color: var(--vernerPanton);
 }
 
 /* Buttons */
-.md-button {
-  background-color: #687555 !important;
-}
-.md-icon {
-  color: white !important;
-}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   /* Chrome, Safari, Edge, Opera support */

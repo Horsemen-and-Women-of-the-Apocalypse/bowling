@@ -5,7 +5,7 @@
     </div>
     <div class="md-layout md-alignment-center-center">
       <div class="md-layout-item">
-        <md-button id='sub' v-on:click="sub" class="md-icon-button">
+        <md-button id='sub' v-on:click="sub" class="md-icon-button md-raised md-primary">
           <md-icon>remove</md-icon>
         </md-button>
       </div>
@@ -15,7 +15,7 @@
         </md-field>
       </div>
       <div class="md-layout-item">
-        <md-button id='add' v-on:click="add" class="md-icon-button">
+        <md-button id='add' v-on:click="add" class="md-icon-button md-raised md-primary">
         <md-icon>add</md-icon>
       </md-button>
       </div>
@@ -25,22 +25,16 @@
 
 <style scoped>
 .names {
-  color: #8C2318;
+  color: var(--eames);
 }
 .spacing {
   padding-top: 5%;
 }
 .hansWegner {
-  color: #88A65E;
+  color: var(--hansWegner);
 }
-.md-button {
-  background-color: #88A65E !important;
-}
-.md-icon {
-  color: white !important;
-}
+
 .pins {
-  background-color: #BFB35A;
   height: 100%;
 }
 @media only screen and (max-device-width: 480px) {
@@ -59,21 +53,30 @@ input[type=number] { /* Firefox support */
 
 <script>
 
+const defaultNbPins = 10
+
 export default {
   name: 'Pins',
   data: () => ({
-    count: 10
+    count: defaultNbPins
   }),
   computed: {
     pinsCount () { // Method to get the number of pins
       return this.count
     }
   },
+  watch: {
+    count () {
+      if (isNaN(this.count)) {
+        this.count = defaultNbPins
+      }
+    }
+  },
   methods: {
     updatePinsCount: function (e) { // Update pins count if value >= 1
       const value = parseInt(e.target.value)
       if (value <= 1) {
-        this.count = 10
+        this.count = defaultNbPins
       } else {
         this.count = value
       }

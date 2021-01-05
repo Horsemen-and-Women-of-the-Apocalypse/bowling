@@ -18,8 +18,8 @@ module.exports = {
     homepage.waitForElementVisible('@appContainer')
     const app = homepage.section.app
 
-    const nbTurn = 10
-    const nbPins = 8
+    const nbTurn = 20
+    const nbPins = 12
     const players = ['toto', 'tata', 'tutu']
 
     // Add turns
@@ -27,9 +27,8 @@ module.exports = {
     app.assert.visible('button[name=firstBtnValidate]')
 
     app.clearValue('input[name=turnCount]')
-    app.setValue('input[name=turnCount]', 1)
-    app.assert.value('input[name=turnCount]', '1')
-    for (let i = 2; i <= nbTurn; i++) {
+    app.assert.value('input[name=turnCount]', '10')
+    for (let i = 11; i <= nbTurn; i++) {
       app.click('.turn #add')
       app.assert.value('input[name=turnCount]', '' + i)
     }
@@ -39,9 +38,8 @@ module.exports = {
     app.assert.visible('input[name=pinsCount]')
     app.assert.visible('button[name=secondBtnValidate]')
     app.clearValue('input[name=pinsCount]')
-    app.setValue('input[name=pinsCount]', 5)
-    app.assert.value('input[name=pinsCount]', '5')
-    for (let i = 6; i <= nbPins; i++) {
+    app.assert.value('input[name=pinsCount]', '10')
+    for (let i = 11; i <= nbPins; i++) {
       app.click('.pins #add')
       app.assert.value('input[name=pinsCount]', '' + i)
     }
@@ -65,12 +63,11 @@ module.exports = {
 
     app.click('button[name=thirdBtnValidate]')
   },
-  'Create game with wrong pins number': browser => {
+  'Create game and remove players': browser => {
     const homepage = browser.page.homepage()
     homepage.waitForElementVisible('@appContainer')
     const app = homepage.section.app
 
-    const nbPins = 'NAN'
     const players = ['toto', 'tata', 'tutu']
 
     // Add turns
@@ -78,25 +75,33 @@ module.exports = {
     app.click('button[name=firstBtnValidate]')
 
     // Add pins
-    app.assert.visible('input[name=pinsCount]')
     app.assert.visible('button[name=secondBtnValidate]')
-    app.clearValue('input[name=pinsCount]')
-    app.setValue('input[name=pinsCount]', nbPins)
     app.click('button[name=secondBtnValidate]')
 
     // Add players
     app.assert.visible('input[name=newPlayerName]')
-    app.assert.visible('button[name=thirdBtnValidate]')
-    app.assert.attributeEquals('button[name=thirdBtnValidate]', 'disabled', 'true')
 
     players.forEach((playerName, i) => {
       app.setValue('input[name=newPlayerName]', playerName)
       app.click('#PlayerListCreator #addPlayerBtn')
-      app.assert.elementPresent('#PlayerListCreator #player_' + (i + 1))
     })
 
-    app.assert.elementCount('#errorMsg', 0)
-    app.click('button[name=thirdBtnValidate]')
-    app.assert.elementCount('#errorMsg', 1)
+    // remove players by removing first players
+    app.assert.elementCount('#PlayerListCreator .removeBtn', players.length)
+    players.forEach(() => {
+      app.click('#PlayerListCreator #player_1 .removeBtn')
+    })
+    app.assert.elementCount('#PlayerListCreator .removeBtn', 0)
+
+    // Add players
+    players.forEach((playerName, i) => {
+      app.setValue('input[name=newPlayerName]', playerName)
+      app.click('#PlayerListCreator #addPlayerBtn')
+    })
+
+    // remove second player
+    app.assert.elementCount('#PlayerListCreator .removeBtn', players.length)
+    app.click('#PlayerListCreator #player_2 .removeBtn')
+    app.assert.elementCount('#PlayerListCreator .removeBtn', players.length - 1)
   }
 }
