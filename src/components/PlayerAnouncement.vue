@@ -102,7 +102,7 @@ export default {
     font-size: 32px;
 
     text-shadow: 0px 4px 0px #F2C45A;
-
+    white-space: nowrap;
     animation: spin_scale 2s;
 }
 
