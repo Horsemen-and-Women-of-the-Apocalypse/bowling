@@ -8,7 +8,7 @@
         <Turn ref="turn" />
         <md-button
           name="firstBtnValidate"
-          class="md-raised next"
+          class="md-raised next md-raised md-primary"
           @click="setDone('first', 'second')"
           >{{ $t("gamepreparation.continue") }}</md-button
         >
@@ -18,7 +18,7 @@
         <Pins ref="pins" />
         <md-button
           name="secondBtnValidate"
-          class="md-raised next"
+          class="md-raised next md-raised md-primary"
           @click="setDone('second', 'third')"
           >{{ $t("gamepreparation.continue") }}</md-button
         >
@@ -29,7 +29,7 @@
         <md-button
           name="thirdBtnValidate"
           :disabled="players.length == 0"
-          class="md-raised next"
+          class="md-raised next md-raised md-primary"
           @click="createGameParam()"
           >{{ $t("gamepreparation.play") }}</md-button
         >
@@ -58,7 +58,7 @@
   margin: 0px;
 }
 .md-steppers {
-  background-color: var(--cantaloupeSkin) !important;
+  background-color: var(--darker) !important;
   min-height: 90vh;
 }
 .md-stepper {
@@ -66,8 +66,6 @@
   padding-right: 0px;
 }
 .next {
-  background-color: var(--vernerPanton) !important;
-  color: var(--hansWegner) !important;
   font-weight: bold;
 }
 #nav {

@@ -4,19 +4,17 @@
   </div>
 </template>
 
-<style lang="scss">
+<style>
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Raleway-Regular;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  background-color: var(--cantaloupeSkin);
-}
-
-#app {
+  background-color: var(--darker);
   height: 100vh;
 }
+
 </style>
 
 <script>

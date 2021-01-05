@@ -1,7 +1,7 @@
 <template>
   <div id="PlayerListCreator">
     <div id="title">
-      <h1>
+      <h1 class="names">
         {{ $t("playerListCreator.title1_1") }}
         <span>{{ $t("playerListCreator.title1_2") }}</span> ?
       </h1>
@@ -15,7 +15,7 @@
         v-model="players"
         handle=".draggable"
         ghostClass="ghost"
-        animation=200
+        animation="200"
       >
         <div
           class="player"
@@ -23,12 +23,12 @@
           :key="i"
           :id="'player_' + (i + 1)"
         >
-          <div
-          class="draggable"
-          >
-            <md-icon class="dragIcon">drag_indicator </md-icon>
+          <div class="draggable">
+            <md-icon class="dragIcon md-accent">drag_indicator </md-icon>
             <div
-              :class="'name ' + (newPlayerName === player.getName() ? 'red' : '')"
+              :class="
+                'name ' + (newPlayerName === player.getName() ? 'red' : '')
+              "
             >
               {{ i + 1 + " : " + player.getName() }}
             </div>
@@ -46,7 +46,11 @@
       <!-- Add player line -->
       <form class="player add" @submit.prevent="">
         <md-field class="name">
-          <md-input type="text" name="newPlayerName" v-model="newPlayerName"></md-input>
+          <md-input
+            type="text"
+            name="newPlayerName"
+            v-model="newPlayerName"
+          ></md-input>
         </md-field>
         <div class="addBtn">
           <md-button
@@ -119,17 +123,17 @@ export default {
   text-align: left;
 }
 #title h1 {
-  color: var(--eames);
   margin-bottom: 0px;
 }
-#title h1 span {
-  color: var(--hansWenger);
-}
+
 #title h2 {
-  color: var(--eames);
   font-size: 1em;
-  margin-top: 0px;
+  margin-top: 1vh;
   font-weight: 100;
+}
+
+#addPlayerBtn {
+  background-color: var(--secondaryLighter) !important;
 }
 
 .ghost {
@@ -144,27 +148,26 @@ export default {
   align-items: center;
 }
 .player:nth-child(n) {
-  background-color: var(--playerListLight);
+  background-color: var(--darkOdd);
 }
 .player:nth-child(2n) {
-  background-color: var(--playerListDark);
+  background-color: var(--dark);
 }
 
 .player .draggable {
   cursor: move;
   display: flex;
   overflow: hidden;
-  flex:1;
+  flex: 1;
 }
-.player .dragIcon {
-  color: var(--knoll) !important;
-}
+
 .player .name {
-  flex:1;
+  flex: 1;
   margin-left: 4%;
   user-select: none;
 
   /* Text: */
+  color: var(--text);
   text-align: left;
   font-size: 1.5em;
   overflow: hidden;
@@ -172,11 +175,11 @@ export default {
   text-overflow: ellipsis;
 }
 .player .name.red {
-  color: red;
+  color: var(--accent);
   font-weight: bold;
 }
 .player.add {
-  background-color: var(--vernerPanton);
+  background-color: var(--darkLighter);
 }
 
 /* Buttons */
