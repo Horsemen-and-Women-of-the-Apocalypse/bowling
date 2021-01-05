@@ -35,6 +35,17 @@ describe('PlayerListCreator component', () => {
 
     expect(wrapper.vm.getPlayers().length).toBe(0)
   })
+  
+  test('Add a new player with no name', async () => {
+    const wrapper = mountComponent()
+
+    expect(wrapper.vm.getPlayers().length).toBe(0)
+    expect(wrapper.vm.newPlayerName).toBe('')
+    await wrapper.find(newPlayerNameInputSelector).setValue('this string is definitely too long and should not be a username')
+    await wrapper.find(addNewPlayerBtnSelector).trigger('click')
+
+    expect(wrapper.vm.getPlayers().length).toBe(0)
+  })
 
   test('Add a player', async () => {
     const wrapper = mountComponent()
