@@ -19,7 +19,7 @@ export default class Automaton {
     }
 
     /**
-     * advance turn
+     * Advance to the next player
      */
     advance () {
       if (!this.isEnd()) {
@@ -44,7 +44,7 @@ export default class Automaton {
     }
 
     /**
-     * Get true if game is finish
+     * Get true if game is finished
      * @return {bool} - game status
      */
     isEnd () {
