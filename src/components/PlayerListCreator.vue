@@ -84,8 +84,9 @@ export default {
     addPlayer () {
       // Add a new player object to the player list
       if (
-        this.newPlayerName.length > 0 &&
-        this.players.find(p => p.getName() === this.newPlayerName) === undefined
+        this.newPlayerName.length > 0 && this.newPlayerName.length < 28 &&
+        this.players.find((p) => p.getName() === this.newPlayerName) ===
+          undefined
       ) {
         // check for duplicates
         this.players.push(new Player(this.newPlayerName))
