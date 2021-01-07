@@ -53,13 +53,6 @@ export default {
       this.animation = true
       this.showAnimation()
     },
-    setDone (id, index) {
-      this[id] = true
-
-      if (index) {
-        this.active = index
-      }
-    },
     goToScoreboard () {
       this.$router.push({ name: 'Scoreboard', params: { automaton: this.automaton, score: new GameScore(this.automaton.getGameParam()), currentPlayer: this.automaton.getCurrentPlayer().getName(), currentTurn: this.automaton.getCurrentTurn() + 1 } })
     },
