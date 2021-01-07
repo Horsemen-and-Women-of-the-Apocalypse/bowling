@@ -110,14 +110,16 @@
           <md-button
             name="SecondBtnValidate"
             class="md-raised md-primary"
-            @click="resetComponent()"
+            @click="backSecond()"
           >
             {{ $t("lastPlayerTurn.reset") }}
           </md-button>
 
           <!-- Valid Input -->
           <md-button
-            v-if="isFirstThrowStrike || isSecondThrowSpare || isSecondThrowStrike"
+            v-if="
+              isFirstThrowStrike || isSecondThrowSpare || isSecondThrowStrike
+            "
             name="SecondBtnValidate"
             class="md-raised md-primary"
             @click="validateSecond()"
@@ -189,7 +191,7 @@
           <md-button
             name="thirdBtnValidate"
             class="md-raised md-primary"
-            @click="resetComponent()"
+            @click="backThird()"
           >
             {{ $t("lastPlayerTurn.reset") }}
           </md-button>
@@ -226,9 +228,7 @@ export default {
   props: {
     totalPins: { type: Number, required: true }
   },
-  created () {
-    this.resetComponent()
-  },
+  created () {},
   computed: {
     isFirstThrowStrike () {
       return parseInt(this.count1) === this.totalPins
@@ -244,7 +244,7 @@ export default {
       else return this.totalPins - parseInt(this.count1)
     },
     maxPinsThirdThrow () {
-      if (this.isSecondThrowStrike || this.isSecondThrowSpare) return this.totalPins
+      if (this.isSecondThrowStrike || this.isSecondThrowSpare) { return this.totalPins }
       return 0
     }
   },
@@ -297,6 +297,12 @@ export default {
       this.active = 'third'
       this.second = true
     },
+    backSecond () {
+      this.active = 'first'
+      this.second = false
+
+      this.count2 = 0
+    },
 
     // third throw
     addThirdThrow () {
@@ -311,20 +317,20 @@ export default {
         this.count3--
       }
     },
+    backThird () {
+      this.active = 'second'
+      this.third = false
+
+      this.count3 = 0
+    },
 
     // terminate
     terminate () {
-      this.$emit('done')
-    },
-
-    resetComponent () {
-      this.active = 'first'
-      this.second = false
-      this.third = false
-
-      this.count1 = 0
-      this.count2 = 0
-      this.count3 = 0
+      this.$emit('done', {
+        turn1: this.count1,
+        turn2: this.count2,
+        turn3: this.count3
+      })
     }
   }
 }
