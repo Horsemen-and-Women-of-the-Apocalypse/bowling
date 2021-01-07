@@ -58,7 +58,6 @@ export default {
 .title
 {
     grid-area: "title";
-    font-family: SpicyRice-Regular;
     font-style: normal;
     font-weight: normal;
     font-size: 10vh;
