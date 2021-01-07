@@ -1,21 +1,13 @@
 <template>
   <div class="game">
     <div v-if="animation">
-        AHHH
+        <PlayerAnouncement :playerName="this.automaton.getCurrentPlayer().getName()" :turn="this.automaton.getCurrentTurn() + 1"/>
     </div>
     <div v-else>
         <div id="nav">
          <Header :currentPlayer="automaton.getCurrentPlayer().getName()"/>
         </div>
-        <md-steppers :md-active-step.sync="active" md-linear>
-        <md-step id="first" md-label="First Step" md-description="Optional" :md-done.sync="first">
-            <md-button class="md-raised next md-raised md-primary" @click="setDone('first', 'second')">{{ $t('game.confirm')}}</md-button>
-        </md-step>
-
-        <md-step id="second" md-label="Second Step" :md-done.sync="second">
-            <md-button class="md-raised next md-raised md-primary" @click="nextTurn()">{{ $t('game.confirm')}}</md-button>
-        </md-step>
-        </md-steppers>
+        <!-- TODO STEPPERS -->
         <md-button class="md-fab md-fab-bottom-left md-plain md-primary" @click="goToScoreboard">
             <md-tooltip md-direction="top">{{ $t('scoreBoard.scoreboard') }}</md-tooltip>
             <md-icon>ballot</md-icon>
@@ -34,12 +26,14 @@
 <script>
 
 import Header from '../components/GameHeader'
+import PlayerAnouncement from '../components/PlayerAnouncement'
 import GameScore from '../objets/gameScore'
 
 export default {
   name: 'Game',
   components: {
-    Header
+    Header,
+    PlayerAnouncement
   },
   data: () => ({
     animation: true,
@@ -50,13 +44,14 @@ export default {
   }),
   created () {
     this.automaton = this.$route.params.automaton
-    setTimeout(() => { this.animation = false }, 2000)
+    this.showAnimation()
   },
   methods: {
     nextTurn () {
       this.setDone('second')
       this.automaton.advance()
-      this.$router.push({ name: 'Game', params: { automaton: this.automaton } })
+      this.animation = true
+      this.showAnimation()
     },
     setDone (id, index) {
       this[id] = true
@@ -67,6 +62,9 @@ export default {
     },
     goToScoreboard () {
       this.$router.push({ name: 'Scoreboard', params: { automaton: this.automaton, score: new GameScore(this.automaton.getGameParam()), currentPlayer: this.automaton.getCurrentPlayer().getName(), currentTurn: this.automaton.getCurrentTurn() + 1 } })
+    },
+    showAnimation () {
+      setTimeout(() => { this.animation = false }, 2000)
     }
   }
 }
