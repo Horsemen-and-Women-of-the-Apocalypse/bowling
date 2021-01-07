@@ -204,9 +204,9 @@ describe('LastPlayerTurn classic use cases', () => {
     await wrapper.find('input[name=pinsFallen3]').setValue(throw3)
     await wrapper.find('button[name=thirdBtnValidate]').trigger('click')
     expect(wrapper.emitted('done')).toStrictEqual([[{
-      turn1: throw1,
-      turn2: throw2,
-      turn3: throw3
+      throw1: throw1,
+      throw2: throw2,
+      throw3: throw3
     }]])
   })
 })
