@@ -27,31 +27,6 @@
   </div>
 </template>
 
-<style scoped>
-
-.pins {
-  height: 100%;
-}
-
-.spacing {
-  padding-top: 5%;
-}
-
-@media only screen and (max-device-width: 480px) {
-  .pins {
-      font-size: 1em;
-  }
-}
-
-input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { /* Chrome, Safari, Edge, Opera support */
-  -webkit-appearance: none;
-}
-
-input[type=number] { /* Firefox support */
-  -moz-appearance: textfield;
-}
-</style>
-
 <script>
 
 const defaultNbPins = 10
@@ -94,3 +69,28 @@ export default {
 }
 
 </script>
+
+<style scoped>
+
+.pins {
+  height: 100%;
+}
+
+.spacing {
+  padding-top: 5%;
+}
+
+@media only screen and (max-device-width: 480px) {
+  .pins {
+      font-size: 1em;
+  }
+}
+
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { /* Chrome, Safari, Edge, Opera support */
+  -webkit-appearance: none;
+}
+
+input[type=number] { /* Firefox support */
+  -moz-appearance: textfield;
+}
+</style>
