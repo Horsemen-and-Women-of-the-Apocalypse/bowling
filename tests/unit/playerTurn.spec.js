@@ -157,7 +157,7 @@ describe('PlayerTurn classic use cases', () => {
     }]])
   })
 
-  test('Text any text back any any', async () => {
+  test('Strike with overvalue', async () => {
     const totalPins = 10
     const throw1 = 10
     const throw2 = 0
