@@ -1,13 +1,15 @@
 {
     "en": {
       "playeranouncement": {
-        "title": "It's the turn of...",
+        "title1": "It's the", 
+        "title2": "turn of...",
         "turn": "Turn"
     }
     },
     "fr": {
       "playeranouncement": {
-        "title": "C'est le tour de...",
+        "title1": "C'est le",
+        "title2": "tour de...",
         "turn": "Tour"
     }
     }

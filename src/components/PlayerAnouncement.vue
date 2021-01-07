@@ -1,13 +1,19 @@
 <template>
   <div id="PlayerAnouncement">
       <div class="title">
-          {{ $t('playeranouncement.turn') }} {{turn}}
+          {{ $t('playeranouncement.turn') }} {{ turn }}
       </div>
       <div class="anounce">
-          <div id="anounce_sub1">
-              {{ $t('playeranouncement.title') }}
+          <div id="anounce_sub1" class="font_size_annonce_sub1_pc" v-if="!isMobileOnly">
+              {{ $t('playeranouncement.title1') }}<br/>{{ $t('playeranouncement.title2') }}
           </div>
-          <div id="ellipse">
+          <div id="anounce_sub1" class="font_size_annonce_sub1_mobile" v-if="isMobileOnly">
+              {{ $t('playeranouncement.title1') }}<br/>{{ $t('playeranouncement.title2') }}
+          </div>
+          <div id="ellipse" class="extra_ellipse_pc" v-if="!isMobileOnly">
+              {{ playerName }}
+          </div>
+          <div id="ellipse" class="extra_ellipse_mobile" v-if="isMobileOnly">
               {{ playerName }}
           </div>
       </div>
@@ -15,6 +21,7 @@
 </template>
 
 <script>
+import { isMobileOnly } from 'mobile-device-detect'
 export default {
   name: 'PlayerAnouncement',
   props: {
@@ -26,7 +33,10 @@ export default {
       type: Number,
       required: true
     }
-  }
+  },
+  data: () => ({
+    isMobileOnly: isMobileOnly
+  })
 }
 </script>
 
@@ -45,10 +55,8 @@ export default {
 
 #PlayerAnouncement
 {
-    background: #5E8C6A;
-
-    height: 200px;
-
+    height: 100vh !important;
+    background: var(--secondaryDarker);
     display: grid;
     grid-template-columns: 100%;
     grid-template-rows: 20% 80%;
@@ -61,19 +69,17 @@ export default {
 .title
 {
     grid-area: "title";
-    font-family: Spicy Rice;
+    font-family: SpicyRice-Regular;
     font-style: normal;
     font-weight: normal;
-    font-size: 36px;
-    line-height: 32px;
-    color: #F2C45A;
+    font-size: 10vh;
+    line-height: 140%;
+    color: #B2A9C8;
 }
 
 .anounce
 {
-    width: 100%;
-    height: 100%;
-
+    transform: translate(0, -8vh);
     grid-area: "anounce";
     display: flex;
     align-items: center;
@@ -83,64 +89,106 @@ export default {
 
 #ellipse
 {
-    width: 100px;
-    height: 100px;
-
     border-radius: 50%;
 
-    background-color: #88A65E;
+    background-color: var(--secondaryLighter);
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    font-family: Spicy Rice;
+    font-family: SpicyRice-Regular;
     font-style: normal;
     font-weight: normal;
     line-height: 90%;
-    color: #8C2318;
-    font-size: 32px;
+    color: var(--primaryLighter);
 
-    text-shadow: 0px 4px 0px #F2C45A;
-    white-space: nowrap;
-    animation: spin_scale 2s;
+    text-shadow: 0px 3px 0px var(--primary);
 }
 
-@keyframes spin_scale
+.extra_ellipse_pc
+{
+    font-size: 7vw;
+    animation: spin_scale_pc 2s;
+    width: 30vw;
+    height: 30vw;
+}
+
+.extra_ellipse_mobile
+{
+    font-size: 10vw;
+    animation: spin_scale_mobile 2s;
+    width: 60vw;
+    height: 60vw;
+}
+
+@keyframes spin_scale_pc
 {
     0%
     {
-        font-size: 0px;
-        width: 28px;
-        height: 28px;
+        font-size: 0vw;
+        width: 1vw;
+        height: 1vw;
     }
 
     50%
     {
-        font-size: 12px;
-        width: 100px;
-        height: 100px;
-        transform: rotate(180deg);
+        width: 30vw;
+        height: 30vw;
     }
 
     100%
     {
-        font-size: 32px;
-        width: 100px;
-        height: 100px;
+        font-size: 7vw;
+        width: 30vw;
+        height: 30vw;
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes spin_scale_mobile
+{
+    0%
+    {
+        font-size: 0vw;
+        width: 1vw;
+        height: 1vw;
+    }
+
+    50%
+    {
+        width: 60vw;
+        height: 60vw;
+    }
+
+    100%
+    {
+        font-size: 10vw;
+        width: 60vw;
+        height: 60vw;
         transform: rotate(360deg);
     }
 }
 
 #anounce_sub1
 {
-    font-family: Raleway;
+    font-family: Raleway-Regular;
     font-style: normal;
     font-weight: bold;
-    font-size: 25px;
     line-height: 90%;
-    color: #F2C45A;
+    color: #B2A9C8;
     z-index: 100;
-    transform: rotate(-10deg) translate(0, 20px);
+    transform: rotate(-10deg) translate(0, 1.2vh);
 }
+
+.font_size_annonce_sub1_pc
+{
+    font-size: 4vw;
+}
+
+.font_size_annonce_sub1_mobile
+{
+    font-size: 10vw;
+}
+
 </style>
