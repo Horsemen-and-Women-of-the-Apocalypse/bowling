@@ -1,19 +1,19 @@
 <template>
   <div id="PlayerAnouncement">
-      <div class="title">
+      <div class="title spicyRice">
           {{ $t('playeranouncement.turn') }} {{ turn }}
       </div>
       <div class="anounce">
-          <div id="anounce_sub1" class="font_size_annonce_sub1_pc" v-if="!isMobileOnly">
+          <div id="anounce_sub1" class="font_size_annonce_sub1_pc ralewayRegular" v-if="!isMobileOnly">
               {{ $t('playeranouncement.title1') }}<br/>{{ $t('playeranouncement.title2') }}
           </div>
-          <div id="anounce_sub1" class="font_size_annonce_sub1_mobile" v-if="isMobileOnly">
+          <div id="anounce_sub1" class="font_size_annonce_sub1_mobile ralewayRegular" v-if="isMobileOnly">
               {{ $t('playeranouncement.title1') }}<br/>{{ $t('playeranouncement.title2') }}
           </div>
-          <div id="ellipse" class="extra_ellipse_pc" v-if="!isMobileOnly">
+          <div id="ellipse" class="extra_ellipse_pc spicyRice" v-if="!isMobileOnly">
               {{ playerName }}
           </div>
-          <div id="ellipse" class="extra_ellipse_mobile" v-if="isMobileOnly">
+          <div id="ellipse" class="extra_ellipse_mobile spicyRice" v-if="isMobileOnly">
               {{ playerName }}
           </div>
       </div>
@@ -41,17 +41,6 @@ export default {
 </script>
 
 <style scoped>
-@font-face {
-    font-family: Spicy Rice;
-    src: url(https://fonts.google.com/specimen/Spicy+Rice);
-    /*font not found*/
-}
-
-@font-face {
-    font-family: Raleway;
-    src: url(https://fonts.google.com/specimen/Raleway);
-    /*font not found*/
-}
 
 #PlayerAnouncement
 {
@@ -74,7 +63,7 @@ export default {
     font-weight: normal;
     font-size: 10vh;
     line-height: 140%;
-    color: #B2A9C8;
+    color: var(--textlighter);
 }
 
 .anounce
@@ -97,7 +86,6 @@ export default {
     align-items: center;
     justify-content: center;
 
-    font-family: SpicyRice-Regular;
     font-style: normal;
     font-weight: normal;
     line-height: 90%;
@@ -172,11 +160,10 @@ export default {
 
 #anounce_sub1
 {
-    font-family: Raleway-Regular;
     font-style: normal;
     font-weight: bold;
     line-height: 90%;
-    color: #B2A9C8;
+    color: var(--textlighter);
     z-index: 100;
     transform: rotate(-10deg) translate(0, 1.2vh);
 }
