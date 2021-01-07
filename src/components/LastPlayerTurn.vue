@@ -83,7 +83,6 @@
                 :min="0"
                 :max="maxPinsSecondThrow"
               />
-              / {{ maxPinsSecondThrow }}
             </md-field>
           </div>
           <div class="md-layout-item md-size-25">
@@ -162,7 +161,6 @@
                 :min="0"
                 :max="maxPinsThirdThrow"
               />
-              / {{ maxPinsThirdThrow }}
             </md-field>
           </div>
           <div class="md-layout-item md-size-25">
