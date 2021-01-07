@@ -115,6 +115,7 @@ export default {
   data: () => ({
     count1: 0,
     count2: 0,
+    count3: 0,
     active: 'first',
     first: false,
     second: false
@@ -132,7 +133,6 @@ export default {
       if (isNaN(this.count1)) {
         this.count1 = 0
       }
-      this.count2 = 0
     },
     count2 () {
       if (isNaN(this.count2)) {
@@ -177,10 +177,7 @@ export default {
     },
     setDone (id, index) {
       this[id] = true
-
-      if (index) {
-        this.active = index
-      }
+      this.active = index
     },
     resetComponent () {
       this.active = 'first'
