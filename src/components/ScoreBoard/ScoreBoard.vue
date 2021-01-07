@@ -4,7 +4,7 @@
     <div id="playerNames">
       <div id="currentTurnNumber" />
       <div
-        v-for="(player, i) in game.getPlayers()"
+        v-for="(player, i) in score.getPlayers()"
         :key="i"
         :class="
           'player ' + (player.getName() === currentPlayer ? 'current' : '')
@@ -26,7 +26,7 @@
     <div id="scores">
       <div id="title">
         <div
-          v-for="turn in game.getTurn()"
+          v-for="turn in score.getTurn()"
           :key="turn"
           :class="'turnNumber ' + (turn === currentTurn ? 'current' : '')"
         >
@@ -34,13 +34,13 @@
         </div>
       </div>
       <div id="players">
-        <div class="player" v-for="(player, i) in game.getPlayers()" :key="i">
+        <div class="player" v-for="(player, i) in score.getPlayers()" :key="i">
           <Score
-            v-for="(turn, j) in game.getTurn()"
+            v-for="(turn, j) in score.getTurn()"
             :key="turn"
-            :game="game"
-            :last="j === game.getTurn() - 1"
-            :score="globalScore[player.getName()][j]"
+            :game="score.getGameParam()"
+            :last="j === score.getTurn() - 1"
+            :score="score.getScore(player.getName(),j)"
             :turn="i"
             :class="'score ' + (j === currentTurn - 1 ? 'current' : '')"
           />
@@ -55,7 +55,7 @@
       </div>
       <div
         class="score"
-        v-for="(player, i) in game.getPlayers()"
+        v-for="(player, i) in score.getPlayers()"
         :key="i"
       ></div>
     </div>
@@ -69,75 +69,9 @@ export default {
   components: { Score },
   name: 'ScoreBoard',
   props: {
-    game: { type: Object, requiered: true },
+    score: { type: Object, requiered: true },
     currentPlayer: { type: String, default: null },
     currentTurn: { type: Number, default: null }
-  },
-  data () {
-    return {
-      globalScore: null
-    }
-  },
-  created () {
-    const playerScores = []
-    this.game.getPlayers().forEach((p) => {
-      const turns = []
-
-      for (let i = 0; i < this.game.getTurn(); i++) {
-        const score = {
-          throws: [null, null, null],
-          score: null
-        }
-        turns.push(score)
-      }
-      playerScores[p.getName()] = turns
-    })
-
-    this.globalScore = playerScores
-  },
-  methods: {
-    /**
-     * @param {String} playerName -Existing name of a player
-     * @param {int} turnNumber - number of the turn to register the score
-     * @param {int} throwNumber - number of the throw to register the score (1, 2 or 3 (only for the last turn))
-     * @param {int} pinsNumber - number of fallen pins
-     */
-    registerThrow (playerName, turnNumber, throwNumber, pinsNumber) {
-      // Player name check
-      if (
-        this.game.getPlayers().find((p) => p.getName() === playerName) ===
-        undefined
-      ) {
-        throw Error('Player not found')
-      }
-
-      // Turn number check
-      if (turnNumber <= 0 || turnNumber > this.game.getTurn()) {
-        throw Error('Invalid turn number')
-      }
-
-      // Throw number check
-      if (
-        throwNumber <= 0 ||
-        (turnNumber === this.game.getTurn() && throwNumber > 3) ||
-        (turnNumber < this.game.getTurn() && throwNumber > 2)
-      ) {
-        throw Error('Invalid throw number')
-      }
-
-      // Register throw
-      this.globalScore[playerName][turnNumber - 1].throws[
-        throwNumber - 1
-      ] = pinsNumber
-
-      // Calculate Score
-
-      // TODO
-
-      // Update total Score
-
-      // TODO
-    }
   }
 }
 </script>

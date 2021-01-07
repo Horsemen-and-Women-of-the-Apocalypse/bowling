@@ -1,0 +1,12 @@
+{
+    "en": {
+      "game": {
+        "confirm": "Validate the throw"
+      }
+    },
+    "fr": {
+      "game": {
+        "confirm": "Valider le lancer"
+      }
+    }
+  }

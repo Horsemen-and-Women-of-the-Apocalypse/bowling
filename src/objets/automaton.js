@@ -44,6 +44,14 @@ export default class Automaton {
     }
 
     /**
+     * Get game param
+     * @return {GameParam} - Game param
+     */
+    getGameParam () {
+      return this.#gameParam
+    }
+
+    /**
      * Get true if game is finished
      * @return {bool} - game status
      */

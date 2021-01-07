@@ -1,12 +1,18 @@
 {
   "en": {
     "scoreBoard": {
-      "total": "TOT"
+      "total": "TOT",
+      "back": "<< Back",
+      "scoreboard": "Scoreboard",
+      "turn": "Turn of"
     }
   },
   "fr": {
     "scoreBoard": {
-      "total": "TOT"
+      "total": "TOT",
+      "back": "<< Fermer",
+      "scoreboard": "Tableau des scores",
+      "turn": "Au tour de"
     }
   }
 }
