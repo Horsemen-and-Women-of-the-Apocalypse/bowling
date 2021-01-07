@@ -14,23 +14,22 @@
         :md-editable="false">
 
           <!-- Title -->
-          <h1 class='names'>{{ $t('playerTurn.first') }}</h1>
-          <h1 class='names'>{{ $t('playerTurn.content') }}</h1>
+          <h1 class='names'>{{ $t('playerTurn.content', { max :this.totalPins }) }}</h1>
 
           <!-- Input Layout -->
           <div class="md-layout md-alignment-center-center">
-            <div class="md-layout-item">
-              <md-button id='sub1' v-on:click="sub1" class="md-icon-button">
+            <div class="md-layout-item md-size-25">
+              <md-button id='decrementFirstThrow' v-on:click="decrementFirstThrow" class="md-icon-button">
                 <md-icon>remove</md-icon>
               </md-button>
             </div>
-            <div class="md-layout-item">
+            <div class="md-layout-item md-size-50">
               <md-field md-inline>
-                <md-input v-model="count1" type="number" name="pinsFallen1" @blur="updatepinsFallen1($event)"/>
+                <md-input v-model="count1" type="number" name="pinsFallen1" @blur="updateFirstCount($event)"/>
               </md-field>
             </div>
-            <div class="md-layout-item">
-              <md-button id='add1' v-on:click="add1" class="md-icon-button">
+            <div class="md-layout-item md-size-25">
+              <md-button id='incrementFirstThrow' v-on:click="incrementFirstThrow" class="md-icon-button">
                 <md-icon>add</md-icon>
               </md-button>
             </div>
@@ -62,23 +61,22 @@
         :md-editable="false">
 
           <!-- Title -->
-          <h1 class='names'>{{ $t('playerTurn.second') }}</h1>
-          <h1 class='names'>{{ $t('playerTurn.content') }}</h1>
+          <h1 class='names'>{{ $t('playerTurn.content', { max :this.maxPinsSecondThrow }) }}</h1>
 
           <!-- Input Layout -->
           <div class="md-layout md-alignment-center-center">
-            <div class="md-layout-item">
-              <md-button id='sub2' v-on:click="sub2" class="md-icon-button">
+            <div class="md-layout-item md-size-25">
+              <md-button id='decrementSecondThrow' v-on:click="decrementSecondThrow" class="md-icon-button">
                 <md-icon>remove</md-icon>
               </md-button>
             </div>
-            <div class="md-layout-item">
+            <div class="md-layout-item md-size-50">
               <md-field md-inline>
-                <md-input v-model="count2" type="number" name="pinsFallen2" @blur="updatepinsFallen2($event)"/>
+                <md-input v-model="count2" type="number" name="pinsFallen2" @blur="updateSecondCount($event)"/>
               </md-field>
             </div>
-            <div class="md-layout-item">
-              <md-button id='add2' v-on:click="add2" class="md-icon-button">
+            <div class="md-layout-item md-size-25">
+              <md-button id='incrementSecondThrow' v-on:click="incrementSecondThrow" class="md-icon-button">
                 <md-icon>add</md-icon>
               </md-button>
             </div>
@@ -161,7 +159,6 @@ export default {
   data: () => ({
     count1: 0,
     count2: 0,
-    maxPinsSecondThrow: 0,
     active: 'first',
     first: false,
     second: false
@@ -169,15 +166,15 @@ export default {
   props: {
     totalPins: { type: Number, required: true }
   },
-  created () {
-    this.maxPinsSecondThrow = this.totalPins
-  },
   computed: {
     pinsFallen1 () { // Method to get the number of pins fallen during the first throw
       return this.count1
     },
     pinsFallen2 () { // Method to get the number of pins fallen during the second throw
       return this.count2
+    },
+    maxPinsSecondThrow () {
+      return this.totalPins - this.count1
     }
   },
   watch: {
@@ -185,7 +182,7 @@ export default {
       if (isNaN(this.count1)) {
         this.count1 = this.totalPins
       }
-      this.maxPinsSecondThrow = this.totalPins - this.count1
+      this.count2 = this.maxPinsSecondThrow
     },
     count2 () {
       if (isNaN(this.count2)) {
@@ -194,36 +191,36 @@ export default {
     }
   },
   methods: {
-    updatepinsFallen1: function (e) { // Update pins count1 if value >= 0
+    updateFirstCount: function (e) { // Update pins count1 if value >= 0
       const value = parseInt(e.target.value)
       this.count1 = value
       if (this.count1 < 0 || this.count1 > this.totalPins) {
         this.count1 = this.totalPins
       }
     },
-    updatepinsFallen2: function (e) { // Update pins count2 if value >= 0
+    updateSecondCount: function (e) { // Update pins count2 if value >= 0
       const value = parseInt(e.target.value)
       this.count2 = value
       if (this.count2 < 0 || this.count2 > this.maxPinsSecondThrow) {
         this.count2 = this.maxPinsSecondThrow
       }
     },
-    add1: function (e) { // Add 1 to number of pins fallen on the first throw
+    incrementFirstThrow: function (e) { // Add 1 to number of pins fallen on the first throw
       if (this.count1 < this.totalPins) {
         this.count1++
       }
     },
-    sub1: function (e) { // Remove 1 to number of pins fallen on the first throw
+    decrementFirstThrow: function (e) { // Remove 1 to number of pins fallen on the first throw
       if (this.count1 > 0) {
         this.count1--
       }
     },
-    add2: function (e) { // Add 1 to number of pins fallen on the second throw
+    incrementSecondThrow: function (e) { // Add 1 to number of pins fallen on the second throw
       if (this.count2 < this.maxPinsSecondThrow) {
         this.count2++
       }
     },
-    sub2: function (e) { // Remove 1 to number of pins fallen on the second throw
+    decrementSecondThrow: function (e) { // Remove 1 to number of pins fallen on the second throw
       if (this.count2 > 0) {
         this.count2--
       }
@@ -238,8 +235,9 @@ export default {
     resetComponent () {
       this.active = 'first'
       this.second = false
-      this.count2 = 0
+      this.count2 = this.maxPinsSecondThrow
     },
+    // TODO
     Reliez_moi_svp () {
       this.$emit('done')
     }

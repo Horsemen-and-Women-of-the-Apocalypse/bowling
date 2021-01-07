@@ -3,20 +3,20 @@
     "playerTurn": {
       "first": "1st throw",
       "second": "2nd throw",
-      "content": "Number of fallen pins :",
+      "content": "Number of fallen pins (on {max}):",
       "continue": "Next",
       "validate": "Finish",
-      "reset": "Annuler"
+      "reset": "Cancel"
     }
   },
   "fr": {
     "playerTurn": {
       "first": "1er lancer",
       "second": "2ème lancer",
-      "content": "Nombre de quilles tombées :",
+      "content": "Nombre de quilles tombées (sur {max}) :",
       "continue": "Suivant",
       "validate": "Terminer",
-      "reset": "Cancel"
+      "reset": "Annuler"
     }
   }
 }
