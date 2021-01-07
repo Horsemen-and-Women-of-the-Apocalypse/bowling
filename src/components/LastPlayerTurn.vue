@@ -338,7 +338,7 @@ export default {
 }
 h1,
 h2 {
-  color: #8c2318;
+  color: var(--primary);
 }
 
 input::-webkit-outer-spin-button,
