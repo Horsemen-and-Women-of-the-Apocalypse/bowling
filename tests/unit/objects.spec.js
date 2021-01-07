@@ -364,6 +364,21 @@ describe('gameparam', () => {
       })
     })
 
+    describe('getParam', () => {
+      test('Assert contents', () => {
+        var p = new Player('Nom')
+        var p2 = new Player('Nom2')
+
+        var players = [p, p2]
+
+        var g = new GameParam(players, 10, 5)
+
+        var a = new Automaton(g)
+
+        expect(a.getGameParam()).toBe(g)
+      })
+    })
+
     describe('isEnd', () => {
       test('Assert contents', () => {
         var p = new Player('Nom')

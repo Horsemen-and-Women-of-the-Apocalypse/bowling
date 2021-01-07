@@ -6,6 +6,7 @@ import VueMaterial from 'vue-material'
 // Objects :
 import Player from '../../../src/objets/player'
 import GameParam from '../../../src/objets/gameparam'
+import GameScore from '../../../src/objets/gameScore'
 
 /**
  * Mount a mocked version of ScoreBoard component
@@ -18,7 +19,7 @@ const mountComponent = (gameParams, currentPlayer, currentTurn) => {
       $t: () => 'i18n is mocked' // Mock i18n function
     },
     propsData: {
-      game: gameParams,
+      score: new GameScore(gameParams),
       currentPlayer,
       currentTurn
     }
@@ -44,34 +45,34 @@ describe('ScoreBoard component', () => {
     const wrapper = mountComponent(gameParam, null, null)
 
     // Check comp initialisation
-    expect(wrapper.vm.globalScore).not.toBe(undefined)
+    expect(wrapper.vm.score).not.toBe(undefined)
     playerNames.forEach(pn => {
-      expect(wrapper.vm.globalScore[pn]).not.toBe(undefined)
-      expect(wrapper.vm.globalScore[pn].length).toBe(nbTurn)
+      expect(wrapper.vm.score.getPlayerScore(pn)).not.toBe(undefined)
+      expect(wrapper.vm.score.getPlayerScore(pn).length).toBe(nbTurn)
 
       for (let i = 0; i < nbTurn; i++) {
         // Assert none
-        expect(wrapper.vm.globalScore[pn][i].score).toBe(null)
-        expect(wrapper.vm.globalScore[pn][i].throws.length).toBe(3)
-        expect(wrapper.vm.globalScore[pn][i].throws[0]).toBe(null)
-        expect(wrapper.vm.globalScore[pn][i].throws[1]).toBe(null)
-        expect(wrapper.vm.globalScore[pn][i].throws[2]).toBe(null)
+        expect(wrapper.vm.score.getScore(pn, i).score).toBe(null)
+        expect(wrapper.vm.score.getScore(pn, i).throws.length).toBe(3)
+        expect(wrapper.vm.score.getScore(pn, i).throws[0]).toBe(null)
+        expect(wrapper.vm.score.getScore(pn, i).throws[1]).toBe(null)
+        expect(wrapper.vm.score.getScore(pn, i).throws[2]).toBe(null)
 
         // First throw
         const pinsFallen1 = Math.floor(Math.random() * nbPins)
-        wrapper.vm.registerThrow(pn, i + 1, 1, pinsFallen1)
-        expect(wrapper.vm.globalScore[pn][i].throws[0]).toBe(pinsFallen1)
+        wrapper.vm.score.registerThrow(pn, i + 1, 1, pinsFallen1)
+        expect(wrapper.vm.score.getScore(pn, i).throws[0]).toBe(pinsFallen1)
 
         // Second throw
         const pinsFallen2 = Math.floor(Math.random() * nbPins)
-        wrapper.vm.registerThrow(pn, i + 1, 2, pinsFallen2)
-        expect(wrapper.vm.globalScore[pn][i].throws[1]).toBe(pinsFallen2)
+        wrapper.vm.score.registerThrow(pn, i + 1, 2, pinsFallen2)
+        expect(wrapper.vm.score.getScore(pn, i).throws[1]).toBe(pinsFallen2)
 
         // Third throw
         if (i === nbTurn - 1) {
           const pinsFallen3 = Math.floor(Math.random() * nbPins)
-          wrapper.vm.registerThrow(pn, i + 1, 3, pinsFallen3)
-          expect(wrapper.vm.globalScore[pn][i].throws[2]).toBe(pinsFallen3)
+          wrapper.vm.score.registerThrow(pn, i + 1, 3, pinsFallen3)
+          expect(wrapper.vm.score.getScore(pn, i).throws[2]).toBe(pinsFallen3)
         }
       }
     })
@@ -129,21 +130,21 @@ describe('ScoreBoard component', () => {
         const pinsFallen1 = Math.floor(Math.random() * nbPins)
 
         // Wrong player
-        expect(() => wrapper.vm.registerThrow('IDONTEXIST', i + 1, 1, pinsFallen1)).toThrow('Player not found')
+        expect(() => wrapper.vm.score.registerThrow('IDONTEXIST', i + 1, 1, pinsFallen1)).toThrow('Player not found')
 
         // Wrong turn (3, but too low)
-        expect(() => wrapper.vm.registerThrow(pn, -1, 1, pinsFallen1)).toThrow('Invalid turn number')
+        expect(() => wrapper.vm.score.registerThrow(pn, -1, 1, pinsFallen1)).toThrow('Invalid turn number')
         // Wrong turn 2 (too high)
-        expect(() => wrapper.vm.registerThrow(pn, nbTurn + 5, 1, pinsFallen1)).toThrow('Invalid turn number')
+        expect(() => wrapper.vm.score.registerThrow(pn, nbTurn + 5, 1, pinsFallen1)).toThrow('Invalid turn number')
 
         // Invalid throw (too low)
-        expect(() => wrapper.vm.registerThrow(pn, i + 1, 0, pinsFallen1)).toThrow('Invalid throw number')
+        expect(() => wrapper.vm.score.registerThrow(pn, i + 1, 0, pinsFallen1)).toThrow('Invalid throw number')
         // Invalid throw (too high)
-        expect(() => wrapper.vm.registerThrow(pn, i + 1, 5, pinsFallen1)).toThrow('Invalid throw number')
+        expect(() => wrapper.vm.score.registerThrow(pn, i + 1, 5, pinsFallen1)).toThrow('Invalid throw number')
         // Invalid throw (3, but not last turn)
-        if (i !== nbTurn - 1) expect(() => wrapper.vm.registerThrow(pn, i + 1, 3, pinsFallen1)).toThrow('Invalid throw number')
+        if (i !== nbTurn - 1) expect(() => wrapper.vm.score.registerThrow(pn, i + 1, 3, pinsFallen1)).toThrow('Invalid throw number')
 
-        expect(wrapper.vm.globalScore[pn][i].throws[0]).toBe(null)
+        expect(wrapper.vm.score.getScore(pn, i).throws[0]).toBe(null)
       }
     })
   })

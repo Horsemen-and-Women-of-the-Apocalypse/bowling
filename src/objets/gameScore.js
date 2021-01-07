@@ -100,4 +100,11 @@ export default class GameScore {
     getScore (playerName, turn) {
       return this.#playerScores[playerName][turn]
     }
+
+    /**
+     *
+     */
+    getPlayerScore (playerName) {
+      return this.#playerScores[playerName]
+    }
 }
