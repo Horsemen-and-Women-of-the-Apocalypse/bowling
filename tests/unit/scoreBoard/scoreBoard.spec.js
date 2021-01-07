@@ -95,6 +95,22 @@ describe('ScoreBoard component', () => {
     const wrapperWithNoPlayerProps = mountComponent(gameParam, null, null)
     expect(wrapperWithNoPlayerProps.find('#playerNames .current').exists()).toBe(false)
   })
+  test('constructError', async () => {
+    // create games params
+    const nbTurn = 20
+    const nbPins = 30
+    const playerNames = ['tata', 'tutu', 'toto']
+    const currentplayerIndex = 1
+    const players = []
+
+    playerNames.forEach(pn => players.push(new Player(pn)))
+
+    const t = () => {
+      return mountComponent(5, playerNames[currentplayerIndex], null)
+    }
+
+    expect(t).toThrow('bad type argument')
+  })
   test('currentTurn props', async () => {
     // create games params
     const nbTurn = 20
