@@ -3,7 +3,7 @@
     "playerTurn": {
       "first": "1st throw",
       "second": "2nd throw",
-      "content": "Number of fallen pins (on {max}):",
+      "content": "Number of fallen pins (out of {max}):",
       "continue": "Next",
       "validate": "Finish",
       "reset": "Cancel"

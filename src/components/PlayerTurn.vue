@@ -14,12 +14,12 @@
         :md-editable="false">
 
           <!-- Title -->
-          <h1 class='inputTitle'>{{ $t('playerTurn.content', { max :this.totalPins }) }}</h1>
+          <h1 class='names'>{{ $t('playerTurn.content', { max :this.totalPins }) }}</h1>
 
           <!-- Input Layout -->
           <div class="md-layout md-alignment-center-center">
             <div class="md-layout-item md-size-25">
-              <md-button id='decrementFirstThrow' v-on:click="decrementFirstThrow" class="md-icon-button">
+              <md-button id='decrementFirstThrow' v-on:click="decrementFirstThrow" class="md-icon-button md-raised md-primary">
                 <md-icon>remove</md-icon>
               </md-button>
             </div>
@@ -29,7 +29,7 @@
               </md-field>
             </div>
             <div class="md-layout-item md-size-25">
-              <md-button id='incrementFirstThrow' v-on:click="incrementFirstThrow" class="md-icon-button">
+              <md-button id='incrementFirstThrow' v-on:click="incrementFirstThrow" class="md-icon-button md-raised md-primary">
                 <md-icon>add</md-icon>
               </md-button>
             </div>
@@ -61,12 +61,12 @@
         :md-editable="false">
 
           <!-- Title -->
-          <h1 class='inputTitle'>{{ $t('playerTurn.content', { max :this.maxPinsSecondThrow }) }}</h1>
+          <h1 class='names'>{{ $t('playerTurn.content', { max :this.maxPinsSecondThrow }) }}</h1>
 
           <!-- Input Layout -->
           <div class="md-layout md-alignment-center-center">
             <div class="md-layout-item md-size-25">
-              <md-button id='decrementSecondThrow' v-on:click="decrementSecondThrow" class="md-icon-button">
+              <md-button id='decrementSecondThrow' v-on:click="decrementSecondThrow" class="md-icon-button md-raised md-primary">
                 <md-icon>remove</md-icon>
               </md-button>
             </div>
@@ -76,7 +76,7 @@
               </md-field>
             </div>
             <div class="md-layout-item md-size-25">
-              <md-button id='incrementSecondThrow' v-on:click="incrementSecondThrow" class="md-icon-button">
+              <md-button id='incrementSecondThrow' v-on:click="incrementSecondThrow" class="md-icon-button md-raised md-primary">
                 <md-icon>add</md-icon>
               </md-button>
             </div>
@@ -136,7 +136,7 @@ export default {
   watch: {
     count1 () {
       if (isNaN(this.count1)) {
-        this.count1 = this.totalPins
+        this.count1 = 0
       }
       this.count2 = 0
     },
@@ -209,10 +209,7 @@ export default {
   height: 100%;
   background-color: var(--darker) !important;
 }
-h1,
-h2 {
-  color: #8c2318;
-}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   /* Chrome, Safari, Edge, Opera support */
