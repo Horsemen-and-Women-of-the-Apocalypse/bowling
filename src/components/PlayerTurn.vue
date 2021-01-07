@@ -123,12 +123,6 @@ export default {
     totalPins: { type: Number, required: true }
   },
   computed: {
-    pinsFallen1 () { // Method to get the number of pins fallen during the first throw
-      return this.count1
-    },
-    pinsFallen2 () { // Method to get the number of pins fallen during the second throw
-      return this.count2
-    },
     maxPinsSecondThrow () {
       return this.totalPins - this.count1
     }
