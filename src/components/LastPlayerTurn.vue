@@ -9,12 +9,11 @@
         :md-editable="false"
       >
         <!-- Title -->
-        <h1 class="pageTitle">{{ $t("lastPlayerTurn.first") }}</h1>
         <h2 class="inputTitle">{{ $t("lastPlayerTurn.inputTitle") }}</h2>
 
         <!-- Input Layout -->
         <div class="md-layout md-alignment-center-center">
-          <div class="md-layout-item">
+          <div class="md-layout-item md-size-25">
             <md-button
               id="subFirstThrow"
               v-on:click="subFirstThrow"
@@ -23,7 +22,7 @@
               <md-icon>remove</md-icon>
             </md-button>
           </div>
-          <div class="md-layout-item">
+          <div class="md-layout-item md-size-50">
             <md-field md-inline>
               <md-input
                 v-model="count1"
@@ -33,10 +32,9 @@
                 :min="0"
                 :max="totalPins"
               />
-              / {{ totalPins }}
             </md-field>
           </div>
-          <div class="md-layout-item">
+          <div class="md-layout-item md-size-25">
             <md-button
               id="addFirstThrow"
               v-on:click="addFirstThrow"
@@ -66,12 +64,11 @@
         :md-editable="false"
       >
         <!-- Title -->
-        <h1 class="pageTitle">{{ $t("lastPlayerTurn.second") }}</h1>
         <h2 class="inputTitle">{{ $t("lastPlayerTurn.inputTitle") }}</h2>
 
         <!-- Input Layout -->
         <div class="md-layout md-alignment-center-center">
-          <div class="md-layout-item">
+          <div class="md-layout-item md-size-25 ">
             <md-button
               id="subSecondThrow"
               v-on:click="subSecondThrow"
@@ -80,7 +77,7 @@
               <md-icon>remove</md-icon>
             </md-button>
           </div>
-          <div class="md-layout-item">
+          <div class="md-layout-item md-size-50">
             <md-field md-inline>
               <md-input
                 v-model="count2"
@@ -93,7 +90,7 @@
               / {{ maxPinsSecondThrow }}
             </md-field>
           </div>
-          <div class="md-layout-item">
+          <div class="md-layout-item md-size-25">
             <md-button
               id="addSecondThrow"
               v-on:click="addSecondThrow"
@@ -130,7 +127,7 @@
           <md-button
             v-else
             name="SecondBtnValidate"
-            class="terminate md-raised md-primary"
+            class="md-raised md-accent"
             @click="terminate()"
             :disabled="count2 > maxPinsSecondThrow"
           >
@@ -147,12 +144,11 @@
         :md-editable="false"
       >
         <!-- Title -->
-        <h1 class="pageTitle">{{ $t("lastPlayerTurn.third") }}</h1>
         <h2 class="inputTitle">{{ $t("lastPlayerTurn.inputTitle") }}</h2>
 
         <!-- Input Layout -->
         <div class="md-layout md-alignment-center-center">
-          <div class="md-layout-item">
+          <div class="md-layout-item md-size-25">
             <md-button
               id="subThirdThrow"
               v-on:click="subThirdThrow"
@@ -161,7 +157,7 @@
               <md-icon>remove</md-icon>
             </md-button>
           </div>
-          <div class="md-layout-item">
+          <div class="md-layout-item md-size-50">
             <md-field md-inline>
               <md-input
                 v-model="count3"
@@ -174,7 +170,7 @@
               / {{ maxPinsThirdThrow }}
             </md-field>
           </div>
-          <div class="md-layout-item">
+          <div class="md-layout-item md-size-25">
             <md-button
               id="addThirdThrow"
               v-on:click="addThirdThrow"
@@ -199,7 +195,7 @@
           <!-- Valid Input -->
           <md-button
             name="thirdBtnValidate"
-            class="terminate md-raised md-primary"
+            class="md-raised md-accent"
             @click="terminate()"
             :disabled="count3 > maxPinsThirdThrow"
           >
@@ -360,9 +356,6 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
   /* Firefox support */
   -moz-appearance: textfield;
-}
-button.terminate {
-  background: var(--accent) !important;
 }
 
 @media only screen and (max-device-width: 480px) {
