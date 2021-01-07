@@ -25,7 +25,7 @@ beforeAll(() => {
 })
 
 describe('PlayerTurn classic use cases', () => {
-  test('Normal normal', async () => {
+  test('Any Any', async () => {
     const totalPins = 10
     const throw1 = 4
     const throw2 = 2
@@ -43,18 +43,28 @@ describe('PlayerTurn classic use cases', () => {
     }]])
   })
 
-  test('any spare', async () => {
+  test('Any spare with input', async () => {
     const totalPins = 10
-    const throw1 = 5
-    const throw2 = 5
+    const throw1 = 9
+    const throw2 = 1
 
+    // In this test, we add the pins with the buttons, and play with the sub btn
     const wrapper = mountComponent(totalPins)
-
-    await wrapper.find('input[name=pinsFallen1]').setValue(throw1)
-    expect(wrapper.find('button[name=firstBtnValidate].md-accent').exists()).toBe(false)
+    await wrapper.find('#subFirstThrow').trigger('click')
+    for (let i = 0; i < throw1; i++) await wrapper.find('#addFirstThrow').trigger('click')
+    // Add and sub 1
+    await wrapper.find('#subFirstThrow').trigger('click')
+    await wrapper.find('#addFirstThrow').trigger('click')
+    await wrapper.find('#addFirstThrow').trigger('click')
+    await wrapper.find('#subFirstThrow').trigger('click')
     await wrapper.find('button[name=BtnNext]').trigger('click')
 
-    await wrapper.find('input[name=pinsFallen2]').setValue(throw2)
+    await wrapper.find('#subSecondThrow').trigger('click')
+    for (let i = 0; i < throw2; i++) await wrapper.find('#addSecondThrow').trigger('click')
+    // Add and sub 1
+    await wrapper.find('#subSecondThrow').trigger('click')
+    await wrapper.find('#addSecondThrow').trigger('click')
+    await wrapper.find('#addSecondThrow').trigger('click')
     await wrapper.find('button[name=secondBtnValidate]').trigger('click')
     expect(wrapper.emitted('done')).toStrictEqual([[{
       throw1: throw1,
@@ -106,7 +116,7 @@ describe('PlayerTurn classic use cases', () => {
     }]])
   })
 
-  test('Text input check', async () => {
+  test('Text any text back any any', async () => {
     const totalPins = 10
     const throw1 = 5
     const throw2 = 5
@@ -125,7 +135,6 @@ describe('PlayerTurn classic use cases', () => {
 
     await wrapper.find('input[name=pinsFallen2]').setValue('TOTA')
     expect(wrapper.vm.count2).toBe('')
-    expect(wrapper.emitted('done')).not.toBeTruthy() // ?????
     await wrapper.find('input[name=pinsFallen2]').setValue(throw2)
     await wrapper.find('button[name=secondBtnValidate]').trigger('click')
 

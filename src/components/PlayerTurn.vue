@@ -19,7 +19,7 @@
           <!-- Input Layout -->
           <div class="md-layout md-alignment-center-center">
             <div class="md-layout-item md-size-25">
-              <md-button id='decrementFirstThrow' v-on:click="decrementFirstThrow" class="md-icon-button md-raised md-primary">
+              <md-button id='subFirstThrow' v-on:click="subFirstThrow" class="md-icon-button md-raised md-primary">
                 <md-icon>remove</md-icon>
               </md-button>
             </div>
@@ -29,7 +29,7 @@
               </md-field>
             </div>
             <div class="md-layout-item md-size-25">
-              <md-button id='incrementFirstThrow' v-on:click="incrementFirstThrow" class="md-icon-button md-raised md-primary">
+              <md-button id='addFirstThrow' v-on:click="addFirstThrow" class="md-icon-button md-raised md-primary">
                 <md-icon>add</md-icon>
               </md-button>
             </div>
@@ -66,7 +66,7 @@
           <!-- Input Layout -->
           <div class="md-layout md-alignment-center-center">
             <div class="md-layout-item md-size-25">
-              <md-button id='decrementSecondThrow' v-on:click="decrementSecondThrow" class="md-icon-button md-raised md-primary">
+              <md-button id='subSecondThrow' v-on:click="subSecondThrow" class="md-icon-button md-raised md-primary">
                 <md-icon>remove</md-icon>
               </md-button>
             </div>
@@ -76,7 +76,7 @@
               </md-field>
             </div>
             <div class="md-layout-item md-size-25">
-              <md-button id='incrementSecondThrow' v-on:click="incrementSecondThrow" class="md-icon-button md-raised md-primary">
+              <md-button id='addSecondThrow' v-on:click="addSecondThrow" class="md-icon-button md-raised md-primary">
                 <md-icon>add</md-icon>
               </md-button>
             </div>
@@ -161,22 +161,22 @@ export default {
         this.count2 = this.maxPinsSecondThrow
       }
     },
-    incrementFirstThrow: function (e) { // Add 1 to number of pins fallen on the first throw
+    addFirstThrow: function (e) { // Add 1 to number of pins fallen on the first throw
       if (this.count1 < this.totalPins) {
         this.count1++
       }
     },
-    decrementFirstThrow: function (e) { // Remove 1 to number of pins fallen on the first throw
+    subFirstThrow: function (e) { // Remove 1 to number of pins fallen on the first throw
       if (this.count1 > 0) {
         this.count1--
       }
     },
-    incrementSecondThrow: function (e) { // Add 1 to number of pins fallen on the second throw
+    addSecondThrow: function (e) { // Add 1 to number of pins fallen on the second throw
       if (this.count2 < this.maxPinsSecondThrow) {
         this.count2++
       }
     },
-    decrementSecondThrow: function (e) { // Remove 1 to number of pins fallen on the second throw
+    subSecondThrow: function (e) { // Remove 1 to number of pins fallen on the second throw
       if (this.count2 > 0) {
         this.count2--
       }
