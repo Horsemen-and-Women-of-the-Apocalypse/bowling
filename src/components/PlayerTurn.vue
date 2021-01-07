@@ -1,5 +1,5 @@
 <template>
-  <div class="playerTurn">
+  <div id="playerTurn">
     <div class='spacing md-alignment-center-center'>
       <md-steppers
       :md-active-step.sync="active"
@@ -14,7 +14,7 @@
         :md-editable="false">
 
           <!-- Title -->
-          <h1 class='names'>{{ $t('playerTurn.content', { max :this.totalPins }) }}</h1>
+          <h1 class='inputTitle'>{{ $t('playerTurn.content', { max :this.totalPins }) }}</h1>
 
           <!-- Input Layout -->
           <div class="md-layout md-alignment-center-center">
@@ -61,7 +61,7 @@
         :md-editable="false">
 
           <!-- Title -->
-          <h1 class='names'>{{ $t('playerTurn.content', { max :this.maxPinsSecondThrow }) }}</h1>
+          <h1 class='inputTitle'>{{ $t('playerTurn.content', { max :this.maxPinsSecondThrow }) }}</h1>
 
           <!-- Input Layout -->
           <div class="md-layout md-alignment-center-center">
@@ -108,50 +108,6 @@
   </div>
 </template>
 
-<style scoped>
-.names {
-  color: #8C2318;
-}
-.spacing {
-  padding-top: 5%;
-}
-.hansWegner {
-  color: #88A65E;
-}
-.md-button {
-  background-color: #88A65E !important;
-}
-.md-icon {
-  color: white !important;
-}
-.playerTurn {
-  background-color: #BFB35A;
-  height: 100%;
-}
-@media only screen and (max-device-width: 480px) {
-  .playerTurn {
-      font-size: 1em;
-  }
-}
-input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { /* Chrome, Safari, Edge, Opera support */
-  -webkit-appearance: none;
-}
-
-input[type=number] { /* Firefox support */
-  -moz-appearance: textfield;
-}
-
-.md-steppers {
-  background-color: #bfb35a !important;
-  height: 90vh;
-}
-
-.md-stepper {
-  padding-left: 0px;
-  padding-right: 0px;
-}
-</style>
-
 <script>
 
 export default {
@@ -182,11 +138,11 @@ export default {
       if (isNaN(this.count1)) {
         this.count1 = this.totalPins
       }
-      this.count2 = this.maxPinsSecondThrow
+      this.count2 = 0
     },
     count2 () {
       if (isNaN(this.count2)) {
-        this.count2 = this.maxPinsSecondThrow
+        this.count2 = 0
       }
     }
   },
@@ -235,7 +191,7 @@ export default {
     resetComponent () {
       this.active = 'first'
       this.second = false
-      this.count2 = this.maxPinsSecondThrow
+      this.count2 = 0
     },
     // TODO
     Reliez_moi_svp () {
@@ -243,5 +199,35 @@ export default {
     }
   }
 }
-
 </script>
+
+<style scoped>
+#playerTurn {
+  height: 100%;
+}
+.md-steppers {
+  height: 100%;
+  background-color: var(--darker) !important;
+}
+h1,
+h2 {
+  color: #8c2318;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* Chrome, Safari, Edge, Opera support */
+  -webkit-appearance: none;
+}
+.md-field {
+  white-space: nowrap;
+}
+input[type="number"] {
+  /* Firefox support */
+  -moz-appearance: textfield;
+}
+@media only screen and (max-device-width: 480px) {
+  #LastPlayerTurn {
+    font-size: 1em;
+  }
+}
+</style>
