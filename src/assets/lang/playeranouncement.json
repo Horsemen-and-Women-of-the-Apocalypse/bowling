@@ -1,0 +1,17 @@
+{
+    "en": {
+      "playeranouncement": {
+        "title1": "It's the", 
+        "title2": "turn of...",
+        "turn": "Turn"
+    }
+    },
+    "fr": {
+      "playeranouncement": {
+        "title1": "C'est le",
+        "title2": "tour de...",
+        "turn": "Tour"
+    }
+    }
+  }
+  
