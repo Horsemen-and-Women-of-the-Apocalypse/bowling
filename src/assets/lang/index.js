@@ -5,5 +5,14 @@ import gameprepheader from './gameprepheader'
 import playerListCreator from './playerListCreator'
 import playerTurn from './playerTurn'
 import merge from 'deepmerge'
+import scoreBoard from './scoreBoard'
 
-export default merge.all([gamepreparation, turn, pins, playerListCreator, gameprepheader, playerTurn])
+export default merge.all([
+  gamepreparation,
+  turn,
+  pins,
+  playerListCreator,
+  gameprepheader,
+  playerTurn,
+  scoreBoard
+])
