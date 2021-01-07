@@ -25,7 +25,15 @@
           </div>
           <div class="md-layout-item">
             <md-field md-inline>
-              <md-input v-model="count1" type="number" name="pinsFallen1" />
+              <md-input
+                v-model="count1"
+                type="number"
+                name="pinsFallen1"
+                v-on:keypress="isNumber"
+                :min="0"
+                :max="totalPins"
+              />
+              / {{ totalPins }}
             </md-field>
           </div>
           <div class="md-layout-item">
@@ -44,7 +52,7 @@
           name="firstBtnValidate"
           class="md-raised md-primary"
           @click="validateFirst"
-          :disbled="true"
+          :disabled="count1 > totalPins"
         >
           {{ $t("lastPlayerTurn.continue") }}
         </md-button>
@@ -74,7 +82,15 @@
           </div>
           <div class="md-layout-item">
             <md-field md-inline>
-              <md-input v-model="count2" type="number" name="pinsFallen2" />
+              <md-input
+                v-model="count2"
+                type="number"
+                name="pinsFallen2"
+                v-on:keypress="isNumber"
+                :min="0"
+                :max="maxPinsSecondThrow"
+              />
+              / {{ maxPinsSecondThrow }}
             </md-field>
           </div>
           <div class="md-layout-item">
@@ -101,9 +117,20 @@
 
           <!-- Valid Input -->
           <md-button
+            v-if="isFirstThrowStrike || isSecondThrowSpare || isSecondThrowStrike"
             name="SecondBtnValidate"
             class="md-raised md-primary"
-            @click="Reliez_moi_svp()"
+            @click="validateSecond()"
+            :disabled="count2 > maxPinsSecondThrow"
+          >
+            {{ $t("lastPlayerTurn.continue") }}
+          </md-button>
+          <md-button
+            v-else
+            name="SecondBtnValidate"
+            class="terminate md-raised md-primary"
+            @click="terminate()"
+            :disabled="count2 > maxPinsSecondThrow"
           >
             {{ $t("lastPlayerTurn.validate") }}
           </md-button>
@@ -134,7 +161,15 @@
           </div>
           <div class="md-layout-item">
             <md-field md-inline>
-              <md-input v-model="count2" type="number" name="pinsFallen2" />
+              <md-input
+                v-model="count3"
+                type="number"
+                name="pinsFallen2"
+                v-on:keypress="isNumber"
+                :min="0"
+                :max="maxPinsThirdThrow"
+              />
+              / {{ maxPinsThirdThrow }}
             </md-field>
           </div>
           <div class="md-layout-item">
@@ -162,8 +197,9 @@
           <!-- Valid Input -->
           <md-button
             name="thirdBtnValidate"
-            class="md-raised md-primary"
-            @click="Reliez_moi_svp()"
+            class="terminate md-raised md-primary"
+            @click="terminate()"
+            :disabled="count3 > maxPinsThirdThrow"
           >
             {{ $t("lastPlayerTurn.validate") }}
           </md-button>
@@ -180,8 +216,6 @@ export default {
     count1: 0,
     count2: 0,
     count3: 0,
-    maxPinsSecondThrow: 0,
-    maxPinsThirdThrow: 0,
 
     // Steppers
     active: 'first',
@@ -195,7 +229,39 @@ export default {
   created () {
     this.resetComponent()
   },
+  computed: {
+    isFirstThrowStrike () {
+      return parseInt(this.count1) === this.totalPins
+    },
+    isSecondThrowStrike () {
+      return parseInt(this.count2) === this.totalPins
+    },
+    isSecondThrowSpare () {
+      return parseInt(this.count1) + parseInt(this.count2) === this.totalPins
+    },
+    maxPinsSecondThrow () {
+      if (this.isFirstThrowStrike) return this.totalPins
+      else return this.totalPins - parseInt(this.count1)
+    },
+    maxPinsThirdThrow () {
+      if (this.isSecondThrowStrike || this.isSecondThrowSpare) return this.totalPins
+      return 0
+    }
+  },
   methods: {
+    isNumber (evt) {
+      evt = evt || window.event
+      var charCode = evt.which ? evt.which : evt.keyCode
+      if (
+        charCode > 31 &&
+        (charCode < 48 || charCode > 57) &&
+        charCode !== 46
+      ) {
+        evt.preventDefault()
+      } else {
+        return true
+      }
+    },
     // First throw
     addFirstThrow () {
       // Add 1 to number of pins fallen on the first throw
@@ -227,53 +293,38 @@ export default {
         this.count2--
       }
     },
-    validateSecond () {},
+    validateSecond () {
+      this.active = 'third'
+      this.second = true
+    },
 
     // third throw
     addThirdThrow () {
       // Add 1 to number of pins fallen on the Third throw
-      if (this.count2 < this.maxPinsThirdThrow) {
-        this.count2++
+      if (this.count3 < this.maxPinsThirdThrow) {
+        this.count3++
       }
     },
     subThirdThrow () {
       // Remove 1 to number of pins fallen on the Third throw
-      if (this.count2 > 0) {
-        this.count2--
+      if (this.count3 > 0) {
+        this.count3--
       }
     },
-    validateThird () {},
 
-    // setDone (id, index) {
-    //   this[id] = true
+    // terminate
+    terminate () {
+      this.$emit('done')
+    },
 
-    //   if (index) {
-    //     this.active = index
-    //   }
-    // },
     resetComponent () {
       this.active = 'first'
       this.second = false
       this.third = false
-      this.count1 = this.totalPins
+
+      this.count1 = 0
       this.count2 = 0
       this.count3 = 0
-    }
-    // Reliez_moi_svp () {
-    //   this.$emit('done')
-    // }
-  },
-  watch: {
-    count1 () {
-      if (isNaN(this.count1)) {
-        this.count1 = this.totalPins
-      }
-      this.maxPinsSecondThrow = this.totalPins - this.count1
-    },
-    count2 () {
-      if (isNaN(this.count2)) {
-        this.count2 = this.maxPinsSecondThrow
-      }
     }
   }
 }
@@ -297,10 +348,15 @@ input::-webkit-inner-spin-button {
   /* Chrome, Safari, Edge, Opera support */
   -webkit-appearance: none;
 }
-
+.md-field {
+  white-space: nowrap;
+}
 input[type="number"] {
   /* Firefox support */
   -moz-appearance: textfield;
+}
+button.terminate {
+  background: var(--accent) !important;
 }
 
 @media only screen and (max-device-width: 480px) {
