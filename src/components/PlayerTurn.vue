@@ -37,7 +37,7 @@
 
           <!-- Valid Input and Next -->
           <md-button
-          name="firstBtnValidate"
+          name="BtnNext"
           class="md-raised md-primary"
           @click="setDone('first', 'second')"
           v-if="count1 != this.totalPins">
@@ -46,7 +46,7 @@
           <!-- Valid Input -->
           <md-button
           name="firstBtnValidate"
-          class="md-raised md-primary"
+          class="md-raised md-primary "
           @click="Reliez_moi_svp()"
           v-else>
             {{ $t("playerTurn.validate") }}
@@ -86,7 +86,7 @@
           <div class="md-layout-item">
             <!-- Reset Component -->
             <md-button
-            name="SecondBtnValidate"
+            name="BtnCancel"
             class="md-raised md-primary"
             @click="resetComponent()">
               {{ $t("playerTurn.reset") }}
@@ -94,7 +94,7 @@
 
             <!-- Valid Input -->
             <md-button
-            name="SecondBtnValidate"
+            name="secondBtnValidate"
             class="md-raised md-primary"
             @click="Reliez_moi_svp ()">
               {{ $t("playerTurn.validate") }}
@@ -195,7 +195,7 @@ export default {
     },
     // TODO
     Reliez_moi_svp () {
-      this.$emit('done')
+      this.$emit('done', { throw1: parseInt(this.count1), throw2: parseInt(this.count2) })
     }
   }
 }
