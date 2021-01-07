@@ -22,6 +22,7 @@
 
 .spicyRice {
     font-family: SpicyRice-Regular !important;
+    font-weight: normal;
 }
 
 .ralewayRegular {
@@ -50,7 +51,3 @@
     color: var(--accent) !important;
     @extend .spicyRice
 }
-
-input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { /* Chrome, Safari, Edge, Opera support */
-    -webkit-appearance: none;
-  }
