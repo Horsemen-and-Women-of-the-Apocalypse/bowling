@@ -97,8 +97,6 @@ describe('ScoreBoard component', () => {
   })
   test('constructError', async () => {
     // create games params
-    const nbTurn = 20
-    const nbPins = 30
     const playerNames = ['tata', 'tutu', 'toto']
     const currentplayerIndex = 1
     const players = []
