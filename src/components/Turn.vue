@@ -1,20 +1,24 @@
 <template>
   <div class="turn">
+
+    <!-- Title -->
     <div class='spacing md-alignment-center-center'>
       <h1 class='names'>{{ $t('turn.title') }} <span>{{$t('turn.turn')}}</span> :</h1>
     </div>
+
+    <!-- Input Layout -->
     <div class="md-layout md-alignment-center-center">
-      <div class="md-layout-item">
+      <div class="md-layout-item md-size-25">
         <md-button id='minus' v-on:click="minus" class="md-icon-button md-raised md-primary">
           <md-icon>remove</md-icon>
         </md-button>
       </div>
-      <div class="md-layout-item">
+      <div class="md-layout-item md-size-50">
         <md-field md-inline>
           <md-input v-model="count" type="number" name="turnCount" @blur="updateTurn($event)">{{count}}</md-input>
         </md-field>
       </div>
-      <div class="md-layout-item">
+      <div class="md-layout-item md-size-25">
         <md-button id='add' v-on:click="add" class="md-icon-button md-raised md-primary">
           <md-icon>add</md-icon>
         </md-button>
