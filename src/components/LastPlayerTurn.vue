@@ -316,9 +316,9 @@ export default {
         Number.isInteger(parseInt(this.count3))
       ) {
         this.$emit('done', {
-          turn1: parseInt(this.count1),
-          turn2: parseInt(this.count2),
-          turn3: parseInt(this.count3)
+          throw1: parseInt(this.count1),
+          throw2: parseInt(this.count2),
+          throw3: parseInt(this.count3)
         })
       }
     }
