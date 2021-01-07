@@ -40,9 +40,9 @@ describe('LastPlayerTurn classic use cases', () => {
     expect(wrapper.emitted('done')).toBe(undefined)
     await wrapper.find('button[name=secondBtnValidate]').trigger('click')
     expect(wrapper.emitted('done')).toStrictEqual([[{
-      turn1: throw1,
-      turn2: throw2,
-      turn3: 0
+      throw1: throw1,
+      throw2: throw2,
+      throw3: 0
     }]])
   })
 
@@ -65,9 +65,9 @@ describe('LastPlayerTurn classic use cases', () => {
     await wrapper.find('input[name=pinsFallen3]').setValue(throw3)
     await wrapper.find('button[name=thirdBtnValidate]').trigger('click')
     expect(wrapper.emitted('done')).toStrictEqual([[{
-      turn1: throw1,
-      turn2: throw2,
-      turn3: throw3
+      throw1: throw1,
+      throw2: throw2,
+      throw3: throw3
     }]])
   })
 
@@ -90,9 +90,9 @@ describe('LastPlayerTurn classic use cases', () => {
     await wrapper.find('input[name=pinsFallen3]').setValue(throw3)
     await wrapper.find('button[name=thirdBtnValidate]').trigger('click')
     expect(wrapper.emitted('done')).toStrictEqual([[{
-      turn1: throw1,
-      turn2: throw2,
-      turn3: throw3
+      throw1: throw1,
+      throw2: throw2,
+      throw3: throw3
     }]])
   })
 
@@ -130,9 +130,9 @@ describe('LastPlayerTurn classic use cases', () => {
     await wrapper.find('#addThirdThrow').trigger('click')
     await wrapper.find('button[name=thirdBtnValidate]').trigger('click')
     expect(wrapper.emitted('done')).toStrictEqual([[{
-      turn1: throw1,
-      turn2: throw2,
-      turn3: throw3
+      throw1: throw1,
+      throw2: throw2,
+      throw3: throw3
     }]])
   })
   test('Normal back Normal Normal Back Spare normal back Strike', async () => {
@@ -174,9 +174,9 @@ describe('LastPlayerTurn classic use cases', () => {
     await wrapper.find('input[name=pinsFallen3]').setValue(throw3Bis)
     await wrapper.find('button[name=thirdBtnValidate]').trigger('click')
     expect(wrapper.emitted('done')).toStrictEqual([[{
-      turn1: throw1Bis,
-      turn2: throw2Bis,
-      turn3: throw3Bis
+      throw1: throw1Bis,
+      throw2: throw2Bis,
+      throw3: throw3Bis
     }]])
   })
   test('Text input check', async () => {

@@ -276,10 +276,8 @@ export default {
       }
     },
     validateSecond () {
-      if (Number.isInteger(parseInt(this.count2))) {
-        this.active = 'third'
-        this.second = true
-      }
+      this.active = 'third'
+      this.second = true
     },
     backSecond () {
       this.active = 'first'
