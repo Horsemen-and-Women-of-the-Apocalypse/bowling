@@ -37,10 +37,7 @@ export default {
   },
   data: () => ({
     animation: true,
-    automaton: null,
-    active: 'first',
-    first: false,
-    second: false
+    automaton: null
   }),
   created () {
     this.automaton = this.$route.params.automaton
