@@ -50,7 +50,7 @@
           name="firstBtnValidate"
           class="md-raised md-primary"
           @click="validateFirst"
-          :disabled="count1 > totalPins"
+          :disabled="count1 < 0 || count1 > totalPins"
         >
           {{ $t("lastPlayerTurn.continue") }}
         </md-button>
@@ -68,7 +68,7 @@
 
         <!-- Input Layout -->
         <div class="md-layout md-alignment-center-center">
-          <div class="md-layout-item md-size-25 ">
+          <div class="md-layout-item md-size-25">
             <md-button
               id="subSecondThrow"
               v-on:click="subSecondThrow"
@@ -105,7 +105,7 @@
         <div class="md-layout-item">
           <!-- Reset Component -->
           <md-button
-            name="SecondBtnValidate"
+            name="SecondBtnBack"
             class="md-raised md-primary"
             @click="backSecond()"
           >
@@ -120,7 +120,7 @@
             name="SecondBtnValidate"
             class="md-raised md-primary"
             @click="validateSecond()"
-            :disabled="count2 > maxPinsSecondThrow"
+            :disabled="count2 < 0 || count2 > maxPinsSecondThrow"
           >
             {{ $t("lastPlayerTurn.continue") }}
           </md-button>
@@ -129,7 +129,7 @@
             name="SecondBtnValidate"
             class="md-raised md-accent"
             @click="terminate()"
-            :disabled="count2 > maxPinsSecondThrow"
+            :disabled="count2 < 0 || count2 > maxPinsSecondThrow"
           >
             {{ $t("lastPlayerTurn.validate") }}
           </md-button>
@@ -162,7 +162,7 @@
               <md-input
                 v-model="count3"
                 type="number"
-                name="pinsFallen2"
+                name="pinsFallen3"
                 v-on:keypress="isNumber"
                 :min="0"
                 :max="maxPinsThirdThrow"
@@ -185,7 +185,7 @@
         <div class="md-layout-item">
           <!-- Reset Component -->
           <md-button
-            name="thirdBtnValidate"
+            name="thirdBtnBack"
             class="md-raised md-primary"
             @click="backThird()"
           >
@@ -197,7 +197,7 @@
             name="thirdBtnValidate"
             class="md-raised md-accent"
             @click="terminate()"
-            :disabled="count3 > maxPinsThirdThrow"
+            :disabled="count3 < 0 || count3 > maxPinsThirdThrow"
           >
             {{ $t("lastPlayerTurn.validate") }}
           </md-button>
@@ -209,7 +209,7 @@
 
 <script>
 export default {
-  name: 'PlayerTurn',
+  name: 'LastPlayerTurn',
   data: () => ({
     count1: 0,
     count2: 0,
@@ -240,23 +240,14 @@ export default {
       else return this.totalPins - parseInt(this.count1)
     },
     maxPinsThirdThrow () {
-      if (this.isSecondThrowStrike || this.isSecondThrowSpare) { return this.totalPins }
+      if (this.isSecondThrowStrike || this.isSecondThrowSpare) { return this.totalPins } else if (this.isFirstThrowStrike) { return this.totalPins - parseInt(this.count2) }
       return 0
     }
   },
   methods: {
     isNumber (evt) {
-      evt = evt || window.event
-      var charCode = evt.which ? evt.which : evt.keyCode
-      if (
-        charCode > 31 &&
-        (charCode < 48 || charCode > 57) &&
-        charCode !== 46
-      ) {
-        evt.preventDefault()
-      } else {
-        return true
-      }
+      if (isNaN(this.count1) || isNaN(this.count2) || isNaN(this.count3)) evt.preventDefault()
+      return true
     },
     // First throw
     addFirstThrow () {
@@ -323,9 +314,9 @@ export default {
     // terminate
     terminate () {
       this.$emit('done', {
-        turn1: this.count1,
-        turn2: this.count2,
-        turn3: this.count3
+        turn1: parseInt(this.count1),
+        turn2: parseInt(this.count2),
+        turn3: parseInt(this.count3)
       })
     }
   }
