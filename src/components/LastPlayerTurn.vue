@@ -10,7 +10,6 @@
       >
         <!-- Title -->
         <h2 class="inputTitle">{{ $t("lastPlayerTurn.inputTitle") }}</h2>
-
         <!-- Input Layout -->
         <div class="md-layout md-alignment-center-center">
           <div class="md-layout-item md-size-25">
@@ -26,9 +25,7 @@
             <md-field md-inline>
               <md-input
                 v-model="count1"
-                type="number"
                 name="pinsFallen1"
-                v-on:keypress="isNumber"
                 :min="0"
                 :max="totalPins"
               />
@@ -83,7 +80,6 @@
                 v-model="count2"
                 type="number"
                 name="pinsFallen2"
-                v-on:keypress="isNumber"
                 :min="0"
                 :max="maxPinsSecondThrow"
               />
@@ -105,7 +101,7 @@
         <div class="md-layout-item">
           <!-- Reset Component -->
           <md-button
-            name="SecondBtnBack"
+            name="secondBtnBack"
             class="md-raised md-primary"
             @click="backSecond()"
           >
@@ -117,7 +113,7 @@
             v-if="
               isFirstThrowStrike || isSecondThrowSpare || isSecondThrowStrike
             "
-            name="SecondBtnValidate"
+            name="secondBtnValidate"
             class="md-raised md-primary"
             @click="validateSecond()"
             :disabled="count2 < 0 || count2 > maxPinsSecondThrow"
@@ -126,7 +122,7 @@
           </md-button>
           <md-button
             v-else
-            name="SecondBtnValidate"
+            name="secondBtnValidate"
             class="md-raised md-accent"
             @click="terminate()"
             :disabled="count2 < 0 || count2 > maxPinsSecondThrow"
@@ -163,7 +159,6 @@
                 v-model="count3"
                 type="number"
                 name="pinsFallen3"
-                v-on:keypress="isNumber"
                 :min="0"
                 :max="maxPinsThirdThrow"
               />
@@ -240,15 +235,15 @@ export default {
       else return this.totalPins - parseInt(this.count1)
     },
     maxPinsThirdThrow () {
-      if (this.isSecondThrowStrike || this.isSecondThrowSpare) { return this.totalPins } else if (this.isFirstThrowStrike) { return this.totalPins - parseInt(this.count2) }
+      if (this.isSecondThrowStrike || this.isSecondThrowSpare) {
+        return this.totalPins
+      } else if (this.isFirstThrowStrike) {
+        return this.totalPins - parseInt(this.count2)
+      }
       return 0
     }
   },
   methods: {
-    isNumber (evt) {
-      if (isNaN(this.count1) || isNaN(this.count2) || isNaN(this.count3)) evt.preventDefault()
-      return true
-    },
     // First throw
     addFirstThrow () {
       // Add 1 to number of pins fallen on the first throw
@@ -263,8 +258,10 @@ export default {
       }
     },
     validateFirst () {
-      this.active = 'second'
-      this.first = true
+      if (Number.isInteger(parseInt(this.count1))) {
+        this.active = 'second'
+        this.first = true
+      }
     },
 
     // Second throw
@@ -281,8 +278,10 @@ export default {
       }
     },
     validateSecond () {
-      this.active = 'third'
-      this.second = true
+      if (Number.isInteger(parseInt(this.count2))) {
+        this.active = 'third'
+        this.second = true
+      }
     },
     backSecond () {
       this.active = 'first'
@@ -313,11 +312,17 @@ export default {
 
     // terminate
     terminate () {
-      this.$emit('done', {
-        turn1: parseInt(this.count1),
-        turn2: parseInt(this.count2),
-        turn3: parseInt(this.count3)
-      })
+      if (
+        Number.isInteger(parseInt(this.count1)) &&
+        Number.isInteger(parseInt(this.count2)) &&
+        Number.isInteger(parseInt(this.count3))
+      ) {
+        this.$emit('done', {
+          turn1: parseInt(this.count1),
+          turn2: parseInt(this.count2),
+          turn3: parseInt(this.count3)
+        })
+      }
     }
   }
 }

@@ -36,13 +36,38 @@ describe('LastPlayerTurn classic use cases', () => {
     await wrapper.find('button[name=firstBtnValidate]').trigger('click')
 
     await wrapper.find('input[name=pinsFallen2]').setValue(throw2)
-    expect(wrapper.find('button[name=SecondBtnValidate].md-accent').exists()).toBe(true)
+    expect(wrapper.find('button[name=secondBtnValidate].md-accent').exists()).toBe(true)
     expect(wrapper.emitted('done')).toBe(undefined)
-    await wrapper.find('button[name=SecondBtnValidate]').trigger('click')
+    await wrapper.find('button[name=secondBtnValidate]').trigger('click')
     expect(wrapper.emitted('done')).toStrictEqual([[{
       turn1: throw1,
       turn2: throw2,
       turn3: 0
+    }]])
+  })
+
+  test('Normal spare any', async () => {
+    const totalPins = 10
+    const throw1 = 5
+    const throw2 = 5
+    const throw3 = 3
+
+    const wrapper = mountComponent(totalPins)
+
+    await wrapper.find('input[name=pinsFallen1]').setValue(throw1)
+    await wrapper.find('button[name=firstBtnValidate]').trigger('click')
+
+    await wrapper.find('input[name=pinsFallen2]').setValue(throw2)
+    expect(wrapper.find('button[name=secondBtnValidate].md-accent').exists()).toBe(false)
+    await wrapper.find('button[name=secondBtnValidate]').trigger('click')
+    expect(wrapper.emitted('done')).toBe(undefined)
+
+    await wrapper.find('input[name=pinsFallen3]').setValue(throw3)
+    await wrapper.find('button[name=thirdBtnValidate]').trigger('click')
+    expect(wrapper.emitted('done')).toStrictEqual([[{
+      turn1: throw1,
+      turn2: throw2,
+      turn3: throw3
     }]])
   })
 
@@ -58,8 +83,8 @@ describe('LastPlayerTurn classic use cases', () => {
     await wrapper.find('button[name=firstBtnValidate]').trigger('click')
 
     await wrapper.find('input[name=pinsFallen2]').setValue(throw2)
-    expect(wrapper.find('button[name=SecondBtnValidate].md-accent').exists()).toBe(false)
-    await wrapper.find('button[name=SecondBtnValidate]').trigger('click')
+    expect(wrapper.find('button[name=secondBtnValidate].md-accent').exists()).toBe(false)
+    await wrapper.find('button[name=secondBtnValidate]').trigger('click')
     expect(wrapper.emitted('done')).toBe(undefined)
 
     await wrapper.find('input[name=pinsFallen3]').setValue(throw3)
@@ -79,24 +104,29 @@ describe('LastPlayerTurn classic use cases', () => {
 
     // In this test, we add the pins with the buttons, and play with the sub btn
     const wrapper = mountComponent(totalPins)
-
+    await wrapper.find('#subFirstThrow').trigger('click')
     for (let i = 0; i < throw1; i++) await wrapper.find('#addFirstThrow').trigger('click')
     // Add and sub 1
     await wrapper.find('#subFirstThrow').trigger('click')
     await wrapper.find('#addFirstThrow').trigger('click')
+    await wrapper.find('#addFirstThrow').trigger('click')
     await wrapper.find('button[name=firstBtnValidate]').trigger('click')
 
+    await wrapper.find('#subSecondThrow').trigger('click')
     for (let i = 0; i < throw2; i++) await wrapper.find('#addSecondThrow').trigger('click')
     // Add and sub 1
     await wrapper.find('#subSecondThrow').trigger('click')
     await wrapper.find('#addSecondThrow').trigger('click')
-    expect(wrapper.find('button[name=SecondBtnValidate].md-accent').exists()).toBe(false)
-    await wrapper.find('button[name=SecondBtnValidate]').trigger('click')
+    await wrapper.find('#addSecondThrow').trigger('click')
+    expect(wrapper.find('button[name=secondBtnValidate].md-accent').exists()).toBe(false)
+    await wrapper.find('button[name=secondBtnValidate]').trigger('click')
     expect(wrapper.emitted('done')).toBe(undefined)
 
+    await wrapper.find('#subThirdThrow').trigger('click')
     for (let i = 0; i < throw3; i++) await wrapper.find('#addThirdThrow').trigger('click')
     // Add and sub 1
     await wrapper.find('#subThirdThrow').trigger('click')
+    await wrapper.find('#addThirdThrow').trigger('click')
     await wrapper.find('#addThirdThrow').trigger('click')
     await wrapper.find('button[name=thirdBtnValidate]').trigger('click')
     expect(wrapper.emitted('done')).toStrictEqual([[{
@@ -105,7 +135,7 @@ describe('LastPlayerTurn classic use cases', () => {
       turn3: throw3
     }]])
   })
-  test('Normal back Normal Normal Back Spare normal back Strike ', async () => {
+  test('Normal back Normal Normal Back Spare normal back Strike', async () => {
     const totalPins = 10
     const throw1 = 3
     const throw1Bis = 4
@@ -121,24 +151,24 @@ describe('LastPlayerTurn classic use cases', () => {
     await wrapper.find('button[name=firstBtnValidate]').trigger('click')
     // 2
     await wrapper.find('input[name=pinsFallen2]').setValue(throw2)
-    expect(wrapper.find('button[name=SecondBtnValidate].md-accent').exists()).toBe(true)
+    expect(wrapper.find('button[name=secondBtnValidate].md-accent').exists()).toBe(true)
     expect(wrapper.vm.count2).toBe('' + throw2)
-    await wrapper.find('button[name=SecondBtnBack]').trigger('click')
+    await wrapper.find('button[name=secondBtnBack]').trigger('click')
     // 1
     await wrapper.find('input[name=pinsFallen1]').setValue(throw1Bis)
     await wrapper.find('button[name=firstBtnValidate]').trigger('click')
     // 2
     expect(parseInt(wrapper.vm.count2)).toBe(0) // Check the value reset
     await wrapper.find('input[name=pinsFallen2]').setValue(throw2Bis)
-    expect(wrapper.find('button[name=SecondBtnValidate].md-accent').exists()).toBe(false)
-    await wrapper.find('button[name=SecondBtnValidate]').trigger('click')
+    expect(wrapper.find('button[name=secondBtnValidate].md-accent').exists()).toBe(false)
+    await wrapper.find('button[name=secondBtnValidate]').trigger('click')
     // 3
     await wrapper.find('input[name=pinsFallen3]').setValue(throw3)
     expect(wrapper.vm.count3).toBe('' + throw3)
     await wrapper.find('button[name=thirdBtnBack]').trigger('click')
     // 2
     expect(wrapper.vm.count2).toBe('' + throw2Bis)
-    await wrapper.find('button[name=SecondBtnValidate]').trigger('click')
+    await wrapper.find('button[name=secondBtnValidate]').trigger('click')
     // 3
     expect(parseInt(wrapper.vm.count3)).toBe(0) // Check the value reset
     await wrapper.find('input[name=pinsFallen3]').setValue(throw3Bis)
@@ -149,15 +179,34 @@ describe('LastPlayerTurn classic use cases', () => {
       turn3: throw3Bis
     }]])
   })
-  test('Normal back Normal Normal Back Spare normal back Strike ', async () => {
+  test('Text input check', async () => {
     const totalPins = 10
-    const throw1 = 'Text'
+    const throw1 = 5
+    const throw2 = 5
+    const throw3 = 5
 
     const wrapper = mountComponent(totalPins)
 
-    // 1
+    await wrapper.find('input[name=pinsFallen1]').setValue('TOTO')
+    await wrapper.find('button[name=firstBtnValidate]').trigger('click')
     await wrapper.find('input[name=pinsFallen1]').setValue(throw1)
     await wrapper.find('button[name=firstBtnValidate]').trigger('click')
-    expect(wrapper.vm.count1).not.toBe(throw1)
+
+    await wrapper.find('input[name=pinsFallen2]').setValue('TOTO')
+    await wrapper.find('button[name=secondBtnValidate]').trigger('click')
+    expect(wrapper.emitted('done')).not.toBeTruthy()
+    await wrapper.find('input[name=pinsFallen2]').setValue(throw2)
+    await wrapper.find('button[name=secondBtnValidate]').trigger('click')
+
+    await wrapper.find('input[name=pinsFallen3]').setValue('TOTO')
+    await wrapper.find('button[name=thirdBtnValidate]').trigger('click')
+    expect(wrapper.emitted('done')).not.toBeTruthy()
+    await wrapper.find('input[name=pinsFallen3]').setValue(throw3)
+    await wrapper.find('button[name=thirdBtnValidate]').trigger('click')
+    expect(wrapper.emitted('done')).toStrictEqual([[{
+      turn1: throw1,
+      turn2: throw2,
+      turn3: throw3
+    }]])
   })
 })
