@@ -157,10 +157,10 @@ describe('PlayerTurn classic use cases', () => {
     }]])
   })
 
-  test('Strike with overvalue', async () => {
+  test('Spare with overvalue', async () => {
     const totalPins = 10
-    const throw1 = 10
-    const throw2 = 0
+    const throw1 = 6
+    const throw2 = 4
 
     const wrapper = mountComponent(totalPins)
 
@@ -168,12 +168,14 @@ describe('PlayerTurn classic use cases', () => {
     expect(wrapper.vm.count1).toBe('12')
     wrapper.find('input[name=pinsFallen1]').trigger('blur')
     expect(wrapper.vm.count1).toBe(10)
+    await wrapper.find('input[name=pinsFallen1]').setValue(6)
+
     await wrapper.find('button[name=BtnNext]').trigger('click')
 
     await wrapper.find('input[name=pinsFallen2]').setValue(12)
     expect(wrapper.vm.count2).toBe('12')
     wrapper.find('input[name=pinsFallen2]').trigger('blur')
-    expect(wrapper.vm.count2).toBe(0)
+    expect(wrapper.vm.count2).toBe(4)
 
     await wrapper.find('button[name=secondBtnValidate]').trigger('click')
 
