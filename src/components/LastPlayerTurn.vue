@@ -9,9 +9,9 @@
         :md-editable="false"
       >
         <!-- Title -->
-        <h2 class="inputTitle">
+        <h1 class="names">
           {{ $t("playerTurn.content", { max: totalPins }) }}
-        </h2>
+        </h1>
         <!-- Input Layout -->
         <div class="md-layout md-alignment-center-center">
           <div class="md-layout-item md-size-25">
@@ -62,9 +62,9 @@
         :md-editable="false"
       >
         <!-- Title -->
-        <h2 class="inputTitle">
+        <h1 class="names">
           {{ $t("playerTurn.content", { max: maxPinsSecondThrow }) }}
-        </h2>
+        </h1>
         <!-- Input Layout -->
         <div class="md-layout md-alignment-center-center">
           <div class="md-layout-item md-size-25">
@@ -139,9 +139,9 @@
         :md-editable="false"
       >
         <!-- Title -->
-        <h2 class="inputTitle">
+        <h1 class="names">
           {{ $t("playerTurn.content", { max: maxPinsThirdThrow }) }}
-        </h2>
+        </h1>
         <!-- Input Layout -->
         <div class="md-layout md-alignment-center-center">
           <div class="md-layout-item md-size-25">
