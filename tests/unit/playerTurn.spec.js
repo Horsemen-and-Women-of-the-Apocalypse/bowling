@@ -102,13 +102,13 @@ describe('PlayerTurn classic use cases', () => {
     // 2
     await wrapper.find('input[name=pinsFallen2]').setValue(throw2)
     expect(wrapper.find('button[name=secondBtnValidate]').exists()).toBe(true)
-    expect(wrapper.vm.count2).toBe('' + throw2)
+    expect(wrapper.vm.secondThrow).toBe('' + throw2)
     await wrapper.find('button[name=BtnCancel]').trigger('click')
     // 1
     await wrapper.find('input[name=pinsFallen1]').setValue(throw1Bis)
     await wrapper.find('button[name=BtnNext]').trigger('click')
     // 2
-    expect(parseInt(wrapper.vm.count2)).toBe(0) // Check the value reset
+    expect(parseInt(wrapper.vm.secondThrow)).toBe(0) // Check the value reset
     await wrapper.find('input[name=pinsFallen2]').setValue(throw2Bis)
     await wrapper.find('button[name=secondBtnValidate]').trigger('click')
     expect(wrapper.emitted('done')).toStrictEqual([[{
@@ -125,28 +125,28 @@ describe('PlayerTurn classic use cases', () => {
     const wrapper = mountComponent(totalPins)
 
     await wrapper.find('input[name=pinsFallen1]').setValue('TOTO')
-    expect(wrapper.vm.count1).toBe('')
+    expect(wrapper.vm.firstThrow).toBe('')
     wrapper.find('input[name=pinsFallen1]').trigger('blur')
-    expect(wrapper.vm.count1).toBe(NaN)
+    expect(wrapper.vm.firstThrow).toBe(NaN)
     // NaN trigger watch on count next tick
     wrapper.vm.$nextTick(() => {
-      expect(wrapper.vm.count1).toBe(0)
+      expect(wrapper.vm.firstThrow).toBe(0)
     })
     await wrapper.find('button[name=BtnNext]').trigger('click')
 
-    expect(wrapper.vm.count2).toBe(0)
+    expect(wrapper.vm.secondThrow).toBe(0)
     await wrapper.find('button[name=BtnCancel]').trigger('click')
 
     await wrapper.find('input[name=pinsFallen1]').setValue(throw1)
     await wrapper.find('button[name=BtnNext]').trigger('click')
 
     await wrapper.find('input[name=pinsFallen2]').setValue('TOTA')
-    expect(wrapper.vm.count2).toBe('')
+    expect(wrapper.vm.secondThrow).toBe('')
     wrapper.find('input[name=pinsFallen2]').trigger('blur')
-    expect(wrapper.vm.count2).toBe(NaN)
+    expect(wrapper.vm.secondThrow).toBe(NaN)
     // NaN trigger watch on count next tick
     wrapper.vm.$nextTick(() => {
-      expect(wrapper.vm.count2).toBe(0)
+      expect(wrapper.vm.secondThrow).toBe(0)
     })
     await wrapper.find('input[name=pinsFallen2]').setValue(throw2)
     await wrapper.find('button[name=secondBtnValidate]').trigger('click')
@@ -165,17 +165,17 @@ describe('PlayerTurn classic use cases', () => {
     const wrapper = mountComponent(totalPins)
 
     await wrapper.find('input[name=pinsFallen1]').setValue(12)
-    expect(wrapper.vm.count1).toBe('12')
+    expect(wrapper.vm.firstThrow).toBe('12')
     wrapper.find('input[name=pinsFallen1]').trigger('blur')
-    expect(wrapper.vm.count1).toBe(10)
+    expect(wrapper.vm.firstThrow).toBe(10)
     await wrapper.find('input[name=pinsFallen1]').setValue(6)
 
     await wrapper.find('button[name=BtnNext]').trigger('click')
 
     await wrapper.find('input[name=pinsFallen2]').setValue(12)
-    expect(wrapper.vm.count2).toBe('12')
+    expect(wrapper.vm.secondThrow).toBe('12')
     wrapper.find('input[name=pinsFallen2]').trigger('blur')
-    expect(wrapper.vm.count2).toBe(4)
+    expect(wrapper.vm.secondThrow).toBe(4)
 
     await wrapper.find('button[name=secondBtnValidate]').trigger('click')
 
