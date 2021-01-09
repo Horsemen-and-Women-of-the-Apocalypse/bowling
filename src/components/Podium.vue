@@ -1,7 +1,11 @@
 <template>
   <div id="Podium">
     <!-- 3rd player -->
-    <div id="third" class="player" v-if="sortedScores.length > 2">
+    <div
+      id="third"
+      :class="'player ' + thirdPlayerPosition"
+      v-if="sortedScores.length > 2"
+    >
       <span class="name">{{ sortedScores[2].name }}</span>
       <div class="score">
         <span class="value spicyRice"> {{ sortedScores[2].score }} </span>
@@ -9,7 +13,11 @@
       </div>
     </div>
     <!-- 1st player -->
-    <div id="first" class="player" v-if="sortedScores.length > 0">
+    <div
+      id="first"
+      class="player first"
+      v-if="sortedScores.length > 0"
+    >
       <span class="name">{{ sortedScores[0].name }}</span>
       <div class="score">
         <span class="value spicyRice"> {{ sortedScores[0].score }} </span>
@@ -17,7 +25,11 @@
       </div>
     </div>
     <!-- 2nd player -->
-    <div id="second" class="player" v-if="sortedScores.length > 1">
+    <div
+      id="second"
+      :class="'player ' + secondPlayerPosition"
+      v-if="sortedScores.length > 1"
+    >
       <span class="name">{{ sortedScores[1].name }}</span>
       <div class="score">
         <span class="value spicyRice"> {{ sortedScores[1].score }} </span>
@@ -38,6 +50,17 @@ export default {
       const ret = []
       for (var s in this.scores) ret.push({ name: s, score: this.scores[s] })
       return ret.sort((a, b) => a.score < b.score)
+    },
+    secondPlayerPosition () {
+      if (this.sortedScores.length > 1 && this.sortedScores[1].score === this.sortedScores[0].score) { return 'first' }
+      return 'second'
+    },
+    thirdPlayerPosition () {
+      if (this.sortedScores.length > 2 && this.sortedScores[2].score === this.sortedScores[1].score) {
+        if (this.sortedScores[1].score === this.sortedScores[0].score) { return 'first' }
+        return 'second'
+      }
+      return 'third'
     }
   }
 }
@@ -77,41 +100,41 @@ export default {
 }
 
 /* First */
-#first .name {
+.first .name {
   /* 1rst player name overflow exeption */
   color: var(--accent);
   overflow: visible;
-  display:flex;
+  display: flex;
   justify-content: center;
 }
-#first .score {
+.first .score {
   height: 80%;
   background: var(--accent);
 }
-#first .score .value {
+.first .score .value {
   font-size: 2em;
 }
 /* Second */
-#second .name {
+.second .name {
   color: var(--primary);
 }
-#second .score {
+.second .score {
   height: 50%;
   background: var(--primary);
 }
-#second .score .value {
+.second .score .value {
   font-size: 1.5em;
 }
 
 /* Third */
-#third .name {
+.third .name {
   color: var(--secondary);
 }
-#third .score {
+.third .score {
   height: 35%;
   background: var(--secondary);
 }
-#third .score .value {
+.third .score .value {
   font-size: 1.2em;
 }
 </style>
