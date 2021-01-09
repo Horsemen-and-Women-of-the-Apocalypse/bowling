@@ -10,7 +10,7 @@
     </div>
     <!-- 1st player -->
     <div id="first" class="player" v-if="sortedScores.length > 0">
-      <span id="winner" class="name">{{ sortedScores[0].name }}</span>
+      <span class="name">{{ sortedScores[0].name }}</span>
       <div class="score">
         <span class="value spicyRice"> {{ sortedScores[0].score }} </span>
         <span class="points"> {{ $t("podium.points") }} </span>
@@ -56,11 +56,11 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: end;
-  max-width: 33%;
+  width: 33%;
 }
 .name {
   font-size: 2em;
-  padding: 0 5% 3% 5%;
+  padding: 0 5% 10% 5%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
