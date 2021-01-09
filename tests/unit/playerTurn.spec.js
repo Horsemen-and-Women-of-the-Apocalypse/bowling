@@ -128,7 +128,7 @@ describe('PlayerTurn classic use cases', () => {
     expect(wrapper.vm.firstThrow).toBe('')
     wrapper.find('input[name=pinsFallen1]').trigger('blur')
     expect(wrapper.vm.firstThrow).toBe(NaN)
-    // NaN trigger watch on count next tick
+    // NaN trigger watch on throw next tick
     wrapper.vm.$nextTick(() => {
       expect(wrapper.vm.firstThrow).toBe(0)
     })
@@ -144,7 +144,7 @@ describe('PlayerTurn classic use cases', () => {
     expect(wrapper.vm.secondThrow).toBe('')
     wrapper.find('input[name=pinsFallen2]').trigger('blur')
     expect(wrapper.vm.secondThrow).toBe(NaN)
-    // NaN trigger watch on count next tick
+    // NaN trigger watch on throw next tick
     wrapper.vm.$nextTick(() => {
       expect(wrapper.vm.secondThrow).toBe(0)
     })

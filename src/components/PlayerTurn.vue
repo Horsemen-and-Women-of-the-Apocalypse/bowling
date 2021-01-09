@@ -25,7 +25,7 @@
             </div>
             <div class="md-layout-item md-size-50">
               <md-field md-inline>
-                <md-input v-model="firstThrow" type="number" name="pinsFallen1" @blur="updateFirstCount($event)"/>
+                <md-input v-model="firstThrow" type="number" name="pinsFallen1" @blur="updateFirstThrow($event)"/>
               </md-field>
             </div>
             <div class="md-layout-item md-size-25">
@@ -47,7 +47,7 @@
           <md-button
           name="firstBtnValidate"
           class="md-raised md-primary "
-          @click="Reliez_moi_svp()"
+          @click="terminate()"
           v-else>
             {{ $t("playerTurn.validate") }}
           </md-button>
@@ -72,7 +72,7 @@
             </div>
             <div class="md-layout-item md-size-50">
               <md-field md-inline>
-                <md-input v-model="secondThrow" type="number" name="pinsFallen2" @blur="updateSecondCount($event)"/>
+                <md-input v-model="secondThrow" type="number" name="pinsFallen2" @blur="updateSecondThrow($event)"/>
               </md-field>
             </div>
             <div class="md-layout-item md-size-25">
@@ -96,7 +96,7 @@
             <md-button
             name="secondBtnValidate"
             class="md-raised md-primary"
-            @click="Reliez_moi_svp ()">
+            @click="terminate()">
               {{ $t("playerTurn.validate") }}
             </md-button>
           </div>
@@ -140,14 +140,14 @@ export default {
     }
   },
   methods: {
-    updateFirstCount: function (e) { // Update pins firstThrow if value >= 0
+    updateFirstThrow: function (e) { // Update pins firstThrow if value >= 0
       const value = parseInt(e.target.value)
       this.firstThrow = value
       if (this.firstThrow < 0 || this.firstThrow > this.totalPins) {
         this.firstThrow = this.totalPins
       }
     },
-    updateSecondCount: function (e) { // Update pins secondThrow if value >= 0
+    updateSecondThrow: function (e) { // Update pins secondThrow if value >= 0
       const value = parseInt(e.target.value)
       this.secondThrow = value
       if (this.secondThrow < 0 || this.secondThrow > this.maxPinsSecondThrow) {
