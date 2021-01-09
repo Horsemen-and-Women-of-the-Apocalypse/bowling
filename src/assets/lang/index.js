@@ -6,7 +6,6 @@ import playerListCreator from './playerListCreator'
 import playerTurn from './playerTurn'
 import playerAnouncement from './playeranouncement'
 import scoreBoard from './scoreBoard'
-import playerTurn from './playerTurn'
 
 import merge from 'deepmerge'
 
@@ -18,6 +17,5 @@ export default merge.all([
   gameprepheader,
   playerTurn,
   scoreBoard,
-  playerAnouncement,
-  playerTurn
+  playerAnouncement
 ])

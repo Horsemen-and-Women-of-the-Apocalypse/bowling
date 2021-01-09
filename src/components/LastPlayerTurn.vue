@@ -4,12 +4,14 @@
       <!-- First Throw -->
       <md-step
         id="first"
-        :md-label="$t('lastPlayerTurn.first')"
+        :md-label="$t('playerTurn.first')"
         :md-done.sync="first"
         :md-editable="false"
       >
         <!-- Title -->
-        <h2 class="inputTitle">{{ $t("lastPlayerTurn.inputTitle") }}</h2>
+        <h2 class="inputTitle">
+          {{ $t("playerTurn.content", { max: totalPins }) }}
+        </h2>
         <!-- Input Layout -->
         <div class="md-layout md-alignment-center-center">
           <div class="md-layout-item md-size-25">
@@ -49,20 +51,21 @@
           @click="validateFirst"
           :disabled="count1 < 0 || count1 > totalPins"
         >
-          {{ $t("lastPlayerTurn.continue") }}
+          {{ $t("playerTurn.continue") }}
         </md-button>
       </md-step>
 
       <!-- Second Throw -->
       <md-step
         id="second"
-        :md-label="$t('lastPlayerTurn.second')"
+        :md-label="$t('playerTurn.second')"
         :md-done.sync="second"
         :md-editable="false"
       >
         <!-- Title -->
-        <h2 class="inputTitle">{{ $t("lastPlayerTurn.inputTitle") }}</h2>
-
+        <h2 class="inputTitle">
+          {{ $t("playerTurn.content", { max: maxPinsSecondThrow }) }}
+        </h2>
         <!-- Input Layout -->
         <div class="md-layout md-alignment-center-center">
           <div class="md-layout-item md-size-25">
@@ -104,7 +107,7 @@
             class="md-raised md-primary"
             @click="backSecond()"
           >
-            {{ $t("lastPlayerTurn.reset") }}
+            {{ $t("playerTurn.reset") }}
           </md-button>
 
           <!-- Valid Input -->
@@ -117,7 +120,7 @@
             @click="validateSecond()"
             :disabled="count2 < 0 || count2 > maxPinsSecondThrow"
           >
-            {{ $t("lastPlayerTurn.continue") }}
+            {{ $t("playerTurn.continue") }}
           </md-button>
           <md-button
             v-else
@@ -126,7 +129,7 @@
             @click="terminate()"
             :disabled="count2 < 0 || count2 > maxPinsSecondThrow"
           >
-            {{ $t("lastPlayerTurn.validate") }}
+            {{ $t("playerTurn.validate") }}
           </md-button>
         </div>
       </md-step>
@@ -134,13 +137,14 @@
       <!-- Third Throw -->
       <md-step
         id="third"
-        :md-label="$t('lastPlayerTurn.third')"
+        :md-label="$t('playerTurn.third')"
         :md-done.sync="third"
         :md-editable="false"
       >
         <!-- Title -->
-        <h2 class="inputTitle">{{ $t("lastPlayerTurn.inputTitle") }}</h2>
-
+        <h2 class="inputTitle">
+          {{ $t("playerTurn.content", { max: maxPinsThirdThrow }) }}
+        </h2>
         <!-- Input Layout -->
         <div class="md-layout md-alignment-center-center">
           <div class="md-layout-item md-size-25">
@@ -182,7 +186,7 @@
             class="md-raised md-primary"
             @click="backThird()"
           >
-            {{ $t("lastPlayerTurn.reset") }}
+            {{ $t("playerTurn.reset") }}
           </md-button>
 
           <!-- Valid Input -->
@@ -192,7 +196,7 @@
             @click="terminate()"
             :disabled="count3 < 0 || count3 > maxPinsThirdThrow"
           >
-            {{ $t("lastPlayerTurn.validate") }}
+            {{ $t("playerTurn.validate") }}
           </md-button>
         </div>
       </md-step>
