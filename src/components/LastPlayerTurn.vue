@@ -28,8 +28,6 @@
               <md-input
                 v-model="count1"
                 name="pinsFallen1"
-                :min="0"
-                :max="totalPins"
               />
             </md-field>
           </div>
@@ -83,8 +81,6 @@
                 v-model="count2"
                 type="number"
                 name="pinsFallen2"
-                :min="0"
-                :max="maxPinsSecondThrow"
               />
             </md-field>
           </div>
@@ -162,8 +158,6 @@
                 v-model="count3"
                 type="number"
                 name="pinsFallen3"
-                :min="0"
-                :max="maxPinsThirdThrow"
               />
             </md-field>
           </div>
@@ -318,9 +312,9 @@ export default {
         Number.isInteger(parseInt(this.count3))
       ) {
         this.$emit('done', {
-          throw1: parseInt(this.count1),
-          throw2: parseInt(this.count2),
-          throw3: parseInt(this.count3)
+          firstThrow: parseInt(this.count1),
+          secondThrow: parseInt(this.count2),
+          thirdThrow: parseInt(this.count3)
         })
       }
     }
@@ -335,10 +329,6 @@ export default {
 .md-steppers {
   height: 100%;
   background-color: var(--darker) !important;
-}
-h1,
-h2 {
-  color: var(--primary);
 }
 
 input::-webkit-outer-spin-button,
