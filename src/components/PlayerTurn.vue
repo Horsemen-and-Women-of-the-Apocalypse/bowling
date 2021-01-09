@@ -25,7 +25,7 @@
             </div>
             <div class="md-layout-item md-size-50">
               <md-field md-inline>
-                <md-input v-model="count1" type="number" name="pinsFallen1" @blur="updateFirstCount($event)"/>
+                <md-input v-model="firstThrow" type="number" name="pinsFallen1" @blur="updateFirstCount($event)"/>
               </md-field>
             </div>
             <div class="md-layout-item md-size-25">
@@ -40,7 +40,7 @@
           name="BtnNext"
           class="md-raised md-primary"
           @click="setDone('first', 'second')"
-          v-if="count1 != this.totalPins">
+          v-if="firstThrow != this.totalPins">
             {{ $t("playerTurn.continue") }}
           </md-button>
           <!-- Valid Input -->
@@ -72,7 +72,7 @@
             </div>
             <div class="md-layout-item md-size-50">
               <md-field md-inline>
-                <md-input v-model="count2" type="number" name="pinsFallen2" @blur="updateSecondCount($event)"/>
+                <md-input v-model="secondThrow" type="number" name="pinsFallen2" @blur="updateSecondCount($event)"/>
               </md-field>
             </div>
             <div class="md-layout-item md-size-25">
@@ -113,9 +113,8 @@
 export default {
   name: 'PlayerTurn',
   data: () => ({
-    count1: 0,
-    count2: 0,
-    count3: 0,
+    firstThrow: 0,
+    secondThrow: 0,
     active: 'first',
     first: false,
     second: false
@@ -125,54 +124,54 @@ export default {
   },
   computed: {
     maxPinsSecondThrow () {
-      return this.totalPins - this.count1
+      return this.totalPins - this.firstThrow
     }
   },
   watch: {
-    count1 () {
-      if (isNaN(this.count1)) {
-        this.count1 = 0
+    firstThrow () {
+      if (isNaN(this.firstThrow)) {
+        this.firstThrow = 0
       }
     },
-    count2 () {
-      if (isNaN(this.count2)) {
-        this.count2 = 0
+    secondThrow () {
+      if (isNaN(this.secondThrow)) {
+        this.secondThrow = 0
       }
     }
   },
   methods: {
-    updateFirstCount: function (e) { // Update pins count1 if value >= 0
+    updateFirstCount: function (e) { // Update pins firstThrow if value >= 0
       const value = parseInt(e.target.value)
-      this.count1 = value
-      if (this.count1 < 0 || this.count1 > this.totalPins) {
-        this.count1 = this.totalPins
+      this.firstThrow = value
+      if (this.firstThrow < 0 || this.firstThrow > this.totalPins) {
+        this.firstThrow = this.totalPins
       }
     },
-    updateSecondCount: function (e) { // Update pins count2 if value >= 0
+    updateSecondCount: function (e) { // Update pins secondThrow if value >= 0
       const value = parseInt(e.target.value)
-      this.count2 = value
-      if (this.count2 < 0 || this.count2 > this.maxPinsSecondThrow) {
-        this.count2 = this.maxPinsSecondThrow
+      this.secondThrow = value
+      if (this.secondThrow < 0 || this.secondThrow > this.maxPinsSecondThrow) {
+        this.secondThrow = this.maxPinsSecondThrow
       }
     },
     addFirstThrow: function (e) { // Add 1 to number of pins fallen on the first throw
-      if (this.count1 < this.totalPins) {
-        this.count1++
+      if (this.firstThrow < this.totalPins) {
+        this.firstThrow++
       }
     },
     subFirstThrow: function (e) { // Remove 1 to number of pins fallen on the first throw
-      if (this.count1 > 0) {
-        this.count1--
+      if (this.firstThrow > 0) {
+        this.firstThrow--
       }
     },
     addSecondThrow: function (e) { // Add 1 to number of pins fallen on the second throw
-      if (this.count2 < this.maxPinsSecondThrow) {
-        this.count2++
+      if (this.secondThrow < this.maxPinsSecondThrow) {
+        this.secondThrow++
       }
     },
     subSecondThrow: function (e) { // Remove 1 to number of pins fallen on the second throw
-      if (this.count2 > 0) {
-        this.count2--
+      if (this.secondThrow > 0) {
+        this.secondThrow--
       }
     },
     setDone (id, index) {
@@ -182,11 +181,10 @@ export default {
     resetComponent () {
       this.active = 'first'
       this.second = false
-      this.count2 = 0
+      this.secondThrow = 0
     },
-    // TODO
-    Reliez_moi_svp () {
-      this.$emit('done', { throw1: parseInt(this.count1), throw2: parseInt(this.count2) })
+    terminate () {
+      this.$emit('done', { throw1: parseInt(this.firstThrow), throw2: parseInt(this.secondThrow) })
     }
   }
 }
