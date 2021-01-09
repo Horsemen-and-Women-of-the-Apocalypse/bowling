@@ -26,7 +26,8 @@
           <div class="md-layout-item md-size-50">
             <md-field md-inline>
               <md-input
-                v-model="count1"
+                type="number"
+                v-model="throw1"
                 name="pinsFallen1"
               />
             </md-field>
@@ -47,7 +48,7 @@
           name="firstBtnValidate"
           class="md-raised md-primary"
           @click="validateFirst"
-          :disabled="count1 < 0 || count1 > totalPins"
+          :disabled="throw1 < 0 || throw1 > totalPins"
         >
           {{ $t("playerTurn.continue") }}
         </md-button>
@@ -78,7 +79,7 @@
           <div class="md-layout-item md-size-50">
             <md-field md-inline>
               <md-input
-                v-model="count2"
+                v-model="throw2"
                 type="number"
                 name="pinsFallen2"
               />
@@ -114,7 +115,7 @@
             name="secondBtnValidate"
             class="md-raised md-primary"
             @click="validateSecond()"
-            :disabled="count2 < 0 || count2 > maxPinsSecondThrow"
+            :disabled="throw2 < 0 || throw2 > maxPinsSecondThrow"
           >
             {{ $t("playerTurn.continue") }}
           </md-button>
@@ -123,7 +124,7 @@
             name="secondBtnValidate"
             class="md-raised md-accent"
             @click="terminate()"
-            :disabled="count2 < 0 || count2 > maxPinsSecondThrow"
+            :disabled="throw2 < 0 || throw2 > maxPinsSecondThrow"
           >
             {{ $t("playerTurn.validate") }}
           </md-button>
@@ -155,7 +156,7 @@
           <div class="md-layout-item md-size-50">
             <md-field md-inline>
               <md-input
-                v-model="count3"
+                v-model="throw3"
                 type="number"
                 name="pinsFallen3"
               />
@@ -188,7 +189,7 @@
             name="thirdBtnValidate"
             class="md-raised md-accent"
             @click="terminate()"
-            :disabled="count3 < 0 || count3 > maxPinsThirdThrow"
+            :disabled="throw3 < 0 || throw3 > maxPinsThirdThrow"
           >
             {{ $t("playerTurn.validate") }}
           </md-button>
@@ -202,9 +203,9 @@
 export default {
   name: 'LastPlayerTurn',
   data: () => ({
-    count1: 0,
-    count2: 0,
-    count3: 0,
+    throw1: 0,
+    throw2: 0,
+    throw3: 0,
 
     // Steppers
     active: 'first',
@@ -218,23 +219,23 @@ export default {
   created () {},
   computed: {
     isFirstThrowStrike () {
-      return parseInt(this.count1) === this.totalPins
+      return parseInt(this.throw1) === this.totalPins
     },
     isSecondThrowStrike () {
-      return parseInt(this.count2) === this.totalPins
+      return parseInt(this.throw2) === this.totalPins
     },
     isSecondThrowSpare () {
-      return parseInt(this.count1) + parseInt(this.count2) === this.totalPins
+      return parseInt(this.throw1) + parseInt(this.throw2) === this.totalPins
     },
     maxPinsSecondThrow () {
       if (this.isFirstThrowStrike) return this.totalPins
-      else return this.totalPins - parseInt(this.count1)
+      else return this.totalPins - parseInt(this.throw1)
     },
     maxPinsThirdThrow () {
       if (this.isSecondThrowStrike || this.isSecondThrowSpare) {
         return this.totalPins
       } else if (this.isFirstThrowStrike) {
-        return this.totalPins - parseInt(this.count2)
+        return this.totalPins - parseInt(this.throw2)
       }
       return 0
     }
@@ -243,18 +244,18 @@ export default {
     // First throw
     addFirstThrow () {
       // Add 1 to number of pins fallen on the first throw
-      if (this.count1 < this.totalPins) {
-        this.count1++
+      if (this.throw1 < this.totalPins) {
+        this.throw1++
       }
     },
     subFirstThrow () {
       // Remove 1 to number of pins fallen on the first throw
-      if (this.count1 > 0) {
-        this.count1--
+      if (this.throw1 > 0) {
+        this.throw1--
       }
     },
     validateFirst () {
-      if (Number.isInteger(parseInt(this.count1))) {
+      if (Number.isInteger(parseInt(this.throw1))) {
         this.active = 'second'
         this.first = true
       }
@@ -263,14 +264,14 @@ export default {
     // Second throw
     addSecondThrow () {
       // Add 1 to number of pins fallen on the second throw
-      if (this.count2 < this.maxPinsSecondThrow) {
-        this.count2++
+      if (this.throw2 < this.maxPinsSecondThrow) {
+        this.throw2++
       }
     },
     subSecondThrow () {
       // Remove 1 to number of pins fallen on the second throw
-      if (this.count2 > 0) {
-        this.count2--
+      if (this.throw2 > 0) {
+        this.throw2--
       }
     },
     validateSecond () {
@@ -281,40 +282,40 @@ export default {
       this.active = 'first'
       this.second = false
 
-      this.count2 = 0
+      this.throw2 = 0
     },
 
     // third throw
     addThirdThrow () {
       // Add 1 to number of pins fallen on the Third throw
-      if (this.count3 < this.maxPinsThirdThrow) {
-        this.count3++
+      if (this.throw3 < this.maxPinsThirdThrow) {
+        this.throw3++
       }
     },
     subThirdThrow () {
       // Remove 1 to number of pins fallen on the Third throw
-      if (this.count3 > 0) {
-        this.count3--
+      if (this.throw3 > 0) {
+        this.throw3--
       }
     },
     backThird () {
       this.active = 'second'
       this.third = false
 
-      this.count3 = 0
+      this.throw3 = 0
     },
 
     // terminate
     terminate () {
       if (
-        Number.isInteger(parseInt(this.count1)) &&
-        Number.isInteger(parseInt(this.count2)) &&
-        Number.isInteger(parseInt(this.count3))
+        Number.isInteger(parseInt(this.throw1)) &&
+        Number.isInteger(parseInt(this.throw2)) &&
+        Number.isInteger(parseInt(this.throw3))
       ) {
         this.$emit('done', {
-          firstThrow: parseInt(this.count1),
-          secondThrow: parseInt(this.count2),
-          thirdThrow: parseInt(this.count3)
+          throw1: parseInt(this.throw1),
+          throw2: parseInt(this.throw2),
+          throw3: parseInt(this.throw3)
         })
       }
     }

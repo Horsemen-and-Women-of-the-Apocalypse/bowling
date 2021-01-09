@@ -40,9 +40,9 @@ describe('LastPlayerTurn classic use cases', () => {
     expect(wrapper.emitted('done')).toBe(undefined)
     await wrapper.find('button[name=secondBtnValidate]').trigger('click')
     expect(wrapper.emitted('done')).toStrictEqual([[{
-      firstThrow: throw1,
-      secondThrow: throw2,
-      thirdThrow: 0
+      throw1: throw1,
+      throw2: throw2,
+      throw3: 0
     }]])
   })
 
@@ -65,9 +65,9 @@ describe('LastPlayerTurn classic use cases', () => {
     await wrapper.find('input[name=pinsFallen3]').setValue(throw3)
     await wrapper.find('button[name=thirdBtnValidate]').trigger('click')
     expect(wrapper.emitted('done')).toStrictEqual([[{
-      firstThrow: throw1,
-      secondThrow: throw2,
-      thirdThrow: throw3
+      throw1: throw1,
+      throw2: throw2,
+      throw3: throw3
     }]])
   })
 
@@ -90,9 +90,9 @@ describe('LastPlayerTurn classic use cases', () => {
     await wrapper.find('input[name=pinsFallen3]').setValue(throw3)
     await wrapper.find('button[name=thirdBtnValidate]').trigger('click')
     expect(wrapper.emitted('done')).toStrictEqual([[{
-      firstThrow: throw1,
-      secondThrow: throw2,
-      thirdThrow: throw3
+      throw1: throw1,
+      throw2: throw2,
+      throw3: throw3
     }]])
   })
 
@@ -130,9 +130,9 @@ describe('LastPlayerTurn classic use cases', () => {
     await wrapper.find('#addThirdThrow').trigger('click')
     await wrapper.find('button[name=thirdBtnValidate]').trigger('click')
     expect(wrapper.emitted('done')).toStrictEqual([[{
-      firstThrow: throw1,
-      secondThrow: throw2,
-      thirdThrow: throw3
+      throw1: throw1,
+      throw2: throw2,
+      throw3: throw3
     }]])
   })
   test('Normal back Normal Normal Back Spare normal back Strike', async () => {
@@ -152,31 +152,31 @@ describe('LastPlayerTurn classic use cases', () => {
     // 2
     await wrapper.find('input[name=pinsFallen2]').setValue(throw2)
     expect(wrapper.find('button[name=secondBtnValidate].md-accent').exists()).toBe(true)
-    expect(wrapper.vm.count2).toBe('' + throw2)
+    expect(wrapper.vm.throw2).toBe('' + throw2)
     await wrapper.find('button[name=secondBtnBack]').trigger('click')
     // 1
     await wrapper.find('input[name=pinsFallen1]').setValue(throw1Bis)
     await wrapper.find('button[name=firstBtnValidate]').trigger('click')
     // 2
-    expect(parseInt(wrapper.vm.count2)).toBe(0) // Check the value reset
+    expect(parseInt(wrapper.vm.throw2)).toBe(0) // Check the value reset
     await wrapper.find('input[name=pinsFallen2]').setValue(throw2Bis)
     expect(wrapper.find('button[name=secondBtnValidate].md-accent').exists()).toBe(false)
     await wrapper.find('button[name=secondBtnValidate]').trigger('click')
     // 3
     await wrapper.find('input[name=pinsFallen3]').setValue(throw3)
-    expect(wrapper.vm.count3).toBe('' + throw3)
+    expect(wrapper.vm.throw3).toBe('' + throw3)
     await wrapper.find('button[name=thirdBtnBack]').trigger('click')
     // 2
-    expect(wrapper.vm.count2).toBe('' + throw2Bis)
+    expect(wrapper.vm.throw2).toBe('' + throw2Bis)
     await wrapper.find('button[name=secondBtnValidate]').trigger('click')
     // 3
-    expect(parseInt(wrapper.vm.count3)).toBe(0) // Check the value reset
+    expect(parseInt(wrapper.vm.throw3)).toBe(0) // Check the value reset
     await wrapper.find('input[name=pinsFallen3]').setValue(throw3Bis)
     await wrapper.find('button[name=thirdBtnValidate]').trigger('click')
     expect(wrapper.emitted('done')).toStrictEqual([[{
-      firstThrow: throw1Bis,
-      secondThrow: throw2Bis,
-      thirdThrow: throw3Bis
+      throw1: throw1Bis,
+      throw2: throw2Bis,
+      throw3: throw3Bis
     }]])
   })
   test('Text input check', async () => {
@@ -204,9 +204,9 @@ describe('LastPlayerTurn classic use cases', () => {
     await wrapper.find('input[name=pinsFallen3]').setValue(throw3)
     await wrapper.find('button[name=thirdBtnValidate]').trigger('click')
     expect(wrapper.emitted('done')).toStrictEqual([[{
-      firstThrow: throw1,
-      secondThrow: throw2,
-      thirdThrow: throw3
+      throw1: throw1,
+      throw2: throw2,
+      throw3: throw3
     }]])
   })
 })
