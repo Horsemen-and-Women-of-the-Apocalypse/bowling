@@ -3,6 +3,7 @@
     "playerTurn": {
       "first": "1st throw",
       "second": "2nd throw",
+      "third": "3rd throw",
       "content": "Number of fallen pins (out of {max}):",
       "continue": "Next",
       "validate": "Finish",
@@ -13,6 +14,7 @@
     "playerTurn": {
       "first": "1er lancer",
       "second": "2ème lancer",
+      "third": "3ème lancer",
       "content": "Nombre de quilles tombées (sur {max}) :",
       "continue": "Suivant",
       "validate": "Terminer",

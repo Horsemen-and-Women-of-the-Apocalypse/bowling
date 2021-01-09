@@ -46,7 +46,7 @@
           <!-- Valid Input -->
           <md-button
           name="firstBtnValidate"
-          class="md-raised md-primary "
+          class="md-raised md-accent"
           @click="terminate()"
           v-else>
             {{ $t("playerTurn.validate") }}
@@ -95,7 +95,7 @@
             <!-- Valid Input -->
             <md-button
             name="secondBtnValidate"
-            class="md-raised md-primary"
+            class="md-raised md-accent"
             @click="terminate()">
               {{ $t("playerTurn.validate") }}
             </md-button>
