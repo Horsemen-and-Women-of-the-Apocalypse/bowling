@@ -3,7 +3,8 @@ import turn from './turn'
 import pins from './pins'
 import gameprepheader from './gameprepheader'
 import playerListCreator from './playerListCreator'
-import playerAnouncement from './playeranouncement.json'
+import playerTurn from './playerTurn'
+import playerAnouncement from './playeranouncement'
 import scoreBoard from './scoreBoard'
 import playerTurn from './playerTurn'
 
@@ -15,6 +16,7 @@ export default merge.all([
   pins,
   playerListCreator,
   gameprepheader,
+  playerTurn,
   scoreBoard,
   playerAnouncement,
   playerTurn
