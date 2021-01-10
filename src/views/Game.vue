@@ -5,9 +5,9 @@
     </div>
     <div v-else>
         <div id="nav">
-         <Header :firstLine="$t('game.turn')" :secondLine="automaton.getCurrentPlayer().getName()"/>
+         <Header :firstLine="$t('game.turn')" :secondLine="this.automaton.getCurrentPlayer().getName()"/>
         </div>
-        <LastPlayerTurn v-if="lastTurn" :totalPins="automaton.getGameParam().getPins()" @done="nextTurn"/>
+        <LastPlayerTurn v-if="this.automaton.isLastTurn()" :totalPins="this.automaton.getGameParam().getPins()" @done="nextTurn"/>
         <PlayerTurn v-else :totalPins="automaton.getGameParam().getPins()" @done="nextTurn"/>
         <md-button class="md-fab md-fab-bottom-left md-plain md-primary" @click="goToScoreboard">
             <md-tooltip md-direction="top">{{ $t('scoreBoard.scoreboard') }}</md-tooltip>
@@ -42,13 +42,11 @@ export default {
   data: () => ({
     animation: true,
     automaton: null,
-    gameScore: null,
-    lastTurn: false
+    gameScore: null
   }),
   created () {
     this.automaton = this.$route.params.automaton
     this.gameScore = this.$route.params.score
-    if (this.automaton.getGameParam().getTurn() === this.automaton.getCurrentTurn() + 1) { this.lastTurn = true }
     this.showAnimation()
   },
   methods: {
@@ -56,8 +54,7 @@ export default {
       this.animation = true
       this.gameScore.registerThrow(this.automaton.getCurrentPlayer().getName(), this.automaton.getCurrentTurn() + 1, 1, throws.throw1)
       this.gameScore.registerThrow(this.automaton.getCurrentPlayer().getName(), this.automaton.getCurrentTurn() + 1, 2, throws.throw2)
-      if (this.lastTurn) { this.gameScore.registerThrow(this.automaton.getCurrentPlayer().getName(), this.automaton.getCurrentTurn() + 1, 3, throws.throw3) }
-      if (this.automaton.getGameParam().getTurn() === this.automaton.getCurrentTurn() + 1) { this.lastTurn = true }
+      if (this.automaton.isLastTurn()) { this.gameScore.registerThrow(this.automaton.getCurrentPlayer().getName(), this.automaton.getCurrentTurn() + 1, 3, throws.throw3) }
       if (this.automaton.isEnd()) {
         // TODO
       } else {
