@@ -398,5 +398,18 @@ describe('gameparam', () => {
         expect(a.isEnd()).toBe(true)
       })
     })
+    describe('getParam', () => {
+      test('Assert contents', () => {
+        var p = new Player('Nom')
+
+        var players = [p]
+
+        var g = new GameParam(players, 1, 5)
+
+        var a = new Automaton(g)
+
+        expect(a.isLastTurn()).toBe(true)
+      })
+    })
   })
 })

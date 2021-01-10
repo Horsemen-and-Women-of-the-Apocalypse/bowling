@@ -47,32 +47,32 @@ describe('ScoreBoard component', () => {
     // Check comp initialisation
     expect(wrapper.vm.score).not.toBe(undefined)
     playerNames.forEach(pn => {
-      expect(wrapper.vm.score.getPlayerScore(pn)).not.toBe(undefined)
-      expect(wrapper.vm.score.getPlayerScore(pn).length).toBe(nbTurn)
+      expect(wrapper.vm.score.getThrows(pn)).not.toBe(undefined)
+      expect(wrapper.vm.score.getThrows(pn).length).toBe(nbTurn)
 
       for (let i = 0; i < nbTurn; i++) {
         // Assert none
-        expect(wrapper.vm.score.getScore(pn, i).score).toBe(null)
-        expect(wrapper.vm.score.getScore(pn, i).throws.length).toBe(3)
-        expect(wrapper.vm.score.getScore(pn, i).throws[0]).toBe(null)
-        expect(wrapper.vm.score.getScore(pn, i).throws[1]).toBe(null)
-        expect(wrapper.vm.score.getScore(pn, i).throws[2]).toBe(null)
+        expect(wrapper.vm.score.getThrow(pn, i).score).toBe(null)
+        expect(wrapper.vm.score.getThrow(pn, i).throws.length).toBe(3)
+        expect(wrapper.vm.score.getThrow(pn, i).throws[0]).toBe(null)
+        expect(wrapper.vm.score.getThrow(pn, i).throws[1]).toBe(null)
+        expect(wrapper.vm.score.getThrow(pn, i).throws[2]).toBe(null)
 
         // First throw
         const pinsFallen1 = Math.floor(Math.random() * nbPins)
         wrapper.vm.score.registerThrow(pn, i + 1, 1, pinsFallen1)
-        expect(wrapper.vm.score.getScore(pn, i).throws[0]).toBe(pinsFallen1)
+        expect(wrapper.vm.score.getThrow(pn, i).throws[0]).toBe(pinsFallen1)
 
         // Second throw
         const pinsFallen2 = Math.floor(Math.random() * nbPins)
         wrapper.vm.score.registerThrow(pn, i + 1, 2, pinsFallen2)
-        expect(wrapper.vm.score.getScore(pn, i).throws[1]).toBe(pinsFallen2)
+        expect(wrapper.vm.score.getThrow(pn, i).throws[1]).toBe(pinsFallen2)
 
         // Third throw
         if (i === nbTurn - 1) {
           const pinsFallen3 = Math.floor(Math.random() * nbPins)
           wrapper.vm.score.registerThrow(pn, i + 1, 3, pinsFallen3)
-          expect(wrapper.vm.score.getScore(pn, i).throws[2]).toBe(pinsFallen3)
+          expect(wrapper.vm.score.getThrow(pn, i).throws[2]).toBe(pinsFallen3)
         }
       }
     })
@@ -158,7 +158,7 @@ describe('ScoreBoard component', () => {
         // Invalid throw (3, but not last turn)
         if (i !== nbTurn - 1) expect(() => wrapper.vm.score.registerThrow(pn, i + 1, 3, pinsFallen1)).toThrow('Invalid throw number')
 
-        expect(wrapper.vm.score.getScore(pn, i).throws[0]).toBe(null)
+        expect(wrapper.vm.score.getThrow(pn, i).throws[0]).toBe(null)
       }
     })
   })

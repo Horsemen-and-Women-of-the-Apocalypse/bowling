@@ -40,7 +40,7 @@
             :key="turn"
             :game="score.getGameParam()"
             :last="j === score.getTurn() - 1"
-            :score="score.getScore(player.getName(),j)"
+            :score="score.getThrow(player.getName(),j)"
             :turn="i"
             :class="'score ' + (j === currentTurn - 1 ? 'current' : '')"
           />

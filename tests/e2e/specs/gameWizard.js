@@ -3,7 +3,64 @@
 module.exports = {
   beforeEach: (browser) => browser.init(),
   afterEach: (browser) => browser.end(),
-  'Wizard is present': browser => {
-    // TODO const game = browser.url('http://localhost:8000/game')
+  'Whole page': browser => {
+    app = firstPage(browser, 10, 4, ["Help", "Me"])
+    app.assert.visible('#PlayerAnouncement')
+    app.waitForElementVisible('.game')
+    app.assert.visible('#playerTurn')
+
   }
+}
+
+function firstPage(browser, cnbTurn, cnbPins, cnbPlayers) {
+  const homepage = browser.page.homepage()
+  homepage.waitForElementVisible('@appContainer')
+  const app = homepage.section.app
+
+  const nbTurn = cnbTurn
+  const nbPins = cnbPins
+  const players = cnbPlayers
+
+  // Add turns
+  app.assert.visible('input[name=turnCount]')
+  app.assert.visible('button[name=firstBtnValidate]')
+
+  app.clearValue('input[name=turnCount]')
+  app.assert.value('input[name=turnCount]', '10')
+  for (let i = 11; i <= nbTurn; i++) {
+    app.click('.turn #add')
+    app.assert.value('input[name=turnCount]', '' + i)
+  }
+  app.click('button[name=firstBtnValidate]')
+
+  // Add pins
+  app.assert.visible('input[name=pinsCount]')
+  app.assert.visible('button[name=secondBtnValidate]')
+  app.clearValue('input[name=pinsCount]')
+  app.assert.value('input[name=pinsCount]', '10')
+  for (let i = 11; i <= nbPins; i++) {
+    app.click('.pins #add')
+    app.assert.value('input[name=pinsCount]', '' + i)
+  }
+  app.click('button[name=secondBtnValidate]')
+
+  // Add players
+  app.assert.visible('input[name=newPlayerName]')
+  app.assert.visible('button[name=thirdBtnValidate]')
+  app.assert.attributeEquals('button[name=thirdBtnValidate]', 'disabled', 'true')
+
+  players.forEach((playerName, i) => {
+    app.setValue('input[name=newPlayerName]', playerName)
+    app.click('#PlayerListCreator #addPlayerBtn')
+    app.assert.elementPresent('#PlayerListCreator #player_' + (i + 1))
+  })
+
+  app.getAttribute('button[name=thirdBtnValidate]', 'disabled', result => { app.assert.equal(result.value, null) })
+  players.forEach((playerName, i) => {
+    app.assert.containsText('#PlayerListCreator #player_' + (i + 1) + ' .name', (i + 1) + ' : ' + playerName)
+  })
+
+  app.click('button[name=thirdBtnValidate]')
+
+  return app
 }
