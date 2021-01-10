@@ -14,7 +14,7 @@
 </style>
 
 <script>
-import Scoreboard from '../components/scoreboard/ScoreBoard'
+import Scoreboard from '../components/ScoreBoard/ScoreBoard'
 
 export default {
   name: 'ScoreboardView',
