@@ -54,9 +54,9 @@ export default {
   methods: {
     nextTurn (throws) {
       this.animation = true
-      // this.gameScore.registerThrow(this.automaton.getCurrentPlayer().getName(), this.automaton.getCurrentTurn() + 1, 1, throws.throw1) // A décommenter pour la tâche Fill score board
-      // this.gameScore.registerThrow(this.automaton.getCurrentPlayer().getName(), this.automaton.getCurrentTurn() + 1, 2, throws.throw2) // A décommenter pour la tâche Fill score board
-      // Ajouter calcul totaux pour les coreboard pour la tâche Fill score board
+      this.gameScore.registerThrow(this.automaton.getCurrentPlayer().getName(), this.automaton.getCurrentTurn() + 1, 1, throws.throw1)
+      this.gameScore.registerThrow(this.automaton.getCurrentPlayer().getName(), this.automaton.getCurrentTurn() + 1, 2, throws.throw2)
+      if (this.lastTurn) { this.gameScore.registerThrow(this.automaton.getCurrentPlayer().getName(), this.automaton.getCurrentTurn() + 1, 3, throws.throw3) }
       if (this.automaton.getGameParam().getTurn() === this.automaton.getCurrentTurn() + 1) { this.lastTurn = true }
       if (this.automaton.isEnd()) {
         // TODO

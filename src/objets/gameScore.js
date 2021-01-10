@@ -4,7 +4,7 @@ import GameParam from './gameparam'
  * Class to store game score
  */
 export default class GameScore {
-    #playerScores = []
+    #playerThrows = []
     #gameParam = null
 
     /**
@@ -23,7 +23,7 @@ export default class GameScore {
             }
             turns.push(score)
           }
-          this.#playerScores[p.getName()] = turns
+          this.#playerThrows[p.getName()] = turns
         })
       } else {
         throw new Error('bad type argument')
@@ -60,7 +60,7 @@ export default class GameScore {
       }
 
       // Register throw
-      this.#playerScores[playerName][turnNumber - 1].throws[
+      this.#playerThrows[playerName][turnNumber - 1].throws[
         throwNumber - 1
       ] = pinsNumber
 
@@ -74,37 +74,42 @@ export default class GameScore {
     }
 
     /**
-     *
+     * Return turn
+     * @return {int} - Turn
      */
     getTurn () {
       return this.#gameParam.getTurn()
     }
 
     /**
-     *
+     * Return players
+     * @return {Players[]} - Players
      */
     getPlayers () {
       return this.#gameParam.getPlayers()
     }
 
     /**
-     *
+     * Return game param
+     * @return {GameParam} - game param
      */
     getGameParam () {
       return this.#gameParam
     }
 
     /**
-     *
+     * Return throw
+     * @return {int} - Throw
      */
-    getScore (playerName, turn) {
-      return this.#playerScores[playerName][turn]
+    getThrow (playerName, turn) {
+      return this.#playerThrows[playerName][turn]
     }
 
     /**
-     *
+     * Return throws
+     * @return {int[]} - Throws
      */
-    getPlayerScore (playerName) {
-      return this.#playerScores[playerName]
+    getThrows (playerName) {
+      return this.#playerThrows[playerName]
     }
 }
