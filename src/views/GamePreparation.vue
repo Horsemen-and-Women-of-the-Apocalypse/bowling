@@ -1,7 +1,7 @@
 <template>
   <div class="gamepreparation">
     <div id="nav">
-      <Header/>
+      <Header :firstLine="$t('gameprepheader.title')" :secondLine="$t('gameprepheader.prep')"/>
     </div>
     <md-steppers :md-active-step.sync="active" md-linear  md-alternative>
       <md-step id="first" :md-label="$t('gamepreparation.turn')" :md-done.sync="first">
@@ -82,7 +82,7 @@ import Pins from '../components/Pins'
 import Players from '../components/PlayerListCreator'
 import GameParam from '../objets/gameparam'
 import Automaton from '../objets/automaton'
-import Header from '../components/GamePrepHeader.vue'
+import Header from '../components/Header.vue'
 import GameScore from '../objets/gameScore'
 
 export default {

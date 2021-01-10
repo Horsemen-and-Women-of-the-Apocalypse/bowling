@@ -5,7 +5,7 @@
     </div>
     <div v-else>
         <div id="nav">
-         <Header :currentPlayer="automaton.getCurrentPlayer().getName()"/>
+         <Header :firstLine="$t('scoreBoard.turn')" :secondLine="automaton.getCurrentPlayer().getName()"/>
         </div>
         <LastPlayerTurn v-if="lastTurn" :totalPins="automaton.getGameParam().getPins()" @done="nextTurn"/>
         <PlayerTurn v-else :totalPins="automaton.getGameParam().getPins()" @done="nextTurn"/>
@@ -26,7 +26,7 @@
 
 <script>
 
-import Header from '../components/GameHeader'
+import Header from '../components/Header'
 import PlayerAnouncement from '../components/PlayerAnouncement'
 import LastPlayerTurn from '../components/LastPlayerTurn'
 import PlayerTurn from '../components/PlayerTurn'
