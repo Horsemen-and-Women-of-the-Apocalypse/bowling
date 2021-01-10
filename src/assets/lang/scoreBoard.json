@@ -3,16 +3,14 @@
     "scoreBoard": {
       "total": "TOT",
       "back": "<< Back",
-      "scoreboard": "Scoreboard",
-      "turn": "Turn of"
+      "scoreboard": "Scoreboard"
     }
   },
   "fr": {
     "scoreBoard": {
       "total": "TOT",
       "back": "<< Fermer",
-      "scoreboard": "Tableau des scores",
-      "turn": "Au tour de"
+      "scoreboard": "Tableau des scores"
     }
   }
 }
