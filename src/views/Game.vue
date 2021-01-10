@@ -9,7 +9,7 @@
         </div>
         <LastPlayerTurn v-if="this.automaton.isLastTurn()" :totalPins="this.automaton.getGameParam().getPins()" @done="nextTurn"/>
         <PlayerTurn v-else :totalPins="automaton.getGameParam().getPins()" @done="nextTurn"/>
-        <md-button class="md-fab md-fab-bottom-left md-plain md-primary" @click="goToScoreboard">
+        <md-button class="md-fab md-fab-bottom-left md-plain md-primary" name="goToScoreboard" @click="goToScoreboard">
             <md-tooltip md-direction="top">{{ $t('scoreBoard.scoreboard') }}</md-tooltip>
             <md-icon>ballot</md-icon>
         </md-button>
