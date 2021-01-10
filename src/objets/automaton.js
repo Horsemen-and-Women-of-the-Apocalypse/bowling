@@ -56,6 +56,6 @@ export default class Automaton {
      * @return {bool} - game status
      */
     isEnd () {
-      return this.#current >= (this.#gameParam.getTurn() * this.#gameParam.getPlayers().length)
+      return (this.#current + 1) >= (this.#gameParam.getTurn() * this.#gameParam.getPlayers().length)
     }
 }

@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     goToHome () {
-      this.$router.push({ name: 'Game', params: { automaton: this.$route.params.automaton } })
+      this.$router.push({ name: 'Game', params: { automaton: this.$route.params.automaton, score: this.$route.params.score } })
     }
   }
 }

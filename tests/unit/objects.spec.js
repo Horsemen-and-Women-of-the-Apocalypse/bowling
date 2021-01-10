@@ -319,7 +319,6 @@ describe('gameparam', () => {
         expect(a.isEnd()).toBe(true)
         a.advance()
         expect(a.isEnd()).toBe(true)
-        expect(a.getCurrentPlayer()).toBe(p)
       })
     })
 
