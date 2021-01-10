@@ -4,15 +4,14 @@ module.exports = {
   beforeEach: (browser) => browser.init(),
   afterEach: (browser) => browser.end(),
   'Whole page': browser => {
-    app = firstPage(browser, 10, 4, ["Help", "Me"])
+    var app = firstPage(browser, 10, 4, ['Help', 'Me'])
     app.assert.visible('#PlayerAnouncement')
     app.waitForElementVisible('.game')
     app.assert.visible('#playerTurn')
-
   }
 }
 
-function firstPage(browser, cnbTurn, cnbPins, cnbPlayers) {
+function firstPage (browser, cnbTurn, cnbPins, cnbPlayers) {
   const homepage = browser.page.homepage()
   homepage.waitForElementVisible('@appContainer')
   const app = homepage.section.app
