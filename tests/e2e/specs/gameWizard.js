@@ -44,7 +44,7 @@ module.exports = {
     app.clearValue('input[name=pinsFallen1]')
     for (let i = 0; i < 10; i++) {
       app.click('#LastPlayerTurn #addFirstThrow')
-      app.assert.value('input[name=pinsFallen1]', '' + (i+1))
+      app.assert.value('input[name=pinsFallen1]', '' + (i + 1))
     }
     app.assert.value('input[name=pinsFallen1]', '10')
     app.click('button[name=firstBtnValidate]')
@@ -56,7 +56,7 @@ module.exports = {
     app.clearValue('input[name=pinsFallen2]')
     for (let i = 0; i < 5; i++) {
       app.click('#LastPlayerTurn #addSecondThrow')
-      app.assert.value('input[name=pinsFallen2]', '' + (i+1))
+      app.assert.value('input[name=pinsFallen2]', '' + (i + 1))
     }
     app.click('button[name=secondBtnValidate]')
 
@@ -74,8 +74,7 @@ module.exports = {
     app.click('button[name=goToScoreboard]')
     app.waitForElementVisible('.scoreboardview')
     app.assert.visible('#ScoreBoard')
-    
-  },
+  }
 }
 
 function firstPage (browser, cnbTurn, cnbPins, cnbPlayers) {
@@ -95,7 +94,7 @@ function firstPage (browser, cnbTurn, cnbPins, cnbPlayers) {
   app.assert.value('input[name=turnCount]', '10')
   for (let i = 10; i > nbTurn; i--) {
     app.click('.turn #minus')
-    app.assert.value('input[name=turnCount]', '' + (i-1))
+    app.assert.value('input[name=turnCount]', '' + (i - 1))
   }
   app.click('button[name=firstBtnValidate]')
 
