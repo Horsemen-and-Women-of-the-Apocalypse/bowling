@@ -398,7 +398,7 @@ describe('gameparam', () => {
         expect(a.isEnd()).toBe(true)
       })
     })
-    describe('getParam', () => {
+    describe('isLastTurn', () => {
       test('Assert contents', () => {
         var p = new Player('Nom')
 

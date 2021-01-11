@@ -58,11 +58,20 @@ module.exports = {
       app.click('#LastPlayerTurn #addSecondThrow')
       app.assert.value('input[name=pinsFallen2]', '' + (i + 1))
     }
+    app.assert.value('input[name=pinsFallen2]', '5')
     app.click('button[name=secondBtnValidate]')
 
     // Third throw
     app.assert.visible('input[name=pinsFallen3]')
     app.assert.visible('button[name=thirdBtnValidate]')
+
+    app.clearValue('input[name=pinsFallen3]')
+    for (let i = 0; i < 5; i++) {
+      app.click('#LastPlayerTurn #addThirdThrow')
+      app.assert.value('input[name=pinsFallen3]', '' + (i + 1))
+    }
+    app.assert.value('input[name=pinsFallen2]', '5')
+    app.click('button[name=thirdBtnValidate]')
   },
   'Open scoreboard': browser => {
     var app = firstPage(browser, 1, 10, ['P1', 'P2'])
@@ -87,42 +96,25 @@ function firstPage (browser, cnbTurn, cnbPins, cnbPlayers) {
   const players = cnbPlayers
 
   // Add turns
-  app.assert.visible('input[name=turnCount]')
-  app.assert.visible('button[name=firstBtnValidate]')
 
-  app.clearValue('input[name=turnCount]')
-  app.assert.value('input[name=turnCount]', '10')
   for (let i = 10; i > nbTurn; i--) {
     app.click('.turn #minus')
-    app.assert.value('input[name=turnCount]', '' + (i - 1))
   }
   app.click('button[name=firstBtnValidate]')
 
   // Add pins
-  app.assert.visible('input[name=pinsCount]')
-  app.assert.visible('button[name=secondBtnValidate]')
-  app.clearValue('input[name=pinsCount]')
-  app.assert.value('input[name=pinsCount]', '10')
+  app.waitForElementVisible('button[name=secondBtnValidate]')
   for (let i = 11; i <= nbPins; i++) {
     app.click('.pins #add')
-    app.assert.value('input[name=pinsCount]', '' + i)
   }
   app.click('button[name=secondBtnValidate]')
 
   // Add players
-  app.assert.visible('input[name=newPlayerName]')
-  app.assert.visible('button[name=thirdBtnValidate]')
-  app.assert.attributeEquals('button[name=thirdBtnValidate]', 'disabled', 'true')
+  app.waitForElementVisible('input[name=newPlayerName]')
 
   players.forEach((playerName, i) => {
     app.setValue('input[name=newPlayerName]', playerName)
     app.click('#PlayerListCreator #addPlayerBtn')
-    app.assert.elementPresent('#PlayerListCreator #player_' + (i + 1))
-  })
-
-  app.getAttribute('button[name=thirdBtnValidate]', 'disabled', result => { app.assert.equal(result.value, null) })
-  players.forEach((playerName, i) => {
-    app.assert.containsText('#PlayerListCreator #player_' + (i + 1) + ' .name', (i + 1) + ' : ' + playerName)
   })
 
   app.click('button[name=thirdBtnValidate]')

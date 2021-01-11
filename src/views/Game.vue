@@ -53,8 +53,8 @@ export default {
     nextTurn (throws) {
       this.animation = true
       this.gameScore.registerThrow(this.automaton.getCurrentPlayer().getName(), this.automaton.getCurrentTurn() + 1, 1, throws.throw1)
-      this.gameScore.registerThrow(this.automaton.getCurrentPlayer().getName(), this.automaton.getCurrentTurn() + 1, 2, throws.throw2)
-      if (this.automaton.isLastTurn()) { this.gameScore.registerThrow(this.automaton.getCurrentPlayer().getName(), this.automaton.getCurrentTurn() + 1, 3, throws.throw3) }
+      if (throws.throw1 < 10) { this.gameScore.registerThrow(this.automaton.getCurrentPlayer().getName(), this.automaton.getCurrentTurn() + 1, 2, throws.throw2) }
+      if (this.automaton.isLastTurn() && (throws.throw1 + throws.throw2 >= 10)) { this.gameScore.registerThrow(this.automaton.getCurrentPlayer().getName(), this.automaton.getCurrentTurn() + 1, 3, throws.throw3) }
       if (this.automaton.isEnd()) {
         // TODO
       } else {
