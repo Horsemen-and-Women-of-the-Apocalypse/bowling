@@ -123,7 +123,7 @@
             v-else
             name="secondBtnValidate"
             class="md-raised md-accent"
-            @click="terminate()"
+            @click="terminate(2)"
             :disabled="throw2 < 0 || throw2 > maxPinsSecondThrow"
           >
             {{ $t("playerTurn.validate") }}
@@ -188,7 +188,7 @@
           <md-button
             name="thirdBtnValidate"
             class="md-raised md-accent"
-            @click="terminate()"
+            @click="terminate(3)"
             :disabled="throw3 < 0 || throw3 > maxPinsThirdThrow"
           >
             {{ $t("playerTurn.validate") }}
@@ -205,7 +205,7 @@ export default {
   data: () => ({
     throw1: 0,
     throw2: 0,
-    throw3: undefined,
+    throw3: 0,
 
     // Steppers
     active: 'first',
@@ -277,7 +277,6 @@ export default {
     validateSecond () {
       this.active = 'third'
       this.second = true
-      this.throw3 = 0
     },
     backSecond () {
       this.active = 'first'
@@ -307,17 +306,23 @@ export default {
     },
 
     // terminate
-    terminate () {
-      if (
-        Number.isInteger(parseInt(this.throw1)) &&
-        Number.isInteger(parseInt(this.throw2)) &&
-        (this.throw3 === undefined || Number.isInteger(parseInt(this.throw3)))
-      ) {
-        this.$emit('done', {
-          throw1: parseInt(this.throw1),
-          throw2: parseInt(this.throw2),
-          throw3: (this.throw3 === undefined) ? this.throw3 : parseInt(this.throw3)
-        })
+    terminate (nbThrow) {
+      if (nbThrow === 2) {
+        if (Number.isInteger(parseInt(this.throw1)) && Number.isInteger(parseInt(this.throw2))) {
+          this.$emit('done', {
+            throw1: parseInt(this.throw1),
+            throw2: parseInt(this.throw2),
+            throw3: undefined
+          })
+        }
+      } else {
+        if (Number.isInteger(parseInt(this.throw1)) && Number.isInteger(parseInt(this.throw2)) && Number.isInteger(parseInt(this.throw3))) {
+          this.$emit('done', {
+            throw1: parseInt(this.throw1),
+            throw2: parseInt(this.throw2),
+            throw3: parseInt(this.throw3)
+          })
+        }
       }
     }
   }

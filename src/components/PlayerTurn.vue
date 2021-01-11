@@ -47,7 +47,7 @@
           <md-button
           name="firstBtnValidate"
           class="md-raised md-accent"
-          @click="terminate()"
+          @click="terminate(1)"
           v-else>
             {{ $t("playerTurn.validate") }}
           </md-button>
@@ -96,7 +96,7 @@
             <md-button
             name="secondBtnValidate"
             class="md-raised md-accent"
-            @click="terminate()">
+            @click="terminate(2)">
               {{ $t("playerTurn.validate") }}
             </md-button>
           </div>
@@ -114,7 +114,7 @@ export default {
   name: 'PlayerTurn',
   data: () => ({
     firstThrow: 0,
-    secondThrow: undefined,
+    secondThrow: 0,
     active: 'first',
     first: false,
     second: false
@@ -177,17 +177,18 @@ export default {
     setDone (id, index) {
       this[id] = true
       this.active = index
-      if (index === 'second') {
-        this.secondThrow = 0
-      }
     },
     resetComponent () {
       this.active = 'first'
       this.second = false
       this.secondThrow = 0
     },
-    terminate () {
-      this.$emit('done', { throw1: parseInt(this.firstThrow), throw2: (this.secondThrow === undefined) ? this.secondThrow : parseInt(this.secondThrow) })
+    terminate (nbThrow) {
+      if (nbThrow === 2) {
+        this.$emit('done', { throw1: parseInt(this.firstThrow), throw2: parseInt(this.secondThrow) })
+      } else {
+        this.$emit('done', { throw1: parseInt(this.firstThrow), throw2: undefined })
+      }
     }
   }
 }
