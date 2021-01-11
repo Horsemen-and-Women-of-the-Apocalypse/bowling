@@ -19,13 +19,24 @@
         </md-button>
 
         <!-- Confirmation dialog -->
-        <md-dialog-confirm
-          :md-active.sync="confirmExitDialog"
-          :md-title="$t('scoreBoard.dialog.title')"
-          :md-content="$t('scoreBoard.dialog.content')"
-          :md-confirm-text="$t('scoreBoard.dialog.yes')"
-          :md-cancel-text="$t('scoreBoard.dialog.no')"
-          @md-confirm="goToHome" />
+        <md-dialog
+        :md-active.sync="confirmExitDialog"
+        :md-fullscreen="false"
+        name="confirmExitDialog">
+          <md-dialog-title>{{ $t('scoreBoard.dialog.title') }}</md-dialog-title>
+          <md-dialog-content>
+            {{ $t('scoreBoard.dialog.content') }}
+          </md-dialog-content>
+
+          <md-dialog-actions>
+            <md-button name="cancel" @click="confirmExitDialog = false">
+              {{ $t('scoreBoard.dialog.no') }}
+            </md-button>
+            <md-button name="confirm" @click="goToHome">
+              {{ $t('scoreBoard.dialog.yes') }}
+            </md-button>
+        </md-dialog-actions>
+      </md-dialog>
     </div>
   </div>
 </template>
