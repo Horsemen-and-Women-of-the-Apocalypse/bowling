@@ -1,12 +1,14 @@
 {
     "en": {
       "game": {
-        "turn": "Turn of"
+        "turn": "Turn of",
+        "turnCount": "Turn"
       }
     },
     "fr": {
       "game": {
-        "turn": "Au tour de"
+        "turn": "Au tour de",
+        "turnCount": "Tour"
       }
     }
   }
