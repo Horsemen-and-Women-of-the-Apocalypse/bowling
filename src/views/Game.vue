@@ -7,7 +7,7 @@
         <div id="nav">
          <Header :firstLine="$t('game.turnCount') + ' ' + Number(this.automaton.getCurrentTurn() + 1) +'/'+ this.automaton.getGameParam().getTurn() + ' - ' + $t('game.turn')" :secondLine="this.automaton.getCurrentPlayer().getName()"/>
         </div>
-        <LastPlayerTurn class="spacing" v-if="this.automaton.isLastTurn()" :totalPins="this.automaton.getGameParam().getPins()" @done="nextTurn"/>
+        <LastPlayerTurn v-if="this.automaton.isLastTurn()" :totalPins="this.automaton.getGameParam().getPins()" @done="nextTurn"/>
         <PlayerTurn v-else :totalPins="automaton.getGameParam().getPins()" @done="nextTurn"/>
         <md-button class="md-fab md-fab-bottom-left md-plain md-primary" name="goToScoreboard" @click="goToScoreboard">
             <md-tooltip md-direction="top">{{ $t('scoreBoard.scoreboard') }}</md-tooltip>
@@ -21,9 +21,6 @@
 
 #nav {
   height: 10vh;
-}
-.spacing {
-  padding-top: 2vh
 }
 </style>
 
