@@ -311,7 +311,7 @@ export default {
       if (
         Number.isInteger(parseInt(this.throw1)) &&
         Number.isInteger(parseInt(this.throw2)) &&
-        Number.isInteger(parseInt(this.throw3))
+        (this.throw3 === undefined || Number.isInteger(parseInt(this.throw3))) 
       ) {
         this.$emit('done', {
           throw1: parseInt(this.throw1),

@@ -83,7 +83,7 @@ describe('PlayerTurn classic use cases', () => {
     await wrapper.find('button[name=firstBtnValidate]').trigger('click')
     expect(wrapper.emitted('done')).toStrictEqual([[{
       throw1: throw1,
-      throw2: 0
+      throw2: undefined
     }]])
   })
 
