@@ -30,6 +30,10 @@ module.exports = {
     app.clearValue('input[name=pinsFallen2]')
     app.assert.value('input[name=pinsFallen2]', '0')
     app.click('button[name=secondBtnValidate]')
+
+    checkScoreboard(app, 'P1', 1, 4, 0, 0, undefined)
+
+
   },
   'Player Last Turn': browser => {
     var app = firstPage(browser, 1, 10, ['P1', 'P2'])
@@ -70,8 +74,10 @@ module.exports = {
       app.click('#LastPlayerTurn #addThirdThrow')
       app.assert.value('input[name=pinsFallen3]', '' + (i + 1))
     }
-    app.assert.value('input[name=pinsFallen2]', '5')
+    app.assert.value('input[name=pinsFallen3]', '5')
     app.click('button[name=thirdBtnValidate]')
+
+    checkScoreboard(app, 'P1', 1, 10, 10, 5, 5)
   },
   'Open scoreboard': browser => {
     var app = firstPage(browser, 1, 10, ['P1', 'P2'])
@@ -83,6 +89,33 @@ module.exports = {
     app.click('button[name=goToScoreboard]')
     app.waitForElementVisible('.scoreboardview')
     app.assert.visible('#ScoreBoard')
+  }
+}
+
+function checkScoreboard(app, player, turn, maxPins, throw1, throw2, throw3) {
+  app.assert.visible('button[name=goToScoreboard]')
+  app.click('button[name=goToScoreboard]')
+  app.waitForElementVisible('.scoreboardview')
+  app.assert.visible('#ScoreBoard')
+
+  app.assert.visible('div[name=' + player + '_score_' + turn + ']')
+
+  if (throw1 === maxPins) { throw1 = 'X'}
+  if (throw1 + throw2 === maxPins) { throw2 = '/'}
+  if (throw2 === maxPins) { throw2 = 'X'}
+  if (throw2 + throw3 === maxPins) { throw3 = '/'}
+  if (throw3 === maxPins) { throw3 = 'X'}
+
+  app.assert.visible('div[name=' + player + '_score_' + turn + '] #top #first') 
+  app.assert.containsText('div[name=' + player + '_score_' + turn + '] #top #first', throw1)
+
+  if(throw2 !== undefined) {
+    app.assert.visible('div[name=' + player + '_score_' + turn + '] #top #second')
+    app.assert.containsText('div[name=' + player + '_score_' + turn + '] #top #second', throw2)
+  }
+  if(throw3 !== undefined) {
+    app.assert.visible('div[name=' + player + '_score_' + turn + '] #top #third')
+    app.assert.containsText('div[name=' + player + '_score_' + turn + '] #top #third', throw3)
   }
 }
 

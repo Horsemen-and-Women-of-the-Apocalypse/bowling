@@ -37,6 +37,7 @@
         <div class="player" v-for="(player, i) in score.getPlayers()" :key="i">
           <Score
             v-for="(turn, j) in score.getTurn()"
+            :name="player.getName() + '_score_' + Number(j+1)"
             :key="turn"
             :game="score.getGameParam()"
             :last="j === score.getTurn() - 1"

@@ -53,6 +53,7 @@ export default {
     grid-template-areas:
     "title"
     "anounce";
+    overflow: hidden;
 }
 
 .title
