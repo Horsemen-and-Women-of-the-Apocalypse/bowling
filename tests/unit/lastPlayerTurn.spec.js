@@ -42,7 +42,7 @@ describe('LastPlayerTurn classic use cases', () => {
     expect(wrapper.emitted('done')).toStrictEqual([[{
       throw1: throw1,
       throw2: throw2,
-      throw3: 0
+      throw3: undefined
     }]])
   })
 

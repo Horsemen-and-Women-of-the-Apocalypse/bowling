@@ -44,10 +44,26 @@ export default class Automaton {
     }
 
     /**
+     * Get game param
+     * @return {GameParam} - Game param
+     */
+    getGameParam () {
+      return this.#gameParam
+    }
+
+    /**
      * Get true if game is finished
      * @return {bool} - game status
      */
     isEnd () {
-      return this.#current >= (this.#gameParam.getTurn() * this.#gameParam.getPlayers().length)
+      return (this.#current + 1) >= (this.#gameParam.getTurn() * this.#gameParam.getPlayers().length)
+    }
+
+    /**
+     * Get true if last turn
+     * @return {bool} - game status
+     */
+    isLastTurn () {
+      return this.#gameParam.getTurn() === this.getCurrentTurn() + 1
     }
 }

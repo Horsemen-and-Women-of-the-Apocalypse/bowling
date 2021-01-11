@@ -1,7 +1,7 @@
 <template>
   <div class="gameprepheader">
-    <div class="spicyRice" id="title">{{ $t('gameprepheader.title')}}</div>
-    <div class="ralewayBold" id="gamePrep">{{ $t('gameprepheader.prep')}}</div>
+    <div class="spicyRice" id="title">{{firstLine}}</div>
+    <div class="ralewayBold" id="gamePrep">{{secondLine}}</div>
   </div>
 </template>
 
@@ -30,3 +30,14 @@
   justify-content: center;
 }
 </style>
+
+<script>
+export default {
+  name: 'GameHeader',
+  props: {
+    firstLine: { type: String, requiered: true },
+    secondLine: { type: String, requiered: true }
+  }
+
+}
+</script>

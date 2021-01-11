@@ -319,7 +319,6 @@ describe('gameparam', () => {
         expect(a.isEnd()).toBe(true)
         a.advance()
         expect(a.isEnd()).toBe(true)
-        expect(a.getCurrentPlayer()).toBe(p)
       })
     })
 
@@ -364,6 +363,21 @@ describe('gameparam', () => {
       })
     })
 
+    describe('getParam', () => {
+      test('Assert contents', () => {
+        var p = new Player('Nom')
+        var p2 = new Player('Nom2')
+
+        var players = [p, p2]
+
+        var g = new GameParam(players, 10, 5)
+
+        var a = new Automaton(g)
+
+        expect(a.getGameParam()).toBe(g)
+      })
+    })
+
     describe('isEnd', () => {
       test('Assert contents', () => {
         var p = new Player('Nom')
@@ -382,6 +396,19 @@ describe('gameparam', () => {
         a.advance()
         a.advance()
         expect(a.isEnd()).toBe(true)
+      })
+    })
+    describe('isLastTurn', () => {
+      test('Assert contents', () => {
+        var p = new Player('Nom')
+
+        var players = [p]
+
+        var g = new GameParam(players, 1, 5)
+
+        var a = new Automaton(g)
+
+        expect(a.isLastTurn()).toBe(true)
       })
     })
   })

@@ -1,0 +1,15 @@
+{
+    "en": {
+      "game": {
+        "turn": "Turn of",
+        "turnCount": "Turn"
+      }
+    },
+    "fr": {
+      "game": {
+        "turn": "Au tour de",
+        "turnCount": "Tour"
+      }
+    }
+  }
+  

@@ -1,7 +1,7 @@
 <template>
   <div class="gamepreparation">
     <div id="nav">
-      <Header/>
+      <Header :firstLine="$t('gameprepheader.title')" :secondLine="$t('gameprepheader.prep')"/>
     </div>
     <md-steppers :md-active-step.sync="active" md-linear  md-alternative>
       <md-step id="first" :md-label="$t('gamepreparation.turn')" :md-done.sync="first">
@@ -81,7 +81,9 @@ import Turn from '../components/Turn'
 import Pins from '../components/Pins'
 import Players from '../components/PlayerListCreator'
 import GameParam from '../objets/gameparam'
-import Header from '../components/GamePrepHeader.vue'
+import Automaton from '../objets/automaton'
+import Header from '../components/Header.vue'
+import GameScore from '../objets/gameScore'
 
 export default {
   name: 'GamePreparation',
@@ -119,6 +121,7 @@ export default {
 
       try {
         this.gameParam = new GameParam(this.players, turn, pins)
+        this.$router.push({ name: 'Game', params: { automaton: new Automaton(this.gameParam), score: new GameScore(this.gameParam) } })
       } catch (error) {
         this.errorMsg = true
       }
