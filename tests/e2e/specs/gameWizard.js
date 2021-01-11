@@ -32,8 +32,6 @@ module.exports = {
     app.click('button[name=secondBtnValidate]')
 
     checkScoreboard(app, 'P1', 1, 4, 0, 0, undefined)
-
-
   },
   'Player Last Turn': browser => {
     var app = firstPage(browser, 1, 10, ['P1', 'P2'])
@@ -92,7 +90,7 @@ module.exports = {
   }
 }
 
-function checkScoreboard(app, player, turn, maxPins, throw1, throw2, throw3) {
+function checkScoreboard (app, player, turn, maxPins, throw1, throw2, throw3) {
   app.assert.visible('button[name=goToScoreboard]')
   app.click('button[name=goToScoreboard]')
   app.waitForElementVisible('.scoreboardview')
@@ -100,20 +98,20 @@ function checkScoreboard(app, player, turn, maxPins, throw1, throw2, throw3) {
 
   app.assert.visible('div[name=' + player + '_score_' + turn + ']')
 
-  if (throw1 === maxPins) { throw1 = 'X'}
-  if (throw1 + throw2 === maxPins) { throw2 = '/'}
-  if (throw2 === maxPins) { throw2 = 'X'}
-  if (throw2 + throw3 === maxPins) { throw3 = '/'}
-  if (throw3 === maxPins) { throw3 = 'X'}
+  if (throw1 === maxPins) { throw1 = 'X' }
+  if (throw1 + throw2 === maxPins) { throw2 = '/' }
+  if (throw2 === maxPins) { throw2 = 'X' }
+  if (throw2 + throw3 === maxPins) { throw3 = '/' }
+  if (throw3 === maxPins) { throw3 = 'X' }
 
-  app.assert.visible('div[name=' + player + '_score_' + turn + '] #top #first') 
+  app.assert.visible('div[name=' + player + '_score_' + turn + '] #top #first')
   app.assert.containsText('div[name=' + player + '_score_' + turn + '] #top #first', throw1)
 
-  if(throw2 !== undefined) {
+  if (throw2 !== undefined) {
     app.assert.visible('div[name=' + player + '_score_' + turn + '] #top #second')
     app.assert.containsText('div[name=' + player + '_score_' + turn + '] #top #second', throw2)
   }
-  if(throw3 !== undefined) {
+  if (throw3 !== undefined) {
     app.assert.visible('div[name=' + player + '_score_' + turn + '] #top #third')
     app.assert.containsText('div[name=' + player + '_score_' + turn + '] #top #third', throw3)
   }
