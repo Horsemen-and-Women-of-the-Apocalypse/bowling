@@ -5,7 +5,7 @@
     </div>
     <div v-else>
         <div id="nav">
-         <Header :firstLine="$t('game.turnCount') + ' ' + this.automaton.getCurrentTurn() + 1 +'/'+ this.automaton.getGameParam().getTurn() + ' - ' + $t('game.turn')" :secondLine="this.automaton.getCurrentPlayer().getName()"/>
+         <Header :firstLine="$t('game.turnCount') + ' ' + Number(this.automaton.getCurrentTurn() + 1) +'/'+ this.automaton.getGameParam().getTurn() + ' - ' + $t('game.turn')" :secondLine="this.automaton.getCurrentPlayer().getName()"/>
         </div>
         <LastPlayerTurn class="spacing" v-if="this.automaton.isLastTurn()" :totalPins="this.automaton.getGameParam().getPins()" @done="nextTurn"/>
         <PlayerTurn v-else :totalPins="automaton.getGameParam().getPins()" @done="nextTurn"/>
