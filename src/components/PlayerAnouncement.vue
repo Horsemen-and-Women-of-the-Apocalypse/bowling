@@ -92,22 +92,40 @@ export default {
     color: var(--primaryLighter);
 
     text-shadow: 0px 3px 0px var(--primary);
-}
 
-.extra_ellipse_pc
-{
-    font-size: 7vw;
-    animation: spin_scale_pc 2s;
-    width: 30vw;
-    height: 30vw;
-}
-
-.extra_ellipse_mobile
-{
+    /* Portrait orientation */
     font-size: 10vw;
     animation: spin_scale_mobile 2s;
-    width: 60vw;
-    height: 60vw;
+    min-width: 60vw;
+    min-height: 60vw;
+}
+
+#anounce_sub1
+{
+    font-style: normal;
+    font-weight: bold;
+    line-height: 90%;
+    color: var(--textlighter);
+    z-index: 100;
+    transform: rotate(-10deg) translate(0, 1.2vh);
+
+    /* Portrait  */
+    font-size: 10vw;
+}
+
+@media screen and (orientation: landscape) {
+    #ellipse
+    {
+        font-size: 12vh;
+        animation: spin_scale_pc 2s;
+        min-width: 60vh;
+        min-height: 60vh;
+    }
+
+    #anounce_sub1
+    {
+        font-size: 10vh;
+    }
 }
 
 @keyframes spin_scale_pc
@@ -156,26 +174,6 @@ export default {
         height: 60vw;
         transform: rotate(360deg);
     }
-}
-
-#anounce_sub1
-{
-    font-style: normal;
-    font-weight: bold;
-    line-height: 90%;
-    color: var(--textlighter);
-    z-index: 100;
-    transform: rotate(-10deg) translate(0, 1.2vh);
-}
-
-.font_size_annonce_sub1_pc
-{
-    font-size: 4vw;
-}
-
-.font_size_annonce_sub1_mobile
-{
-    font-size: 10vw;
 }
 
 </style>
