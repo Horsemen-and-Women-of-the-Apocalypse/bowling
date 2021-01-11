@@ -17,7 +17,11 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
+
+#game {
+  height: 100vh;
+}
 
 #nav {
   height: 10vh;

@@ -1,15 +1,20 @@
 <template>
-    <transition name="slide">
         <div class="scoreboardview">
             <div>
-                <Scoreboard :score="this.$route.params.score" :currentPlayer="this.$route.params.currentPlayer" :currentTurn="this.$route.params.currentTurn"/>
+              <Scoreboard :score="this.$route.params.score" :currentPlayer="this.$route.params.currentPlayer" :currentTurn="this.$route.params.currentTurn"/>
             </div>
-            <md-button class="md-raised md-primary" @click="goToHome">{{$t('scoreBoard.back')}}</md-button>
+              <md-button class="md-raised md-primary fixed-bottom md-fab md-fab-bottom-center" @click="goToHome">
+                <md-tooltip md-direction="top">{{ $t('scoreBoard.back') }}</md-tooltip>
+                <md-icon>close</md-icon>
+              </md-button>
         </div>
-    </transition>
 </template>
 
 <style scoped>
+
+.scoreboardview {
+  height: 100vh;
+}
 
 </style>
 

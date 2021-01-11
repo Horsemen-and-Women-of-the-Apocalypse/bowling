@@ -2,14 +2,14 @@
   "en": {
     "scoreBoard": {
       "total": "TOT",
-      "back": "<< Back",
+      "back": "Back",
       "scoreboard": "Scoreboard"
     }
   },
   "fr": {
     "scoreBoard": {
       "total": "TOT",
-      "back": "<< Fermer",
+      "back": "Fermer",
       "scoreboard": "Tableau des scores"
     }
   }
