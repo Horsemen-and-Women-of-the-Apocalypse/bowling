@@ -6,8 +6,9 @@
     <div v-else>
         <div id="nav">
          <Header :firstLine="$t('game.turn')" :secondLine="this.automaton.getCurrentPlayer().getName()"/>
+         <h2>Tour {{this.automaton.getCurrentTurn() + 1}} / {{this.automaton.getGameParam().getTurn()}}</h2>
         </div>
-        <LastPlayerTurn v-if="this.automaton.isLastTurn()" :totalPins="this.automaton.getGameParam().getPins()" @done="nextTurn"/>
+        <LastPlayerTurn class="spacing" v-if="this.automaton.isLastTurn()" :totalPins="this.automaton.getGameParam().getPins()" @done="nextTurn"/>
         <PlayerTurn v-else :totalPins="automaton.getGameParam().getPins()" @done="nextTurn"/>
         <md-button class="md-fab md-fab-bottom-left md-plain md-primary" name="goToScoreboard" @click="goToScoreboard">
             <md-tooltip md-direction="top">{{ $t('scoreBoard.scoreboard') }}</md-tooltip>
@@ -21,6 +22,9 @@
 
 #nav {
   height: 10vh;
+}
+.spacing {
+  padding-top: 2vh
 }
 </style>
 
@@ -53,8 +57,12 @@ export default {
     nextTurn (throws) {
       this.animation = true
       this.gameScore.registerThrow(this.automaton.getCurrentPlayer().getName(), this.automaton.getCurrentTurn() + 1, 1, throws.throw1)
-      if (throws.throw1 < 10) { this.gameScore.registerThrow(this.automaton.getCurrentPlayer().getName(), this.automaton.getCurrentTurn() + 1, 2, throws.throw2) }
-      if (this.automaton.isLastTurn() && (throws.throw1 + throws.throw2 >= 10)) { this.gameScore.registerThrow(this.automaton.getCurrentPlayer().getName(), this.automaton.getCurrentTurn() + 1, 3, throws.throw3) }
+      if (throws.throw2 !== undefined) {
+        this.gameScore.registerThrow(this.automaton.getCurrentPlayer().getName(), this.automaton.getCurrentTurn() + 1, 2, throws.throw2)
+      }
+      if (throws.throw3 !== undefined) {
+        this.gameScore.registerThrow(this.automaton.getCurrentPlayer().getName(), this.automaton.getCurrentTurn() + 1, 3, throws.throw3)
+      }
       if (this.automaton.isEnd()) {
         // TODO
       } else {

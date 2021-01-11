@@ -205,7 +205,7 @@ export default {
   data: () => ({
     throw1: 0,
     throw2: 0,
-    throw3: 0,
+    throw3: undefined,
 
     // Steppers
     active: 'first',
@@ -277,6 +277,7 @@ export default {
     validateSecond () {
       this.active = 'third'
       this.second = true
+      this.throw3 = 0
     },
     backSecond () {
       this.active = 'first'
@@ -315,7 +316,7 @@ export default {
         this.$emit('done', {
           throw1: parseInt(this.throw1),
           throw2: parseInt(this.throw2),
-          throw3: parseInt(this.throw3)
+          throw3: (this.throw3 === undefined) ? this.throw3 : parseInt(this.throw3)
         })
       }
     }

@@ -114,7 +114,7 @@ export default {
   name: 'PlayerTurn',
   data: () => ({
     firstThrow: 0,
-    secondThrow: 0,
+    secondThrow: undefined,
     active: 'first',
     first: false,
     second: false
@@ -177,6 +177,9 @@ export default {
     setDone (id, index) {
       this[id] = true
       this.active = index
+      if (index === 'second') {
+        this.secondThrow = 0
+      }
     },
     resetComponent () {
       this.active = 'first'
@@ -184,7 +187,7 @@ export default {
       this.secondThrow = 0
     },
     terminate () {
-      this.$emit('done', { throw1: parseInt(this.firstThrow), throw2: parseInt(this.secondThrow) })
+      this.$emit('done', { throw1: parseInt(this.firstThrow), throw2: (this.secondThrow === undefined) ? this.secondThrow : parseInt(this.secondThrow) })
     }
   }
 }
