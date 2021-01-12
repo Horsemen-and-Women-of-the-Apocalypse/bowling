@@ -3,10 +3,10 @@
             <div>
               <Scoreboard :score="this.$route.params.score" :currentPlayer="this.$route.params.currentPlayer" :currentTurn="this.$route.params.currentTurn"/>
             </div>
-              <md-button class="md-raised md-primary fixed-bottom md-fab md-fab-bottom-center" @click="goToHome">
-                <md-tooltip md-direction="top">{{ $t('scoreBoard.back') }}</md-tooltip>
-                <md-icon>close</md-icon>
-              </md-button>
+            <md-button name="goToHome" class="md-raised md-primary fixed-bottom md-fab md-fab-bottom-center" @click="goToHome">
+              <md-tooltip md-direction="top">{{ $t('scoreBoard.back') }}</md-tooltip>
+              <md-icon>close</md-icon>
+            </md-button>
         </div>
 </template>
 
