@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <transition>
+    <transition name="slide-fade">
       <router-view/>
     </transition>
   </div>
@@ -15,6 +15,14 @@
   text-align: center;
   background-color: var(--darker);
   height: 100vh;
+}
+
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-enter {
+  transform: translateX(-100vw);
+  opacity: 0;
 }
 
 </style>

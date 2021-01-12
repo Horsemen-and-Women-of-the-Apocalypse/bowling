@@ -2,7 +2,7 @@
   "en": {
     "scoreBoard": {
       "total": "TOT",
-      "back": "<< Back",
+      "back": "Back",
       "scoreboard": "Scoreboard",
       "home" : "Leave game",
       "dialog": {
@@ -16,7 +16,7 @@
   "fr": {
     "scoreBoard": {
       "total": "TOT",
-      "back": "<< Fermer",
+      "back": "Fermer",
       "scoreboard": "Tableau des scores",
       "home" : "Quitter la partie",
       "dialog": {
