@@ -13,7 +13,7 @@
             <md-tooltip md-direction="top">{{ $t('scoreBoard.scoreboard') }}</md-tooltip>
             <md-icon>ballot</md-icon>
         </md-button>
-        <md-button class="md-fab md-fab-bottom-right md-plain" name="goToHome" @click="confirmExitDialog = true">
+        <md-button class="md-fab md-fab-bottom-right md-plain md-primary" name="goToHome" @click="confirmExitDialog = true">
             <md-tooltip md-direction="top">{{ $t('scoreBoard.home') }}</md-tooltip>
             <md-icon>home</md-icon>
         </md-button>
@@ -22,6 +22,7 @@
         <md-dialog
         :md-active.sync="confirmExitDialog"
         :md-fullscreen="false"
+        class="ralewayRegular"
         name="confirmExitDialog">
           <md-dialog-title>{{ $t('scoreBoard.dialog.title') }}</md-dialog-title>
           <md-dialog-content>
