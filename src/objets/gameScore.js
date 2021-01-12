@@ -112,4 +112,16 @@ export default class GameScore {
     getThrows (playerName) {
       return this.#playerThrows[playerName]
     }
+
+    /**
+     * Return scores sorted by player
+     * @return {} - Score by player
+     */
+    totalScore () {
+      var scoreByPlayer = {}
+      for (var e in this.#playerThrows) {
+        scoreByPlayer[e] = this.#playerThrows[e][this.#playerThrows[e].length - 1].score
+      }
+      return scoreByPlayer
+    }
 }

@@ -1,16 +1,20 @@
+// Import
+const LoadPageInit = require("../../e2e-common/utils.js").LoadPageInit
+
 // Game wizard tests
 
 module.exports = {
+
   beforeEach: (browser) => browser.init(),
   afterEach: (browser) => browser.end(),
   'Wizard is present': browser => {
-    var app = firstPage(browser, 10, 4, ['P1', 'P2'])
+    var app = LoadPageInit(browser, 10, 4, ['P1', 'P2'])
     app.assert.visible('#PlayerAnouncement')
     app.waitForElementVisible('.game')
     app.assert.visible('#playerTurn')
   },
   'Player Turn': browser => {
-    var app = firstPage(browser, 10, 4, ['P1', 'P2'])
+    var app = LoadPageInit(browser, 10, 4, ['P1', 'P2'])
     app.assert.visible('#PlayerAnouncement')
     app.waitForElementVisible('.game')
     app.assert.visible('#playerTurn')
@@ -34,7 +38,7 @@ module.exports = {
     checkScoreboard(app, 'P1', 1, 4, 0, 0, undefined)
   },
   'Player Last Turn': browser => {
-    var app = firstPage(browser, 1, 10, ['P1', 'P2'])
+    var app = LoadPageInit(browser, 1, 10, ['P1', 'P2'])
     app.assert.visible('#PlayerAnouncement')
     app.waitForElementVisible('.game')
     app.assert.visible('#LastPlayerTurn')
@@ -78,7 +82,7 @@ module.exports = {
     checkScoreboard(app, 'P1', 1, 10, 10, 5, 5)
   },
   'Open scoreboard': browser => {
-    var app = firstPage(browser, 1, 10, ['P1', 'P2'])
+    var app = LoadPageInit(browser, 1, 10, ['P1', 'P2'])
     app.assert.visible('#PlayerAnouncement')
     app.waitForElementVisible('.game')
     app.assert.visible('#LastPlayerTurn')
@@ -89,7 +93,7 @@ module.exports = {
     app.assert.visible('#ScoreBoard')
   },
   'Home btn': browser => {
-    var app = firstPage(browser, 10, 10, ['P1', 'P2'])
+    var app = LoadPageInit(browser, 10, 10, ['P1', 'P2'])
     app.waitForElementVisible('.game')
     app.assert.visible('button[name=goToHome]')
 
@@ -134,40 +138,4 @@ function checkScoreboard (app, player, turn, maxPins, throw1, throw2, throw3) {
     app.assert.visible('div[name=' + player + '_score_' + turn + '] #top #third')
     app.assert.containsText('div[name=' + player + '_score_' + turn + '] #top #third', throw3)
   }
-}
-
-function firstPage (browser, cnbTurn, cnbPins, cnbPlayers) {
-  const homepage = browser.page.homepage()
-  homepage.waitForElementVisible('@appContainer')
-  const app = homepage.section.app
-
-  const nbTurn = cnbTurn
-  const nbPins = cnbPins
-  const players = cnbPlayers
-
-  // Add turns
-
-  for (let i = 10; i > nbTurn; i--) {
-    app.click('.turn #minus')
-  }
-  app.click('button[name=firstBtnValidate]')
-
-  // Add pins
-  app.waitForElementVisible('button[name=secondBtnValidate]')
-  for (let i = 11; i <= nbPins; i++) {
-    app.click('.pins #add')
-  }
-  app.click('button[name=secondBtnValidate]')
-
-  // Add players
-  app.waitForElementVisible('input[name=newPlayerName]')
-
-  players.forEach((playerName, i) => {
-    app.setValue('input[name=newPlayerName]', playerName)
-    app.click('#PlayerListCreator #addPlayerBtn')
-  })
-
-  app.click('button[name=thirdBtnValidate]')
-
-  return app
 }

@@ -87,7 +87,7 @@ export default {
         this.gameScore.registerThrow(this.automaton.getCurrentPlayer().getName(), this.automaton.getCurrentTurn() + 1, 3, throws.throw3)
       }
       if (this.automaton.isEnd()) {
-        // TODO
+        this.$router.push({ name: 'GameEnd', params: { automaton: this.automaton, gameScore: this.gameScore } })
       } else {
         this.automaton.advance()
         this.showAnimation()
