@@ -87,6 +87,25 @@ module.exports = {
     app.click('button[name=goToScoreboard]')
     app.waitForElementVisible('.scoreboardview')
     app.assert.visible('#ScoreBoard')
+  },
+  'Home btn': browser => {
+    var app = firstPage(browser, 10, 10, ['P1', 'P2'])
+    app.waitForElementVisible('.game')
+    app.assert.visible('button[name=goToHome]')
+
+    // cancel action
+    browser.click('button[name=goToHome]')
+    browser.waitForElementVisible('div[name=confirmExitDialog]')
+    browser.assert.visible('.md-dialog button[name=cancel]')
+    browser.click('.md-dialog button[name=cancel]')
+    browser.assert.visible('.game')
+
+    // confirm home
+    browser.click('button[name=goToHome]')
+    browser.waitForElementVisible('div[name=confirmExitDialog]')
+    browser.assert.visible('.md-dialog button[name=confirm]')
+    browser.click('.md-dialog button[name=confirm]')
+    browser.waitForElementVisible('.gamepreparation')
   }
 }
 
