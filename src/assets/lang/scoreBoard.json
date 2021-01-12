@@ -3,14 +3,28 @@
     "scoreBoard": {
       "total": "TOT",
       "back": "Back",
-      "scoreboard": "Scoreboard"
+      "scoreboard": "Scoreboard",
+      "home" : "Leave game",
+      "dialog": {
+        "title": "Leave game",
+        "content": "Do you realy want to stop the game ?",
+        "yes": "Yes",
+        "no": "No"
+      }
     }
   },
   "fr": {
     "scoreBoard": {
       "total": "TOT",
       "back": "Fermer",
-      "scoreboard": "Tableau des scores"
+      "scoreboard": "Tableau des scores",
+      "home" : "Quitter la partie",
+      "dialog": {
+        "title": "Quitter la partie",
+        "content": "Voulez vous vraiment quitter la partie ?",
+        "yes": "Oui",
+        "no": "Non"
+      }
     }
   }
 }

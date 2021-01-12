@@ -13,6 +13,31 @@
             <md-tooltip md-direction="top">{{ $t('scoreBoard.scoreboard') }}</md-tooltip>
             <md-icon>ballot</md-icon>
         </md-button>
+        <md-button class="md-fab md-fab-bottom-right md-plain md-primary" name="goToHome" @click="confirmExitDialog = true">
+            <md-tooltip md-direction="top">{{ $t('scoreBoard.home') }}</md-tooltip>
+            <md-icon>home</md-icon>
+        </md-button>
+
+        <!-- Confirmation dialog -->
+        <md-dialog
+        :md-active.sync="confirmExitDialog"
+        :md-fullscreen="false"
+        class="ralewayRegular"
+        name="confirmExitDialog">
+          <md-dialog-title>{{ $t('scoreBoard.dialog.title') }}</md-dialog-title>
+          <md-dialog-content>
+            {{ $t('scoreBoard.dialog.content') }}
+          </md-dialog-content>
+
+          <md-dialog-actions>
+            <md-button name="cancel" @click="confirmExitDialog = false">
+              {{ $t('scoreBoard.dialog.no') }}
+            </md-button>
+            <md-button name="confirm" @click="goToHome">
+              {{ $t('scoreBoard.dialog.yes') }}
+            </md-button>
+        </md-dialog-actions>
+      </md-dialog>
     </div>
   </div>
 </template>
@@ -46,7 +71,9 @@ export default {
   data: () => ({
     animation: true,
     automaton: null,
-    gameScore: null
+    gameScore: null,
+
+    confirmExitDialog: false
   }),
   created () {
     this.automaton = this.$route.params.automaton
@@ -72,6 +99,9 @@ export default {
     },
     goToScoreboard () {
       this.$router.push({ name: 'Scoreboard', params: { automaton: this.automaton, score: this.gameScore } })
+    },
+    goToHome () {
+      this.$router.push({ name: 'GamePreparation' })
     },
     showAnimation () {
       setTimeout(() => { this.animation = false }, 2000)
