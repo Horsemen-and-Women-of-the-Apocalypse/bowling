@@ -36,11 +36,11 @@ const router = new VueRouter({
   routes
 })
 
-const authorizedRoutesPaths = ['/manual']
+const authorizedRoutesPaths = ['/', '/manual']
 
 router.beforeEach((to, from, next) => {
-  // Redirect user on first visit if he tries to access to another page and if this page isn't authorized
-  if (!authorizedRoutesPaths.includes(to.path) && from.name === null && to.name !== routes[0].name) {
+  // Redirect user on first visit if this page isn't authorized
+  if (from.name === null && !authorizedRoutesPaths.includes(to.path)) {
     next({ name: routes[0].name })
   } else {
     next()
