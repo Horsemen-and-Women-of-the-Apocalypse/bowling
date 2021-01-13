@@ -64,6 +64,7 @@ export default class GameScore {
       this.#playerThrows[playerName][turnNumber - 1].throws[
         throwNumber - 1
       ] = pinsNumber
+
       // Calculate Score
       for (let i = 0; i < this.#playerThrows[playerName].length; i++) {
         // We look for the first score by turn that is still null
@@ -78,14 +79,15 @@ export default class GameScore {
             // Current turn is the last one
             if (i === this.#playerThrows[playerName].length - 1) {
               // Last throw
-              if (throwNumber === 3) {
-                this.#playerThrows[playerName][i].score = scoreCalculation(this.translateThrows(playerName))
+              if (throwNumber >= 2) {
+                this.#playerThrows[playerName][i].score = scoreCalculation(this.translateThrows(playerName), this.#gameParam.getPins())
               }
+              break
             } else {
               // We can only know the score for the current turn if some pins remain after 2 throws
               if (throwNumber === 2) {
                 if ((this.#playerThrows[playerName][i].throws[0] + this.#playerThrows[playerName][i].throws[1]) < this.#gameParam.getPins()) {
-                  this.#playerThrows[playerName][i].score = scoreCalculation(this.translateThrows(playerName))
+                  this.#playerThrows[playerName][i].score = scoreCalculation(this.translateThrows(playerName), this.#gameParam.getPins())
                 }
               }
             }
@@ -96,21 +98,31 @@ export default class GameScore {
                 // Next turn is the last one
                 if (i + 1 === this.#playerThrows[playerName].length - 1) {
                   // 2 next throws have been registered, we can go on
-                  if (this.#playerThrows[playerName][i + 1].throws[1] !== 0) {
-                    this.#playerThrows[playerName][i].score = scoreCalculation(this.translateThrows(playerName))
+                  if (this.#playerThrows[playerName][i + 1].throws[1] !== null) {
+                    this.#playerThrows[playerName][i].score = scoreCalculation(this.translateThrows(playerName), this.#gameParam.getPins())
                   }
                 } else {
                   // Strike
                   if (this.#playerThrows[playerName][i + 1].throws[0] === this.#gameParam.getPins()) {
                     if (this.#playerThrows[playerName][i + 2].throws[0] !== null) {
-                      this.#playerThrows[playerName][i].score = scoreCalculation(this.translateThrows(playerName))
+                      this.#playerThrows[playerName][i].score = scoreCalculation(this.translateThrows(playerName), this.#gameParam.getPins())
                     }
                   } else {
-                    this.#playerThrows[playerName][i].score = scoreCalculation(this.translateThrows(playerName))
+                    if (this.#playerThrows[playerName][i + 1].throws[1] !== null) {
+                      // Tricky situations where we have to fill two scores : strike + 2 throws, where the two throws dont reach spare
+                      const nextTurnPins = this.#playerThrows[playerName][i + 1].throws[0] + this.#playerThrows[playerName][i + 1].throws[1]
+                      // Spare
+                      if (nextTurnPins === this.#gameParam.getPins()) {
+                        this.#playerThrows[playerName][i].score = scoreCalculation(this.translateThrows(playerName), this.#gameParam.getPins())
+                      } else {
+                        this.#playerThrows[playerName][i].score = scoreCalculation(this.translateThrows(playerName), this.#gameParam.getPins()) - nextTurnPins
+                        this.#playerThrows[playerName][i + 1].score = scoreCalculation(this.translateThrows(playerName), this.#gameParam.getPins())
+                      }
+                    }
                   }
                 }
               } else { // Spare
-                this.#playerThrows[playerName][i].score = scoreCalculation(this.translateThrows(playerName))
+                this.#playerThrows[playerName][i].score = scoreCalculation(this.translateThrows(playerName), this.#gameParam.getPins())
               }
             }
           }
@@ -170,14 +182,27 @@ export default class GameScore {
       const pthrows = this.#playerThrows[playerName]
       const translatedThrows = []
       for (let i = 0; i < pthrows.length; i++) {
-        if (pthrows[i].throws[0] === this.#gameParam.getPins()) {
-          translatedThrows.push(pthrows[i].throws[0])
-          translatedThrows.push(0)
+        if (i < pthrows.length - 1) {
+          if (pthrows[i].throws[0] === this.#gameParam.getPins()) {
+            translatedThrows.push(pthrows[i].throws[0])
+            translatedThrows.push(0)
+          } else {
+            translatedThrows.push(pthrows[i].throws[0])
+            translatedThrows.push(pthrows[i].throws[1])
+          }
         } else {
+          if (pthrows[i].throws[0] !== null && pthrows[i].throws[1] !== null) {
+            if (pthrows[i].throws[0] + pthrows[i].throws[1] < this.#gameParam.getPins()) {
+              translatedThrows.push(pthrows[i].throws[0])
+              translatedThrows.push(pthrows[i].throws[1])
+              translatedThrows.push(0)
+              break
+            }
+          }
           translatedThrows.push(pthrows[i].throws[0])
           translatedThrows.push(pthrows[i].throws[1])
+          translatedThrows.push(pthrows[i].throws[2])
         }
-        if (i === pthrows.length - 1) translatedThrows.push(pthrows[i].throws[2])
       }
       return translatedThrows
     }
