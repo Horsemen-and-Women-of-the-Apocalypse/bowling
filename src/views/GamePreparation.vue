@@ -36,8 +36,13 @@
       </md-step>
     </md-steppers>
 
-    <!-- Error msg -->
+    <!-- Manual btn -->
+    <md-button class="md-fab md-fab-bottom-right md-plain md-primary" name="goToManual" @click="goToManual">
+      <md-tooltip md-direction="top">{{ $t('gamepreparation.manualBtn') }}</md-tooltip>
+      <md-icon>help</md-icon>
+    </md-button>
 
+    <!-- Error msg -->
     <md-snackbar
       id="errorMsg"
       md-position="center"
@@ -128,6 +133,9 @@ export default {
     },
     playerListChange (players) {
       this.players = players
+    },
+    goToManual () {
+      this.$router.push({ name: 'UserManual' })
     }
   }
 }
