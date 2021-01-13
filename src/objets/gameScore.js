@@ -99,7 +99,14 @@ export default class GameScore {
                 if (i + 1 === this.#playerThrows[playerName].length - 1) {
                   // 2 next throws have been registered, we can go on
                   if (this.#playerThrows[playerName][i + 1].throws[1] !== null) {
-                    this.#playerThrows[playerName][i].score = scoreCalculation(this.translateThrows(playerName), this.#gameParam.getPins())
+                    const nextTurnPins = this.#playerThrows[playerName][i + 1].throws[0] + this.#playerThrows[playerName][i + 1].throws[1]
+                    // Spare
+                    if (nextTurnPins >= this.#gameParam.getPins()) {
+                      this.#playerThrows[playerName][i].score = scoreCalculation(this.translateThrows(playerName), this.#gameParam.getPins())
+                    } else {
+                      this.#playerThrows[playerName][i].score = scoreCalculation(this.translateThrows(playerName), this.#gameParam.getPins()) - nextTurnPins
+                      this.#playerThrows[playerName][i + 1].score = scoreCalculation(this.translateThrows(playerName), this.#gameParam.getPins())
+                    }
                   }
                 } else {
                   // Strike

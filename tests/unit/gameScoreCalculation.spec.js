@@ -11,6 +11,7 @@ import Player from '../../src/objets/player'
 // Spare '
 // Normal throw '
 // 2 throws
+
 describe('Global assertion of GameScore.registerThrow(...) method', () => {
   const imaginaryPlayer = new Player('Joseph')
   const imaginaryParams = new GameParam([imaginaryPlayer], 7, 10)
@@ -113,4 +114,22 @@ describe('Global assertion of GameScore.registerThrow(...) method', () => {
   throwData = imaginaryGame.getThrows(imaginaryPlayer.getName())
   expect(throwData[0].score).toBe(20)
   expect(throwData[1].score).toBe(null)
+})
+
+describe('Global assertion of GameScore.registerThrow(...) method', () => {
+  const imaginaryPlayer = new Player('Joseph')
+  const imaginaryParams = new GameParam([imaginaryPlayer], 2, 10)
+  var imaginaryGame = new GameScore(imaginaryParams)
+
+  // Strike
+  imaginaryGame.registerThrow(imaginaryPlayer.getName(), 1, 1, 10)
+  let throwData = imaginaryGame.getThrows(imaginaryPlayer.getName())
+  expect(throwData[0].score).toBe(null)
+
+  // Spare : score must be determined for the last turn, and empty for the current
+  imaginaryGame.registerThrow(imaginaryPlayer.getName(), 2, 1, 5)
+  imaginaryGame.registerThrow(imaginaryPlayer.getName(), 2, 2, 2)
+  throwData = imaginaryGame.getThrows(imaginaryPlayer.getName())
+  expect(throwData[0].score).toBe(17)
+  expect(throwData[1].score).toBe(24)
 })
