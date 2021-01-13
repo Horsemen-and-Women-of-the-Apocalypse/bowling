@@ -17,6 +17,7 @@ function scoreCalculation (throwArray, maxPins) {
     if (throwArray[i] === maxPins) {
       // special conditions if the strike happens around the last 3 throws
       if (i >= throwArray.length - 3) {
+        if (throwArray[throwArray.length - 1] === null) break
         totalScore += maxPins
       } else if (i + 5 === throwArray.length) {
         if (throwArray[i + 2] === null || throwArray[i + 3] === null) {
@@ -41,6 +42,7 @@ function scoreCalculation (throwArray, maxPins) {
       }
     } else {
       if (i >= throwArray.length - 3) {
+        if (throwArray[throwArray.length - 1] === null) break
         totalScore += throwArray[i]
       } else {
         if (throwArray[i + 1] === null) {
@@ -49,7 +51,7 @@ function scoreCalculation (throwArray, maxPins) {
         var turnScore = throwArray[i] + throwArray[i + 1]
         // Spare
         if (turnScore === maxPins) {
-          if (throwArray[i + 3] === null) {
+          if (throwArray[i + 2] === null) {
             break
           }
           totalScore += turnScore + throwArray[i + 2]

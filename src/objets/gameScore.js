@@ -1,4 +1,5 @@
 import GameParam from './gameparam'
+import scoreCalculation from './scoreCalculator'
 
 /**
  * Class to store game score
@@ -65,9 +66,69 @@ export default class GameScore {
       ] = pinsNumber
 
       // Calculate Score
-
-      // TODO
-
+      for (let i = 0; i < this.#playerThrows[playerName].length; i++) {
+        // We look for the first score by turn that is still null
+        // 3 options
+        // It's null because the turn has not beeen finished (current turn)
+        // It's null because it's a spare
+        // It's null because it's a strike
+        //
+        if (this.#playerThrows[playerName][i].score === null) {
+          // Null is at current turn
+          if (i === turnNumber - 1) {
+            // Current turn is the last one
+            if (i === this.#playerThrows[playerName].length - 1) {
+              // Last throw
+              if (throwNumber >= 2) {
+                this.#playerThrows[playerName][i].score = scoreCalculation(this.translateThrows(playerName), this.#gameParam.getPins())
+              }
+              break
+            } else {
+              // We can only know the score for the current turn if some pins remain after 2 throws
+              if (throwNumber === 2) {
+                if ((this.#playerThrows[playerName][i].throws[0] + this.#playerThrows[playerName][i].throws[1]) < this.#gameParam.getPins()) {
+                  this.#playerThrows[playerName][i].score = scoreCalculation(this.translateThrows(playerName), this.#gameParam.getPins())
+                }
+              }
+            }
+          } else { // Null happens before current throw. Is it because of a spare or strike ?
+            // Both options need the next throw
+            if (this.#playerThrows[playerName][i + 1].throws[0] !== null) {
+              if (this.#playerThrows[playerName][i].throws[0] === this.#gameParam.getPins()) { // Strike
+                // Next turn is the last one
+                if (i + 1 === this.#playerThrows[playerName].length - 1) {
+                  // 2 next throws have been registered, we can go on
+                  if (this.#playerThrows[playerName][i + 1].throws[1] !== null) {
+                    this.#playerThrows[playerName][i].score = scoreCalculation(this.translateThrows(playerName), this.#gameParam.getPins())
+                  }
+                } else {
+                  // Strike
+                  if (this.#playerThrows[playerName][i + 1].throws[0] === this.#gameParam.getPins()) {
+                    if (this.#playerThrows[playerName][i + 2].throws[0] !== null) {
+                      this.#playerThrows[playerName][i].score = scoreCalculation(this.translateThrows(playerName), this.#gameParam.getPins())
+                    }
+                  } else {
+                    if (this.#playerThrows[playerName][i + 1].throws[1] !== null) {
+                      // Tricky situations where we have to fill two scores : strike + 2 throws, where the two throws dont reach spare
+                      const nextTurnPins = this.#playerThrows[playerName][i + 1].throws[0] + this.#playerThrows[playerName][i + 1].throws[1]
+                      // Spare
+                      if (nextTurnPins === this.#gameParam.getPins()) {
+                        this.#playerThrows[playerName][i].score = scoreCalculation(this.translateThrows(playerName), this.#gameParam.getPins())
+                      } else {
+                        this.#playerThrows[playerName][i].score = scoreCalculation(this.translateThrows(playerName), this.#gameParam.getPins()) - nextTurnPins
+                        this.#playerThrows[playerName][i + 1].score = scoreCalculation(this.translateThrows(playerName), this.#gameParam.getPins())
+                      }
+                    }
+                  }
+                }
+              } else { // Spare
+                this.#playerThrows[playerName][i].score = scoreCalculation(this.translateThrows(playerName), this.#gameParam.getPins())
+              }
+            }
+          }
+          break
+        }
+      }
       // Update total Score
 
       // TODO
@@ -111,5 +172,38 @@ export default class GameScore {
      */
     getThrows (playerName) {
       return this.#playerThrows[playerName]
+    }
+
+    /**
+     * Returns an array of throws for a specific player, ready to be computed
+     * @return {int} - Throws
+     */
+    translateThrows (playerName) {
+      const pthrows = this.#playerThrows[playerName]
+      const translatedThrows = []
+      for (let i = 0; i < pthrows.length; i++) {
+        if (i < pthrows.length - 1) {
+          if (pthrows[i].throws[0] === this.#gameParam.getPins()) {
+            translatedThrows.push(pthrows[i].throws[0])
+            translatedThrows.push(0)
+          } else {
+            translatedThrows.push(pthrows[i].throws[0])
+            translatedThrows.push(pthrows[i].throws[1])
+          }
+        } else {
+          if (pthrows[i].throws[0] !== null && pthrows[i].throws[1] !== null) {
+            if (pthrows[i].throws[0] + pthrows[i].throws[1] < this.#gameParam.getPins()) {
+              translatedThrows.push(pthrows[i].throws[0])
+              translatedThrows.push(pthrows[i].throws[1])
+              translatedThrows.push(0)
+              break
+            }
+          }
+          translatedThrows.push(pthrows[i].throws[0])
+          translatedThrows.push(pthrows[i].throws[1])
+          translatedThrows.push(pthrows[i].throws[2])
+        }
+      }
+      return translatedThrows
     }
 }
