@@ -1,6 +1,7 @@
 import Player from '../../src/objets/player'
 import GameParam from '../../src/objets/gameparam'
 import Automaton from '../../src/objets/automaton'
+import GameScore from '../../src/objets/gameScore'
 
 describe('player', () => {
   describe('constructor', () => {
@@ -398,6 +399,7 @@ describe('gameparam', () => {
         expect(a.isEnd()).toBe(true)
       })
     })
+
     describe('isLastTurn', () => {
       test('Assert contents', () => {
         var p = new Player('Nom')
@@ -409,6 +411,18 @@ describe('gameparam', () => {
         var a = new Automaton(g)
 
         expect(a.isLastTurn()).toBe(true)
+      })
+
+      describe('totalScore', () => {
+        test('Assert contents', () => {
+          var gScore = new GameScore(new GameParam([new Player('Toto'), new Player('Tata')], 10, 10))
+          for (var i = 1; i < 11; i++) {
+            gScore.registerThrow('Toto', i, 1, 10)
+            gScore.registerThrow('Tata', i, 1, 4)
+            gScore.registerThrow('Tata', i, 2, 1)
+          }
+          expect(gScore.totalScore()).toStrictEqual({ Toto: 300, Tata: 50 })
+        })
       })
     })
   })
