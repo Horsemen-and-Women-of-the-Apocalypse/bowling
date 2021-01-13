@@ -1,5 +1,5 @@
 // Import
-const LoadPageInit = require("../../e2e-common/utils.js").LoadPageInit
+const LoadPageInit = require('../../e2e-common/utils.js').LoadPageInit
 
 // Game wizard tests
 

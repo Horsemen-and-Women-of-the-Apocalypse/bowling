@@ -421,7 +421,7 @@ describe('gameparam', () => {
             gScore.registerThrow('Tata', i, 1, 4)
             gScore.registerThrow('Tata', i, 2, 1)
           }
-          //Last Turn
+          // Last Turn
           gScore.registerThrow('Toto', 10, 2, 10)
           gScore.registerThrow('Toto', 10, 3, 10)
           expect(gScore.totalScoreByPlayer()).toStrictEqual({ Toto: 300, Tata: 50 })
