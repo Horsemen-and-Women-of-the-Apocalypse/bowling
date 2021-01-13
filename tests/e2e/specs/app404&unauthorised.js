@@ -14,5 +14,12 @@ module.exports = {
     // Existing but non home page
     browser.url('http://localhost:8080/game')
     browser.assert.elementPresent('.gamepreparation')
+  },
+  'Manual non redirection': browser => {
+    // Look for the default home page component
+    browser.assert.elementPresent('.gamepreparation')
+
+    browser.url('http://localhost:8080/manual')
+    browser.assert.elementPresent('#userManual')
   }
 }
