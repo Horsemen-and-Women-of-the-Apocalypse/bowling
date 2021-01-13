@@ -81,6 +81,59 @@ module.exports = {
 
     checkScoreboard(app, 'P1', 1, 10, 10, 5, 5)
   },
+  'Check data is still present': browser => {
+    var app = firstPage(browser, 1, 10, ['P1', 'P2'])
+    app.assert.visible('#PlayerAnouncement')
+    app.waitForElementVisible('.game')
+    app.assert.visible('#LastPlayerTurn')
+
+    // First throw
+    app.assert.visible('input[name=pinsFallen1]')
+    app.assert.visible('button[name=firstBtnValidate]')
+
+    app.clearValue('input[name=pinsFallen1]')
+    for (let i = 0; i < 10; i++) {
+      app.click('#LastPlayerTurn #addFirstThrow')
+      app.assert.value('input[name=pinsFallen1]', '' + (i + 1))
+    }
+    app.assert.value('input[name=pinsFallen1]', '10')
+    app.click('button[name=firstBtnValidate]')
+
+    // Second throw
+    app.assert.visible('input[name=pinsFallen2]')
+    app.assert.visible('button[name=secondBtnValidate]')
+
+    app.clearValue('input[name=pinsFallen2]')
+    for (let i = 0; i < 5; i++) {
+      app.click('#LastPlayerTurn #addSecondThrow')
+      app.assert.value('input[name=pinsFallen2]', '' + (i + 1))
+    }
+    app.assert.value('input[name=pinsFallen2]', '5')
+    app.click('button[name=secondBtnValidate]')
+
+    // Third throw
+    app.assert.visible('input[name=pinsFallen3]')
+    app.assert.visible('button[name=thirdBtnValidate]')
+
+    app.clearValue('input[name=pinsFallen3]')
+    for (let i = 0; i < 5; i++) {
+      app.click('#LastPlayerTurn #addThirdThrow')
+      app.assert.value('input[name=pinsFallen3]', '' + (i + 1))
+    }
+
+    app.assert.value('input[name=pinsFallen3]', '5')
+
+    app.assert.visible('button[name=goToScoreboard]')
+    app.click('button[name=goToScoreboard]')
+    app.waitForElementVisible('.scoreboardview')
+    app.assert.visible('#ScoreBoard')
+
+    app.assert.visible('button[name=goToHome]')
+    app.click('button[name=goToHome]')
+
+    app.waitForElementVisible('.game')
+    app.assert.value('input[name=pinsFallen3]', '5')
+  },
   'Open scoreboard': browser => {
     var app = LoadPageInit(browser, 1, 10, ['P1', 'P2'])
     app.assert.visible('#PlayerAnouncement')
