@@ -16,7 +16,25 @@ L'application est accessible sur le lien suivant : [http://tomansion.fr:9000/](h
 Sommaire
 ========
 
-
+- [Manuel d'utilisation](#manuel-dutilisation)
+- [Présentation](#présentation)
+- [Sommaire](#sommaire)
+- [1\. Rappel des règles du bowling 🎳](#1-rappel-des-règles-du-bowling-)
+  - [Comment est calculé le score ?](#comment-est-calculé-le-score-)
+    - [Strike](#strike)
+    - [Spare](#spare)
+  - [Dernier tour](#dernier-tour)
+- [2\. Préparation d'une partie ⚙️](#2-préparation-dune-partie-️)
+  - [Nombre de tours et nombre de quilles](#nombre-de-tours-et-nombre-de-quilles)
+  - [Joueurs 👨‍👧](#joueurs-)
+- [3\. Déroulement d'une partie 🎳](#3-déroulement-dune-partie-)
+  - [Organisation](#organisation)
+  - [Scénario général](#scénario-général)
+  - [Rappel des règles du bowling](#rappel-des-règles-du-bowling)
+  - [Rectifier un lancer](#rectifier-un-lancer)
+  - [Tableau des scores](#tableau-des-scores)
+    - [Organisation du tableau](#organisation-du-tableau)
+- [4\. Fin de la partie 🏆](#4-fin-de-la-partie-)
 
 1\. Rappel des règles du bowling 🎳
 ===================================
@@ -31,7 +49,7 @@ Au début de chaque tour d'un joueur, il faut disposer les quilles au fond de ce
 
 
 
-![](https://t4549646.p.clickup-attachments.com/t4549646/323322d1-cce4-4957-9021-19cb83df7997/image.png)
+![](userManual/pins.png)
 
 
 
@@ -65,7 +83,7 @@ Le dernier tour est un peu plus spécial. Il se déroule comme un tour normal ma
 2\. Préparation d'une partie ⚙️
 ===============================
 
-![](https://t4549646.p.clickup-attachments.com/t4549646/68ad12a6-466f-4eee-8ce8-e287d938074d/game_preparation4.gif)
+![](userManual/game_preparation4.gif)
 
 Avant que la partie commence, un assistant vous demande de remplir les paramètres de la partie :
 
@@ -167,7 +185,3 @@ Un écran de fin s'affiche. Il est composé de :
 *   Un tableau des scores avec le classement des joueurs
 
 Vous pouvez rejouer une partie en appuyant sur le bouton **Rejouer**.
-
-
-
-===

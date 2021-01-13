@@ -17,7 +17,7 @@
 <script>
 import VueMarkdown from 'vue-markdown'
 // eslint-disable-next-line import/no-webpack-loader-syntax
-import userManual from '!raw-loader!../assets/files/userManual.md'
+import userManual from '!raw-loader!../assets/files/userManual/userManual.md'
 
 export default {
   name: 'ScoreboardView',
