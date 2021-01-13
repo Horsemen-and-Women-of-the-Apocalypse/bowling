@@ -36,4 +36,13 @@ const router = new VueRouter({
   routes
 })
 
+router.beforeEach((to, from, next) => {
+  // Redirect user on first visit if he tries to access to another page
+  if (from.name === null && to.name !== routes[0].name) {
+    next({ name: routes[0].name })
+  } else {
+    next()
+  }
+})
+
 export default router
