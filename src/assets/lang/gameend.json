@@ -1,0 +1,18 @@
+{
+  "en": {
+    "gameEnd": {
+      "title": "Bowling",
+      "result": "Final Score",
+      "fullScreenScore": "Score full screen",
+      "replay": "Play Again"
+    }
+  },
+  "fr": {
+    "gameEnd": {
+      "title": "Bowling",
+      "result": "Résultats Finaux",
+      "fullScreenScore": "Mettre le score en plein écran",
+      "replay": "Rejouer"
+    }
+  }
+}

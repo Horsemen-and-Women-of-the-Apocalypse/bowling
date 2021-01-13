@@ -129,9 +129,6 @@ export default class GameScore {
           break
         }
       }
-      // Update total Score
-
-      // TODO
     }
 
     /**
@@ -175,6 +172,26 @@ export default class GameScore {
     }
 
     /**
+     * Return scores sorted by player
+     * @return {} - Score by player
+     */
+    totalScoreByPlayer () {
+      var scoreByPlayer = {}
+      for (var e in this.#playerThrows) {
+        scoreByPlayer[e] = this.totalScore(e)
+      }
+      return scoreByPlayer
+    }
+
+    /**
+     * Return scores of playerName
+     * @return {} - Score of playerName
+     */
+    totalScore (playerName) {
+      return scoreCalculation(this.translateThrows(playerName), this.#gameParam.getPins())
+    }
+
+    /*
      * Returns an array of throws for a specific player, ready to be computed
      * @return {int} - Throws
      */

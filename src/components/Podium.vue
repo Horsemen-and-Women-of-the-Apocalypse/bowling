@@ -49,7 +49,7 @@ export default {
     sortedScores () {
       const ret = []
       for (var s in this.scores) ret.push({ name: s, score: this.scores[s] })
-      return ret.sort((a, b) => a.score < b.score)
+      return ret.sort((a, b) => b.score - a.score)
     },
     secondPlayerPosition () {
       if (this.sortedScores.length > 1 && this.sortedScores[1].score === this.sortedScores[0].score) { return 'first' }
@@ -78,7 +78,7 @@ export default {
 .player {
   display: flex;
   flex-direction: column;
-  justify-content: end;
+  justify-content: flex-end;
   width: 33%;
 }
 .name {
