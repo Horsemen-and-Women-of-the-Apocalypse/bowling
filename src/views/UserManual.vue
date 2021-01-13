@@ -20,7 +20,7 @@ import VueMarkdown from 'vue-markdown'
 import userManual from '!raw-loader!../assets/files/userManual/userManual.md'
 
 export default {
-  name: 'ScoreboardView',
+  name: 'UserManual',
   components: {
     VueMarkdown
   },
