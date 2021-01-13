@@ -1,7 +1,7 @@
 <template>
         <div class="scoreboardview">
             <div>
-              <Scoreboard :score="this.$route.params.score" :currentPlayer="this.$route.params.currentPlayer" :currentTurn="this.$route.params.currentTurn"/>
+              <Scoreboard :score="this.$route.params.score" :currentPlayer="this.$route.params.automaton.getCurrentPlayer().getName()" :currentTurn="this.$route.params.automaton.getCurrentTurn() + 1"/>
             </div>
             <md-button name="goToHome" class="md-raised md-primary fixed-bottom md-fab md-fab-bottom-center" @click="goToHome">
               <md-tooltip md-direction="top">{{ $t('scoreBoard.back') }}</md-tooltip>

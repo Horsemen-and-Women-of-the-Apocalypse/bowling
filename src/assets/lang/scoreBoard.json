@@ -7,7 +7,7 @@
       "home" : "Leave game",
       "dialog": {
         "title": "Leave game",
-        "content": "Do you realy want to stop the game ?",
+        "content": "Do you really want to stop the game ?",
         "yes": "Yes",
         "no": "No"
       }

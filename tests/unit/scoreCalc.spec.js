@@ -46,6 +46,11 @@ describe('scoreCalculation', () => {
     var score = scoreCalculation(tb, 10)
     expect(score).toBe(0)
   })
+  test('null after spare + throw', () => {
+    var tb = [5, 5, 2, null, null, null, null]
+    var score = scoreCalculation(tb, 10)
+    expect(score).toBe(12)
+  })
   test('turn not finished', () => {
     var tb = [5, null, null, null, null, null, null]
     var score = scoreCalculation(tb, 10)
@@ -65,6 +70,16 @@ describe('scoreCalculation', () => {
     var tb = [10, 0, 10, 0, 2, 0, 0]
     var score = scoreCalculation(tb, 10)
     expect(score).toBe(36)
+  })
+  test('strike and normal', () => {
+    var tb = [10, 0, 2, 3, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+    var score = scoreCalculation(tb, 10)
+    expect(score).toBe(20)
+  })
+  test('strike and normal', () => {
+    var tb = [10, 0, 10, 0, 2, 2, 2, 8, 8, 1, 10, 0, 10, 10, null]
+    var score = scoreCalculation(tb, 10)
+    expect(score).toBe(97)
   })
   test('array is null', () => {
     expect(() => scoreCalculation(null, 10)).toThrow('throwArray is null')
