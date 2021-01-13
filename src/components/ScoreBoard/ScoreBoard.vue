@@ -58,7 +58,8 @@
         class="score"
         v-for="(player, i) in score.getPlayers()"
         :key="i"
-      ></div>
+      >
+      {{ score.totalScore(player.getName()) }}</div>
     </div>
   </div>
 </template>

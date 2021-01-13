@@ -4,7 +4,7 @@
       <Header :firstLine="$t('gameEnd.title')" :secondLine="$t('gameEnd.result')"/>
     </div>
     <div id="podium">
-      <Podium :scores='this.$route.params.gameScore.totalScore()'/>
+      <Podium :scores='this.$route.params.gameScore.totalScoreByPlayer()'/>
     </div>
     <div id="Scoreboard">
       <Scoreboard :score="this.$route.params.gameScore"/>

@@ -413,7 +413,7 @@ describe('gameparam', () => {
         expect(a.isLastTurn()).toBe(true)
       })
 
-      describe('totalScore', () => {
+      describe('totalScoreByPlayer', () => {
         test('Assert contents', () => {
           var gScore = new GameScore(new GameParam([new Player('Toto'), new Player('Tata')], 10, 10))
           for (var i = 1; i < 11; i++) {
@@ -421,7 +421,10 @@ describe('gameparam', () => {
             gScore.registerThrow('Tata', i, 1, 4)
             gScore.registerThrow('Tata', i, 2, 1)
           }
-          expect(gScore.totalScore()).toStrictEqual({ Toto: 300, Tata: 50 })
+          //Last Turn
+          gScore.registerThrow('Toto', 10, 2, 10)
+          gScore.registerThrow('Toto', 10, 3, 10)
+          expect(gScore.totalScoreByPlayer()).toStrictEqual({ Toto: 300, Tata: 50 })
         })
       })
     })
