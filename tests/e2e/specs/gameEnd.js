@@ -19,6 +19,7 @@ module.exports = {
 
     // Game End
     app.waitForElementVisible('.gameend')
+    app.waitForElementVisible('button[name=replay]')
     app.click('button[name=replay]')
     browser.waitForElementVisible('.gamepreparation')
   }
